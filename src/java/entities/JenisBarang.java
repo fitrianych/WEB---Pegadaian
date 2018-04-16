@@ -96,7 +96,7 @@ public class JenisBarang implements Serializable {
 
     @Override
     public String toString() {
-        return "enitites.JenisBarang[ idJenis=" + idJenis + " ]";
+        return "" + idJenis + " ";
     }
     
 }

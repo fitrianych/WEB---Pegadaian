@@ -109,7 +109,7 @@ public class Barang implements Serializable {
 
     @Override
     public String toString() {
-        return "enitites.Barang[ idBarang=" + idBarang + " ]";
+        return "" + idBarang + " ";
     }
     
 }

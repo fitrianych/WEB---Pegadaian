@@ -106,7 +106,7 @@ public class DetailGadai implements Serializable {
 
     @Override
     public String toString() {
-        return "enitites.DetailGadai[ idDetailGadai=" + idDetailGadai + " ]";
+        return "" + idDetailGadai + " ";
     }
     
 }

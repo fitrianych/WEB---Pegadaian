@@ -96,7 +96,7 @@ public class Status implements Serializable {
 
     @Override
     public String toString() {
-        return "enitites.Status[ idStatus=" + idStatus + " ]";
+        return "" + idStatus + " ";
     }
     
 }
