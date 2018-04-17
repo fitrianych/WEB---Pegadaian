@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.insert;
+package controller.update;
 
-import dao.CustomerDAO;
-import entities.Customer;
+import dao.Jenis_BarangDAO;
+import entities.JenisBarang;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "CustomerInsert", urlPatterns = {"/customerinsert"})
-public class CustomerInsert extends HttpServlet {
+@WebServlet(name = "JenisUpdate", urlPatterns = {"/jenisupdate"})
+public class JenisUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,32 +37,16 @@ public class CustomerInsert extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String id = request.getParameter("txtID");
-        String nama = request.getParameter("txtNama");
-        String jenis_kelamin = request.getParameter("txtJK");
-        String no_telp = request.getParameter("txtNoTelp");
-        String pekerjaan = request.getParameter("txtPekerjaan");
-        String alamat = request.getParameter("txtAlamat");
-        
-        HttpSession session = request.getSession();
+        String id = request.getParameter("id");
         RequestDispatcher dis = null;
-        String Pesan = "Gagal Insert";
-        CustomerDAO cdao = new CustomerDAO();
+        HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          Customer cst = new Customer();
-          cst.setNoIdentitas(Integer.parseInt(id));
-          cst.setNama(nama);
-          cst.setJenisKelamin(jenis_kelamin);
-          cst.setNoTelp(no_telp);
-          cst.setPekerjaan(pekerjaan);
-          cst.setAlamat(alamat);
-          
-          if(cdao.insert(cst)){
-              Pesan = "Berhasil Insert dengan id" +cst.getNoIdentitas();
-          }
-          out.println(Pesan);
-          dis = request.getRequestDispatcher("view/insert/insertcustomer.jsp");
+            JenisBarang jns = (JenisBarang) new Jenis_BarangDAO().getById(id);
+            session.setAttribute("jns", jns);
+            out.println("<font color = \"red\">update" +jns.getIdJenis()+"</font>");
+        //out.println("<b>"+id);
+        dis = request.getRequestDispatcher("view/update/updatejenis.jsp");
         dis.include(request, response);
         }
     }

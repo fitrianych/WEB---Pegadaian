@@ -39,6 +39,7 @@ public class JenisServlet extends HttpServlet {
         
         RequestDispatcher dispatcher =null;
         HttpSession session = request.getSession();
+        Jenis_BarangDAO cdao = new Jenis_BarangDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
@@ -53,9 +54,14 @@ public class JenisServlet extends HttpServlet {
 
             List<Object> datas = new Jenis_BarangDAO().getAll();
             
+             if (session.getAttribute("Pesan")!=null) {
+                out.print(session.getAttribute("Pesan")+ "<br>");
+                session.removeAttribute("Pesan");
+            }
+            
             session.setAttribute("dataJenis", datas);
             dispatcher = request.getRequestDispatcher("view/jenis.jsp");
-            dispatcher.forward(request, response);
+            dispatcher.include(request, response);
         }
     }
 

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : jenis
-    Created on : Apr 16, 2018, 4:41:47 PM
+    Document   : insertjenis
+    Created on : Apr 18, 2018, 12:56:37 AM
     Author     : Fitriany Chairunnisa
 --%>
 
@@ -75,22 +75,22 @@
     <![endif]-->
     </head>
     <body>
-                 <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
-            </div>
-            <!-- /.navbar-header -->
+                <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
+                </div>
+                <!-- /.navbar-header -->
 
-           
-            <!-- /.navbar-top-links -->
+
+                <!-- /.navbar-top-links -->
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
@@ -105,67 +105,45 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="jenisservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+
+                <!-- /.navbar-static-side -->
+            </nav>
         </div>   
-        
-        <div id="page-wrapper">
+
+        <div id="page-wrapper">  
+
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tabel Jenis Barang</h1>
+                    <h1 class="page-header">Form Jenis Barang</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>    
-    
-    <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           <a href="jenistoinsert" class="btn btn-primary">Add Jenis</a>
-                        </div>
-                         <!-- /.panel-heading -->
-                        <div class="panel-body">
-        
-       <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-         <thead>
-                    <tr>
-                        <th>ID Jenis</th>
-                        <th>Jenis</th>
-                        <th colspan="2">Aksi</th>
-                        
-                    </tr>
-                </thead>
-        <%
-                //List<Object> datas = new CustomerDAO().getAll();
-                
-                List<Object> datas =(List<Object>) session.getAttribute("dataJenis");
-            
-            for (Object data : datas) {
-                JenisBarang jb = (JenisBarang) data; %>
-                  <tbody>
-                    <tr>
-                        <td><%= jb.getIdJenis()%></td>
-                        <td><%= jb.getNamaJenis()%></td>
-                        <td><a href="jenisupdate?id=<%=jb.getIdJenis()%>">update</a></td>
-                        <td><a href="jenisdelete?id=<%=jb.getIdJenis()%>">delete</a></td>
+            </div> 
 
-                    </tr>
-                  
-                </tbody>
-           <% }
-            %>
-        
-               </table>
-                        </div>
-                    </div>
+
+            <form role="form" action="jenisinsert" method="post">
+                <div class="form-group">
+                    <label>ID Jenis</label>
+                    <input class="form-control"  name="txtID" type="text" > 
                 </div>
-    </div>
-    </div>
+
+                <div class="form-group">
+                    <label>Jenis</label>
+                    <input class="form-control" name="txtJenis" type="text">
+                </div>
+
+                
+                <div class="form-group">
+                   
+                    <input type="submit" class="btn btn-primary" value="Insert" name="submit">
+                    <a href="jenisservlet" class="btn btn-primary">Cancel</a>
+                </div>
+            </form>
+        </div>
                 <!-- /#wrapper -->
 
     <!-- jQuery -->
