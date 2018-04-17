@@ -212,7 +212,7 @@
 
                 <div class="form-group">
 <!--                    <button type="button" name="submit" class="btn btn-primary">Tambah</button>-->
-                         <input type="button" value="Insert" name="submit">
+                         <input type="submit" class="btn btn-primary" value="Insert" name="submit">
                 </div>
             </form>
         </div>

@@ -36,25 +36,25 @@ public class CustomerDelete extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String id = request.getParameter("id");
         RequestDispatcher dis = null;
         HttpSession sesi = request.getSession();
         String Pesan = "Gagal Hapus";
         CustomerDAO cdao = new CustomerDAO();
         try (PrintWriter out = response.getWriter()) {
-            
-            Customer cstm = new Customer();
-            cstm.setNoIdentitas(Integer.parseInt(id));
+
+//            Customer cstm = new Customer();
+//            cstm.setNoIdentitas(Integer.parseInt(id));
 //             out.println("<b>"+id);
 
-     if(cdao.delete(id)){
-              Pesan = "Berhasil Delete dengan id" +cstm.getNoIdentitas();
-          }
-     out.println(Pesan);
-        sesi.setAttribute("Pesan", Pesan);
-        dis = request.getRequestDispatcher("customerservlet");
-        dis.include(request, response);
+            if (cdao.delete(id)) {
+                Pesan = "Berhasil Delete dengan id" + id;
+            }
+           
+            sesi.setAttribute("Pesan", Pesan);
+            dis = request.getRequestDispatcher("customerservlet");
+            dis.include(request, response);
         }
     }
 

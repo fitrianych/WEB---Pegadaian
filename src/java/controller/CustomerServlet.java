@@ -69,16 +69,27 @@ public class CustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        //String Pesan = "Data Dihapus";
+         //String id = request.getParameter("id");
         RequestDispatcher dispatcher =null;
         HttpSession session = request.getSession();
+        CustomerDAO cdao = new CustomerDAO();
         try (PrintWriter out = response.getWriter()) {
 
         
              List<Object> datas = new CustomerDAO().getAll();
+            //     if(cdao.delete(id)){
+           // Pesan = "Terhapus";
+           // session.setAttribute("Pesan", Pesan);
             
+            if (session.getAttribute("Pesan")!=null) {
+                out.print(session.getAttribute("Pesan")+ "<br>");
+                session.removeAttribute("Pesan");
+            }
+        
             session.setAttribute("dataCustomer", datas);
             dispatcher = request.getRequestDispatcher("view/customer.jsp");
-            dispatcher.forward(request, response);
+            dispatcher.include(request, response);
         }
     }    
     
