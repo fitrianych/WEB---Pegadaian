@@ -58,4 +58,8 @@ public class CustomerDAO implements InterfaceDAO{
     public Object getById(String id) {
         return fdao.getById("from Customer where noIdentitas='" + id + "'");
     }
+    
+    public Integer getAutoID(){
+        return (Integer) fdao.getById("SELECT MAX(noIdentitas) FROM Customer");
+    }
 }

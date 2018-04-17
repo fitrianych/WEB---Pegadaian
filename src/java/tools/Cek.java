@@ -14,7 +14,9 @@ import java.util.List;
  */
 public class Cek {
     public static void main(String[] args) {
-        List<Object> datas = new CustomerDAO().getAll();
-        System.out.println(datas.size());
+//        List<Object> datas = new CustomerDAO().getAll();
+//        System.out.println(datas.size());
+        
+        System.out.println(new CustomerDAO().getAutoID());
     }
 }

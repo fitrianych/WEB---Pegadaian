@@ -42,7 +42,7 @@ public class Customer implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "NO_IDENTITAS")
-    private BigDecimal noIdentitas;
+    private Integer noIdentitas;
     @Column(name = "NAMA")
     private String nama;
     @Column(name = "JENIS_KELAMIN")
@@ -61,15 +61,15 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(BigDecimal noIdentitas) {
+    public Customer(Integer noIdentitas) {
         this.noIdentitas = noIdentitas;
     }
 
-    public BigDecimal getNoIdentitas() {
+    public Integer getNoIdentitas() {
         return noIdentitas;
     }
 
-    public void setNoIdentitas(BigDecimal noIdentitas) {
+    public void setNoIdentitas(Integer noIdentitas) {
         this.noIdentitas = noIdentitas;
     }
 

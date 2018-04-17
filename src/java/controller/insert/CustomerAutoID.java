@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.insert;
 
 import dao.CustomerDAO;
-import entities.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,14 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import sun.rmi.server.Dispatcher;
 
 /**
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "CustomerServlet", urlPatterns = {"/customerservlet"})
-public class CustomerServlet extends HttpServlet {
+@WebServlet(name = "CustomerAutoID", urlPatterns = {"/customerautoid"})
+public class CustomerAutoID extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,54 +32,21 @@ public class CustomerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        
-//        String Pesan = "Data Dihapus";
-//        String id = request.getParameter("id");
-//        RequestDispatcher dispatcher = null;
-//        HttpSession session = request.getSession();
-//        CustomerDAO cdao = new CustomerDAO();
-//       
-//        try (PrintWriter out = response.getWriter()) {
-//
-//        List<Object> datas = new CustomerDAO().getAll();
-//        if(cdao.delete(id)){
-//            Pesan = "Terhapus";
-//            session.setAttribute("Pesan", Pesan);
-//            
-//            if (session.getAttribute("Pesan")!=null) {
-//                out.print(session.getAttribute("Pesan")+ "<br>");
-//                session.removeAttribute("Pesan");
-//            }
-//        }
-//        
-//        
-//        session.setAttribute("dataCustomer", datas);
-//            dispatcher = request.getRequestDispatcher("view/customer.jsp");
-//            dispatcher.include(request, response);
-//        }
-//    }
-    
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        RequestDispatcher dispatcher =null;
         HttpSession session = request.getSession();
+        RequestDispatcher dis = null;
+        CustomerDAO ct = new CustomerDAO();
         try (PrintWriter out = response.getWriter()) {
-
-        
-             List<Object> datas = new CustomerDAO().getAll();
-            
-            session.setAttribute("dataCustomer", datas);
-            dispatcher = request.getRequestDispatcher("view/customer.jsp");
-            dispatcher.forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            session.setAttribute("autoID", ct.getAutoID());
+            dis = request.getRequestDispatcher("customer.jsp");
+            dis.forward(request, response);
         }
-    }    
-    
-    
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
