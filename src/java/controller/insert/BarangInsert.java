@@ -5,7 +5,10 @@
  */
 package controller.insert;
 
-import dao.CustomerDAO;
+import dao.BarangDAO;
+import dao.Jenis_BarangDAO;
+import entities.Barang;
+import entities.JenisBarang;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "CustomerToInsert", urlPatterns = {"/customertoinsert"})
-public class CustomerToInsert extends HttpServlet {
+@WebServlet(name = "BarangInsert", urlPatterns = {"/baranginsert"})
+public class BarangInsert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,15 +38,29 @@ public class CustomerToInsert extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //HttpSession session = request.getSession();
-        RequestDispatcher dispatcher =null;
-       // CustomerDAO ct = new CustomerDAO();
+
+        String id = request.getParameter("txtID");
+        String jenis = request.getParameter("txtJenis");
+        String nama_barang = request.getParameter("txtBarang");
+
+        HttpSession session = request.getSession();
+        RequestDispatcher dis = null;
+        String Pesan = "Gagal Insert";
+        BarangDAO bdao = new BarangDAO();
+        //Jenis_BarangDAO jdao = new Jenis_BarangDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          //  session.setAttribute("cus", ct.getAll());
-            dispatcher = request.getRequestDispatcher("view/insert/insertcustomer.jsp");
-            dispatcher.forward(request, response);
+          Barang brg = new Barang();
+          brg.setIdBarang(Short.parseShort(id));
+          brg.setIdJenis(new JenisBarang (Short.parseShort(jenis)));
+          brg.setNamaBarang(nama_barang);
+          
+                    if(bdao.insert(brg)){
+              Pesan = "Berhasil Insert dengan id" +brg.getIdBarang();
+          }
+          out.println(Pesan);
+          dis = request.getRequestDispatcher("view/insert/insertbarang.jsp");
+        dis.include(request, response);
         }
     }
 

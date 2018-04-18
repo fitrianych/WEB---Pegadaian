@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.insert;
+package controller.update;
 
-import dao.CustomerDAO;
+import dao.BarangDAO;
+import entities.Barang;
+import entities.JenisBarang;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "CustomerToInsert", urlPatterns = {"/customertoinsert"})
-public class CustomerToInsert extends HttpServlet {
+@WebServlet(name = "ProsesUpdateBarang", urlPatterns = {"/prosesupdatebarang"})
+public class ProsesUpdateBarang extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,14 +38,27 @@ public class CustomerToInsert extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        //HttpSession session = request.getSession();
-        RequestDispatcher dispatcher =null;
-       // CustomerDAO ct = new CustomerDAO();
+        String id = request.getParameter("txtID");
+        String jenis = request.getParameter("txtJenis");
+        String namaBarang = request.getParameter("txtBarang");
+        
+//        HttpSession session = request.getSession();
+        RequestDispatcher dis = null;
+        String Pesan = "Gagal Update";
+        BarangDAO bdao = new BarangDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          //  session.setAttribute("cus", ct.getAll());
-            dispatcher = request.getRequestDispatcher("view/insert/insertcustomer.jsp");
-            dispatcher.forward(request, response);
+          Barang brg = new Barang();
+          brg.setIdBarang(Short.parseShort(id));
+          brg.setIdJenis(new JenisBarang (Short.parseShort(jenis)));
+          brg.setNamaBarang(namaBarang);
+          
+          if(bdao.update(brg)){
+              Pesan = "Berhasil Update dengan id" +brg.getIdBarang();
+          }
+          out.println(Pesan);
+          dis = request.getRequestDispatcher("view/update/updatebarang.jsp");
+        dis.include(request, response);
         }
     }
 

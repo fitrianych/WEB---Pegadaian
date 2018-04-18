@@ -16,15 +16,15 @@ import tools.HibernateUtil;
  *
  * @author Fitriany Chairunnisa
  */
-public class BarangDAO implements InterfaceDAO{
+public class BarangDAO implements InterfaceDAO {
+
     public Session session;
     private SessionFactory factory;
     public Transaction transaction;
 
     public FunctionsDAO fdao;
-    
-    public BarangDAO()
-    {
+
+    public BarangDAO() {
         this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
     }
 
@@ -35,7 +35,7 @@ public class BarangDAO implements InterfaceDAO{
 
     @Override
     public boolean update(Object object) {
-      return fdao.insert(object);
+        return fdao.insert(object);
     }
 
     @Override
@@ -57,10 +57,13 @@ public class BarangDAO implements InterfaceDAO{
     public Object getById(String id) {
         return fdao.getById("from Barang where idBarang=" + id);
     }
-    
-    public Object getByIdJns(String id){
+
+    public Object getByIdJns(String id) {
         return fdao.getByIdJns("from JenisBarang where idJenis ='" + id + "'");
     }
-    
-    
+
+    public Integer getAutoID() {
+        return (Integer) fdao.getById("SELECT MAX(idBarang)+1 FROM Barang");
+    }
+
 }

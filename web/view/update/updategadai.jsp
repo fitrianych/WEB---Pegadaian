@@ -1,9 +1,12 @@
 <%-- 
-    Document   : updatecustomer
-    Created on : Apr 17, 2018, 9:22:25 AM
+    Document   : updategadai
+    Created on : Apr 18, 2018, 1:49:30 PM
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Gadai"%>
+<%@page import="entities.Barang"%>
+<%@page import="entities.JenisBarang"%>
 <%@page import="entities.Customer"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -111,7 +114,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="customerservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="gadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>
@@ -124,59 +127,49 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Customer </h1>
+                    <h1 class="page-header">Update Gadai </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>    
 
 
-            <% Customer cuss = (Customer) session.getAttribute("cus");%>
-            <form role="form" action="prosesupdatecustomer" method="post">
+            <% Gadai brgg = (Gadai) session.getAttribute("g");%>
+            <form role="form" action="prosesupdategadai" method="post">
+                <div class="form-group">
+                    <label>ID Gadai</label>
+                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= brgg.getIdGadai()%>">
+
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Pengajuan</label>
+                    <input class="form-control" name="txtPengajuan"  type="date" value="<%=brgg.getTanggalPengajuan()%>">
+                </div>
+
+                <div class="form-group">
+                    <label>Jatuh Tempo</label>
+                    <input class="form-control" name="txtJatuhTempo"  type="date" value="<%= brgg.getJatuhTempo()%>">
+                </div>
+
+                <div class="form-group">
+                    <label>Jumlah Pinjaman</label>
+                    <input class="form-control" name="txtPinjaman"  type="text" value="<%= brgg.getJumlahPinjaman()%>">
+                </div>
+
                 <div class="form-group">
                     <label>No. Identitas</label>
-                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= cuss.getNoIdentitas()%>">
-
+                    <input class="form-control" name="txtIdentitas" readonly="true" type="text" value="<%= brgg.getNoIdentitas().getNoIdentitas()%>">
                 </div>
 
                 <div class="form-group">
-                    <label>Nama</label>
-                    <input class="form-control" name="txtNama" type="text" value="<%= cuss.getNama()%>">
-
-                </div>
-
-                <div class="form-group">
-                    <% if (cuss.getJenisKelamin().equals("Laki-Laki")) { %>
-                    <input type="radio" name="txtJK" value="Laki-Laki" checked="true" > Laki-Laki
-                    <input type="radio" name="txtJK" value="Perempuan" > Perempuan <br>
-                    <%} else {%>
-                    <input type="radio" name="txtJK" value="Laki-Laki" > Laki-Laki
-                    <input type="radio" name="txtJK" value="Perempuan" checked="true"> Perempuan <br>
-                    <%}%>
-
-                </div>
-
-                <div class="form-group">
-                    <label>No. Telp</label>
-                    <input class="form-control" name="txtNoTelp" type="text" value="<%= cuss.getNoTelp()%>">
-
-                </div>
-
-                <div class="form-group">
-                    <label>Pekerjaan</label>
-                    <input class="form-control" name="txtPekerjaan" type="text" value="<%= cuss.getPekerjaan()%>">
-
-                </div>
-
-                <div class="form-group">
-                    <label>Alamat</label>
-                    <input class="form-control" name="txtAlamat" type="text" value="<%= cuss.getAlamat()%>">
-
+                    <label>Status</label>
+                    <input class="form-control" name="txtStatus" readonly="true"  type="text" value="<%= brgg.getIdStatus().getIdStatus()%>">
                 </div>
 
 
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                    <a href="customerservlet" class="btn btn-primary">Cancel</a>
+                    <a href="gadaiservlet" class="btn btn-primary">Cancel</a>
                 </div>
 
 

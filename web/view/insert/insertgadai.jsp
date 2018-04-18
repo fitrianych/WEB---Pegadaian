@@ -1,21 +1,15 @@
 <%-- 
-    Document   : updatecustomer
-    Created on : Apr 17, 2018, 9:22:25 AM
+    Document   : insertgadai
+    Created on : Apr 18, 2018, 1:36:45 PM
     Author     : Fitriany Chairunnisa
 --%>
 
-<%@page import="entities.Customer"%>
+<%@page import="entities.JenisBarang"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <head>
-        <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <title>Lihat Customer<table border="1">
-                       
-                </title>-->
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,7 +105,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="customerservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="gadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>
@@ -119,71 +113,58 @@
 
                 <!-- /.navbar-static-side -->
             </nav>
-        </div>
+        </div>   
 
-        <div id="page-wrapper">
+        <div id="page-wrapper">  
+
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Customer </h1>
+                    <h1 class="page-header">Form Gadai</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>    
+            </div> 
 
+            <% long autoid = (long) session.getAttribute("autoID");%>
+            <form role="form" action="gadaiinsert" method="post">
+                <!--                <div class="form-group">
+                                    <label>ID Jenis</label>-->
+                <input class="form-control hidden"  name="txtID" type="text" value="<%= autoid%>"> 
+                <!--                </div>-->
 
-            <% Customer cuss = (Customer) session.getAttribute("cus");%>
-            <form role="form" action="prosesupdatecustomer" method="post">
                 <div class="form-group">
                     <label>No. Identitas</label>
-                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= cuss.getNoIdentitas()%>">
-
+                    <input class="form-control" name="txtIdentitas" type="text">
                 </div>
 
                 <div class="form-group">
-                    <label>Nama</label>
-                    <input class="form-control" name="txtNama" type="text" value="<%= cuss.getNama()%>">
-
+                    <label>Tanggal Pengajuan</label>
+                    <input class="form-control" name="txtPengajuan" type="date">
                 </div>
 
                 <div class="form-group">
-                    <% if (cuss.getJenisKelamin().equals("Laki-Laki")) { %>
-                    <input type="radio" name="txtJK" value="Laki-Laki" checked="true" > Laki-Laki
-                    <input type="radio" name="txtJK" value="Perempuan" > Perempuan <br>
-                    <%} else {%>
-                    <input type="radio" name="txtJK" value="Laki-Laki" > Laki-Laki
-                    <input type="radio" name="txtJK" value="Perempuan" checked="true"> Perempuan <br>
-                    <%}%>
-
+                    <label>Jatuh Tempo</label>
+                    <input class="form-control" name="txtJatuhTempo" type="date">
                 </div>
 
                 <div class="form-group">
-                    <label>No. Telp</label>
-                    <input class="form-control" name="txtNoTelp" type="text" value="<%= cuss.getNoTelp()%>">
-
-                </div>
-
-                <div class="form-group">
-                    <label>Pekerjaan</label>
-                    <input class="form-control" name="txtPekerjaan" type="text" value="<%= cuss.getPekerjaan()%>">
-
-                </div>
-
-                <div class="form-group">
-                    <label>Alamat</label>
-                    <input class="form-control" name="txtAlamat" type="text" value="<%= cuss.getAlamat()%>">
-
+                    <label>Jumlah Pinjaman</label>
+                    <input class="form-control" name="txtPinjaman" type="text">
                 </div>
 
 
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                    <a href="customerservlet" class="btn btn-primary">Cancel</a>
+                    <label>Status</label>
+                    <input class="form-control" name="txtStatus" type="text">
                 </div>
 
 
+                <div class="form-group">
+
+                    <input type="submit" class="btn btn-primary" value="Insert" name="submit">
+                    <a href="gadaiservlet" class="btn btn-primary">Cancel</a>
+                </div>
             </form>
         </div>
-
-
         <!-- /#wrapper -->
 
         <!-- jQuery -->
@@ -211,5 +192,6 @@
                 });
             });
         </script>
+
     </body>
 </html>

@@ -6,6 +6,8 @@
 package tools;
 
 import dao.CustomerDAO;
+import dao.GadaiDAO;
+import dao.Jenis_BarangDAO;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ public class Cek {
 //        List<Object> datas = new CustomerDAO().getAll();
 //        System.out.println(datas.size());
         
-        System.out.println(new CustomerDAO().getAutoID());
+        //System.out.println(new CustomerDAO().getAutoID());
+        System.out.println(new GadaiDAO().getAutoID());
     }
 }

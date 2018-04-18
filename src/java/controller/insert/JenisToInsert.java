@@ -5,6 +5,7 @@
  */
 package controller.insert;
 
+import dao.Jenis_BarangDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,10 +36,12 @@ public class JenisToInsert extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
+        HttpSession session = request.getSession();
         RequestDispatcher dispatcher =null;
+        Jenis_BarangDAO ct = new Jenis_BarangDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            session.setAttribute("autoID", ct.getAutoID());
             dispatcher = request.getRequestDispatcher("view/insert/insertjenis.jsp");
             dispatcher.forward(request, response);
         }

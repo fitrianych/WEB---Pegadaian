@@ -134,6 +134,8 @@
 
 
             <form role="form" action="customerinsert" method="post">
+
+
                 <div class="form-group">
                     <label>No. Identitas</label>
                     <input class="form-control"  name="txtID" type="text" >
@@ -146,10 +148,19 @@
                     <!--                                            <p class="help-block">Example block-level help text here.</p>-->
                 </div>
 
+                <!--                <div class="form-group">
+                                    <label>Jenis Kelamin</label>
+                                    <input class="form-control" name="txtJK" type="text">-->
+                <!--                                            <p class="help-block">Example block-level help text here.</p>-->
+                <!--                </div>-->
+
                 <div class="form-group">
                     <label>Jenis Kelamin</label>
-                    <input class="form-control" name="txtJK" type="text">
-                    <!--                                            <p class="help-block">Example block-level help text here.</p>-->
+                </div>
+                <div class="form-group">
+                    <input type="radio" name="txtJK" value="Laki-Laki" > Laki-Laki
+                    <input type="radio" name="txtJK" value="Perempuan" > Perempuan <br>
+
                 </div>
 
                 <div class="form-group">

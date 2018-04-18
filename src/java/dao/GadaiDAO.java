@@ -40,7 +40,7 @@ public class GadaiDAO implements InterfaceDAO{
 
     @Override
     public boolean delete(Object object) {
-         return fdao.delete(Gadai.class, Integer.parseInt(object.toString()));
+         return fdao.delete(Gadai.class, Long.parseLong(object.toString()));
     }
 
     @Override
@@ -58,6 +58,9 @@ public class GadaiDAO implements InterfaceDAO{
         return fdao.getById("from Gadai where idGadai='" + id + "'");
     }
     
+        public Long getAutoID() {
+        return (Long) fdao.getById("SELECT MAX(idGadai)+1 FROM Gadai");
+    }
 //    public Object cek(String cek)
 //    {
 //        return fdao.cek("from Gadai JOIN Angsuran on Gadai.noIdentitas = Angsuran.noIdentitas "

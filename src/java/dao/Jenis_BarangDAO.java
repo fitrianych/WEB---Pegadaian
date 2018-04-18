@@ -57,4 +57,7 @@ public class Jenis_BarangDAO implements InterfaceDAO{
         return fdao.getById("from JenisBarang where idJenis='" + id + "'");
     }
     
+        public Integer getAutoID(){
+        return (Integer) fdao.getById("SELECT MAX(idJenis)+1 FROM JenisBarang");
+    }
 }

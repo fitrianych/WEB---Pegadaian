@@ -5,9 +5,17 @@
  */
 package controller.insert;
 
-import dao.CustomerDAO;
+import dao.GadaiDAO;
+import entities.Customer;
+import entities.Gadai;
+import entities.Status;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +28,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "CustomerToInsert", urlPatterns = {"/customertoinsert"})
-public class CustomerToInsert extends HttpServlet {
+@WebServlet(name = "GadaiInsert", urlPatterns = {"/gadaiinsert"})
+public class GadaiInsert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +43,49 @@ public class CustomerToInsert extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //HttpSession session = request.getSession();
-        RequestDispatcher dispatcher =null;
-       // CustomerDAO ct = new CustomerDAO();
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-          //  session.setAttribute("cus", ct.getAll());
-            dispatcher = request.getRequestDispatcher("view/insert/insertcustomer.jsp");
-            dispatcher.forward(request, response);
+        String id = request.getParameter("txtID");
+        String tanggal_pengajuan = request.getParameter("txtPengajuan");
+        String jatuh_tempo = request.getParameter("txtJatuhTempo");
+        String jumlah_pinjaman = request.getParameter("txtPinjaman");
+        String no_identitas = request.getParameter("txtIdentitas");
+        String status = request.getParameter("txtStatus");
+        HttpSession session = request.getSession();
+        RequestDispatcher dis = null;
+        String Pesan = "Gagal Update";
+        GadaiDAO gdao = new GadaiDAO();
+
+        Date date1 = null;
+        Date date2 = null;
+
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal_pengajuan);
+        } catch (ParseException ex) {
+            Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
         }
+      
+        try {
+            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(jatuh_tempo);
+        } catch (ParseException ex) {
+            Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+
+                Gadai gad = new Gadai();
+                gad.setIdGadai(Long.parseLong(id));
+                gad.setTanggalPengajuan(date1);
+                gad.setJatuhTempo(date2);
+                gad.setJumlahPinjaman(Long.parseLong(jumlah_pinjaman));
+                gad.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
+                gad.setIdStatus(new Status(status));
+
+                if (gdao.update(gad)) {
+                    Pesan = "Berhasil Update dengan id" + gad.getIdGadai();
+                }
+                out.println(Pesan);
+                dis = request.getRequestDispatcher("view/insert/insertgadai.jsp");
+                dis.include(request, response);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

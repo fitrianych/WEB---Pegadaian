@@ -36,26 +36,21 @@ public class BarangServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        RequestDispatcher dispatcher =null;
+
+        RequestDispatcher dispatcher = null;
         HttpSession session = request.getSession();
+        BarangDAO bdao = new BarangDAO();
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet BarangServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet BarangServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-        
-             List<Object> datas = new BarangDAO().getAll();
-            
+
+            List<Object> datas = new BarangDAO().getAll();
+
+            if (session.getAttribute("Pesan") != null) {
+                out.print(session.getAttribute("Pesan") + "<br>");
+                session.removeAttribute("Pesan");
+            }
             session.setAttribute("dataBarang", datas);
             dispatcher = request.getRequestDispatcher("view/barang.jsp");
-            dispatcher.forward(request, response);
+            dispatcher.include(request, response);
         }
     }
 

@@ -36,26 +36,27 @@ public class JenisInsert extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String id = request.getParameter("txtID");
         String jenis = request.getParameter("txtJenis");
-        
+
         HttpSession session = request.getSession();
         RequestDispatcher dis = null;
         String Pesan = "Gagal Insert";
         Jenis_BarangDAO jdao = new Jenis_BarangDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          JenisBarang jns = new JenisBarang();
-          jns.setIdJenis(Short.parseShort(id));
-          jns.setNamaJenis(jenis);
-          
-                    if(jdao.insert(jns)){
-              Pesan = "Berhasil Insert dengan id" +jns.getIdJenis();
-          }
-          out.println(Pesan);
-          dis = request.getRequestDispatcher("view/insert/insertjenis.jsp");
-        dis.include(request, response);
+            JenisBarang jns = new JenisBarang();
+            jns.setIdJenis(Short.parseShort(id));
+            jns.setNamaJenis(jenis);
+
+            if (jdao.insert(jns)) {
+                Pesan = "Berhasil Insert dengan id" + jns.getIdJenis();
+            }
+            //out.println(id+", "+jenis);
+            out.println(Pesan);
+            dis = request.getRequestDispatcher("view/insert/insertjenis.jsp");
+            dis.include(request, response);
         }
     }
 

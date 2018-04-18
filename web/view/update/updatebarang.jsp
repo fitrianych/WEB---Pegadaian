@@ -1,9 +1,11 @@
 <%-- 
-    Document   : updatecustomer
-    Created on : Apr 17, 2018, 9:22:25 AM
+    Document   : updatebarang
+    Created on : Apr 18, 2018, 11:11:39 AM
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Barang"%>
+<%@page import="entities.JenisBarang"%>
 <%@page import="entities.Customer"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -111,7 +113,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="customerservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="barangservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>
@@ -124,59 +126,34 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Customer </h1>
+                    <h1 class="page-header">Update Barang </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>    
 
 
-            <% Customer cuss = (Customer) session.getAttribute("cus");%>
-            <form role="form" action="prosesupdatecustomer" method="post">
+            <% Barang brgg = (Barang) session.getAttribute("b");%>
+            <form role="form" action="prosesupdatebarang" method="post">
                 <div class="form-group">
-                    <label>No. Identitas</label>
-                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= cuss.getNoIdentitas()%>">
+                    <label>ID Barang</label>
+                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= brgg.getIdBarang()%>">
 
                 </div>
 
                 <div class="form-group">
-                    <label>Nama</label>
-                    <input class="form-control" name="txtNama" type="text" value="<%= cuss.getNama()%>">
-
+                    <label>Jenis Barang</label>
+                    <input class="form-control" name="txtJenis"  type="text" value="<%=brgg.getIdJenis().getIdJenis() %>">
                 </div>
 
                 <div class="form-group">
-                    <% if (cuss.getJenisKelamin().equals("Laki-Laki")) { %>
-                    <input type="radio" name="txtJK" value="Laki-Laki" checked="true" > Laki-Laki
-                    <input type="radio" name="txtJK" value="Perempuan" > Perempuan <br>
-                    <%} else {%>
-                    <input type="radio" name="txtJK" value="Laki-Laki" > Laki-Laki
-                    <input type="radio" name="txtJK" value="Perempuan" checked="true"> Perempuan <br>
-                    <%}%>
-
-                </div>
-
-                <div class="form-group">
-                    <label>No. Telp</label>
-                    <input class="form-control" name="txtNoTelp" type="text" value="<%= cuss.getNoTelp()%>">
-
-                </div>
-
-                <div class="form-group">
-                    <label>Pekerjaan</label>
-                    <input class="form-control" name="txtPekerjaan" type="text" value="<%= cuss.getPekerjaan()%>">
-
-                </div>
-
-                <div class="form-group">
-                    <label>Alamat</label>
-                    <input class="form-control" name="txtAlamat" type="text" value="<%= cuss.getAlamat()%>">
-
+                    <label>Nama Barang</label>
+                    <input class="form-control" name="txtBarang"  type="text" value="<%= brgg.getNamaBarang()%>">
                 </div>
 
 
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                    <a href="customerservlet" class="btn btn-primary">Cancel</a>
+                    <a href="barangservlet" class="btn btn-primary">Cancel</a>
                 </div>
 
 

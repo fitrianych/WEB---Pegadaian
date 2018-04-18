@@ -36,9 +36,11 @@ public class GadaiServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        RequestDispatcher dispatcher =null;
+
+        RequestDispatcher dispatcher = null;
         HttpSession session = request.getSession();
+        GadaiDAO cdao = new GadaiDAO();
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
@@ -52,10 +54,15 @@ public class GadaiServlet extends HttpServlet {
 //            out.println("</html>");
 
             List<Object> datas = new GadaiDAO().getAll();
-            
+
+            if (session.getAttribute("Pesan") != null) {
+                out.print(session.getAttribute("Pesan") + "<br>");
+                session.removeAttribute("Pesan");
+            }
+
             session.setAttribute("dataGadai", datas);
             dispatcher = request.getRequestDispatcher("view/gadai.jsp");
-            dispatcher.forward(request, response);
+            dispatcher.include(request, response);
         }
     }
 
