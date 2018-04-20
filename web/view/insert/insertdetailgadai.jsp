@@ -127,7 +127,7 @@
                 <!-- /.col-lg-12 -->
             </div> 
 
-            <% int autoid = (int) session.getAttribute("autoID");%>
+            <% long autoid = (long) session.getAttribute("autoID");%>
             <% Gadai ga = (Gadai) session.getAttribute("gdao");%>
             <form role="form" action="detailgadaiinsert" method="post">
                 <!--                <div class="form-group">

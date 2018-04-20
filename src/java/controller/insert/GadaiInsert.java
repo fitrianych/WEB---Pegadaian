@@ -49,7 +49,7 @@ public class GadaiInsert extends HttpServlet {
         String tanggal_pengajuan = request.getParameter("txtPengajuan");
         String jatuh_tempo = request.getParameter("txtJatuhTempo");
         String jumlah_pinjaman = request.getParameter("txtPinjaman");
-       // String status = request.getParameter("txtStatus");
+        // String status = request.getParameter("txtStatus");
         HttpSession session = request.getSession();
         RequestDispatcher dis = null;
         String Pesan = "Gagal Insert Data";
@@ -64,32 +64,40 @@ public class GadaiInsert extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
         try {
             date2 = new SimpleDateFormat("yyyy-MM-dd").parse(jatuh_tempo);
         } catch (ParseException ex) {
             Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
         }
-            try (PrintWriter out = response.getWriter()) {
-                /* TODO output your page here. You may use following sample code. */
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
 
-                Gadai gad = new Gadai();
-                gad.setIdGadai(Long.parseLong(id));
-                gad.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
-                gad.setTanggalPengajuan(date1);
-                gad.setJatuhTempo(date2);
-                gad.setJumlahPinjaman(Long.parseLong(jumlah_pinjaman));
-                gad.setIdStatus(new Status("b"));
+            Gadai gad = new Gadai();
+            gad.setIdGadai(Long.parseLong(id));
+            gad.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
+            gad.setTanggalPengajuan(date1);
+            gad.setJatuhTempo(date2);
+            gad.setJumlahPinjaman(Long.parseLong(jumlah_pinjaman));
+            gad.setIdStatus(new Status("b"));
 
-                if (gdao.update(gad)) {
-                    Pesan = "Berhasil Insert dengan id" + gad.getIdGadai();
-                }
-                out.println(Pesan);
-                           // session.setAttribute("autoID", dgdao.getAutoID());
-                            session.setAttribute("gdao", gdao.getById(id));
-                dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
-                dis.include(request, response);
+            if (gdao.update(gad)) {
+                Pesan = "Berhasil Insert dengan id" + gad.getIdGadai();
             }
+            out.println(Pesan);
+            
+            
+//            Gadai gadai = (Gadai) gdao.getById(id);
+//            if (gadai.getJumlahPinjaman()== 0) {
+//                System.out.println("LUNAS");
+//            } else {
+//                System.out.println("BELUM LUNAS");
+//            }
+            // session.setAttribute("autoID", dgdao.getAutoID());
+            session.setAttribute("gdao", gdao.getById(id));
+            dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
+            dis.include(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

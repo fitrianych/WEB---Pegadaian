@@ -132,6 +132,8 @@
            
             <% Gadai gadd = (Gadai) session.getAttribute("gad");%>
             <% String autoid = (String) session.getAttribute("autoID");%>
+            
+
             <form role="form" action="angsuraninsert" method="post">
                 <!--                <div class="form-group">
                                     <label>ID Barang</label>-->

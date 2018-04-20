@@ -55,16 +55,16 @@ public class DetailGadaiInsert extends HttpServlet {
             // dgad.setIdDetailGadai(Short.parseShort(id_detail));
             //dgad.setIdBarang(new Barang(Short.parseShort(barang)));
 
+            dgad.setKeterangan(keterangan);
+
 //            if (barang.length > 0) {
             for (int i = 0; i < barang.length; i++) {
-                dgad.setIdDetailGadai(Short.parseShort(id_detail));
+                int id_detail_gadai = Integer.parseInt(id_detail)+ i;
+                dgad.setIdDetailGadai(Short.parseShort(id_detail_gadai +""));
                 dgad.setIdBarang(new Barang(Short.parseShort(barang[i])));
                 dgad.setIdGadai(new Gadai(Long.parseLong(id_gadai)));
-                dgad.setKeterangan(keterangan);
-                 
+                System.out.println(barang[i]);
                 if (gdao.insert(dgad)) {
-
-                    System.out.println(barang[i]);
                     System.out.println("berhasil");
                     System.out.println(Pesan = "Berhasil Insert dengan id" + dgad.getIdDetailGadai());
                 }

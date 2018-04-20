@@ -11,6 +11,7 @@ import dao.CustomerDAO;
 import dao.Detail_GadaiDAO;
 import dao.GadaiDAO;
 import dao.Jenis_BarangDAO;
+import entities.Gadai;
 import java.util.List;
 
 /**
@@ -23,7 +24,8 @@ public class Cek {
 //        System.out.println(datas.size());
         
         //System.out.println(new CustomerDAO().getAutoID());
-        AngsuranDAO aDAO = new AngsuranDAO();
-        System.out.println(aDAO.getAutoID());
+//        AngsuranDAO aDAO = new AngsuranDAO();
+//        System.out.println(aDAO.getAutoID());
+        //Gadai gadd = (Gadai) fdao.getById(id_gadai);
     }
 }

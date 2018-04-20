@@ -59,7 +59,7 @@ public class AngsuranDAO implements InterfaceDAO{
     }
     
            public String getAutoID() {
-        return (String) fdao.getById("SELECT CONCAT('TR',LPAD((TO_NUMBER(SUBSTR(MAX(idAngsuran),5,5))+1),5,'0')) FROM Angsuran");
+        return (String) fdao.getById("SELECT CONCAT('TR',LPAD((TO_NUMBER(SUBSTR(MAX(idAngsuran),3,3))+1),3,'0')) FROM Angsuran");
     }
     
 

@@ -6,6 +6,7 @@
 package controller.insert;
 
 import dao.AngsuranDAO;
+import dao.GadaiDAO;
 import entities.Angsuran;
 import entities.Customer;
 import entities.Gadai;
@@ -55,6 +56,7 @@ public class AngsuranInsert extends HttpServlet {
         RequestDispatcher dis = null;
         String Pesan = "Gagal Insert";
         AngsuranDAO bdao = new AngsuranDAO();
+        GadaiDAO gdao = new GadaiDAO();
 
         Date date1 = null;
 
@@ -74,12 +76,35 @@ public class AngsuranInsert extends HttpServlet {
 
             if (bdao.insert(a)) {
                 Pesan = "Berhasil Insert dengan id" + a.getIdAngsuran();
+
+                boolean cek = cek(id_gadai);
+                if (cek) {
+                    gdao.update(id_gadai, "a");
+
+                }
             }
             out.println(Pesan);
             dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
             dis.include(request, response);
 
         }
+    }
+        public boolean cek(String id){
+        Gadai gadai = (Gadai) new GadaiDAO().getById(id);
+        if (gadai.getJumlahPinjaman() == 0) {
+            System.out.println("LUNAS");
+            
+            //return gDAO.update(gadai);
+            //System.out.println(gadai.getIdStatus().equals("a"));
+            return true;
+        }
+        else
+        {
+            System.out.println("BELUM LUNAS");
+            return false;
+            //return gDAO.update(gadai);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
