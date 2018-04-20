@@ -1,24 +1,19 @@
 <%-- 
-    Document   : updatebarang
-    Created on : Apr 18, 2018, 11:11:39 AM
+    Document   : insertangsuran
+    Created on : Apr 19, 2018, 1:44:42 PM
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Gadai"%>
+<%@page import="entities.Angsuran"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="dao.Jenis_BarangDAO"%>
-<%@page import="entities.Barang"%>
 <%@page import="entities.JenisBarang"%>
-<%@page import="entities.Customer"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <head>
-        <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <title>Lihat Customer<table border="1">
-                       
-                </title>-->
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -114,7 +109,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="barangservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="angsuranservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>
@@ -122,55 +117,62 @@
 
                 <!-- /.navbar-static-side -->
             </nav>
-        </div>
+        </div>   
 
-        <div id="page-wrapper">
+        <div id="page-wrapper">  
+
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Barang </h1>
+                    <h1 class="page-header">Form Angsuran</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>    
+            </div> 
 
 
-            <% Barang brgg = (Barang) session.getAttribute("b");%>
-            <form role="form" action="prosesupdatebarang" method="post">
+           
+            <% Gadai gadd = (Gadai) session.getAttribute("gad");%>
+            <% String autoid = (String) session.getAttribute("autoID");%>
+            <form role="form" action="angsuraninsert" method="post">
+                <!--                <div class="form-group">
+                                    <label>ID Barang</label>-->
+
+                <!--                </div>-->
+
                 <div class="form-group">
-                    <label>ID Barang</label>
-                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= brgg.getIdBarang()%>">
-
+<!--                    <label>No. Transaksi</label>-->
+                    <input class="form-control hidden"  name="txtNoTransaksi" type="text" value="<%=autoid%>"> 
                 </div>
 
                 <div class="form-group">
-                    <label>Jenis Barang</label>
+                    <label>No. Identitas</label>
+                    <input class="form-control"  name="txtNoIdentitas" type="text" value="<%= gadd.getNoIdentitas().getNoIdentitas()%>"> 
+                </div>
 
-                    <select name ="txtJenis" class="form-control">
-                        <%
-                            List<Object> datas2 = new Jenis_BarangDAO().getAll();
-                            for (Object data : datas2) {
-                                JenisBarang jb = (JenisBarang) data;%>
-                        <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
+           
 
-                            }%>
-                    </select>
+                <div class="form-group">
+                    <label>ID Gadai</label>
+                    <input class="form-control"  name="txtIdGadai" type="text" value="<%= gadd.getIdGadai()%>">
                 </div>
 
                 <div class="form-group">
-                    <label>Nama Barang</label>
-                    <input class="form-control" name="txtBarang"  type="text" value="<%= brgg.getNamaBarang()%>">
+                    <label>Tanggal Angsuran</label>
+                    <input class="form-control" name="txtTglAngsuran" type="date" required="true">
+                </div>
+
+                <div class="form-group">
+                    <label>Jumlah Angsuran</label>
+                    <input class="form-control" name="txtJmlAngsuran" type="text">
                 </div>
 
 
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                    <a href="barangservlet" class="btn btn-primary">Cancel</a>
+
+                    <input type="submit" class="btn btn-primary" value="Insert" name="submit">
+                    <a href="gadaiservlet" class="btn btn-primary">Cancel</a>
                 </div>
-
-
             </form>
         </div>
-
-
         <!-- /#wrapper -->
 
         <!-- jQuery -->
@@ -198,5 +200,6 @@
                 });
             });
         </script>
+
     </body>
 </html>

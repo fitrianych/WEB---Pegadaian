@@ -50,17 +50,17 @@ public class BarangInsert extends HttpServlet {
         //Jenis_BarangDAO jdao = new Jenis_BarangDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          Barang brg = new Barang();
-          brg.setIdBarang(Short.parseShort(id));
-          brg.setIdJenis(new JenisBarang (Short.parseShort(jenis)));
-          brg.setNamaBarang(nama_barang);
-          
-                    if(bdao.insert(brg)){
-              Pesan = "Berhasil Insert dengan id" +brg.getIdBarang();
-          }
-          out.println(Pesan);
-          dis = request.getRequestDispatcher("view/insert/insertbarang.jsp");
-        dis.include(request, response);
+            Barang brg = new Barang();
+            brg.setIdBarang(Short.parseShort(id));
+            brg.setIdJenis(new JenisBarang(Short.parseShort(jenis)));
+            brg.setNamaBarang(nama_barang);
+
+            if (bdao.insert(brg)) {
+                Pesan = "Berhasil Insert dengan id" + brg.getIdBarang();
+            }
+            out.println(Pesan);
+            dis = request.getRequestDispatcher("view/insert/insertbarang.jsp");
+            dis.include(request, response);
         }
     }
 

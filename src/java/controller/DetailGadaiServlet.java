@@ -36,26 +36,22 @@ public class DetailGadaiServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        RequestDispatcher dispatcher =null;
-        HttpSession session = request.getSession();
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet DetailGadaiServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet DetailGadaiServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
 
-                 List<Object> datas = new Detail_GadaiDAO().getAll();
-            
+        RequestDispatcher dispatcher = null;
+        HttpSession session = request.getSession();
+        Detail_GadaiDAO cdao = new Detail_GadaiDAO();
+        try (PrintWriter out = response.getWriter()) {
+
+            List<Object> datas = new Detail_GadaiDAO().getAll();
+
+             if (session.getAttribute("Pesan")!=null) {
+                out.print(session.getAttribute("Pesan")+ "<br>");
+                session.removeAttribute("Pesan");
+            }
+             
             session.setAttribute("dataDetail", datas);
             dispatcher = request.getRequestDispatcher("view/detailgadai.jsp");
-            dispatcher.forward(request, response);
+            dispatcher.include(request, response);
         }
     }
 

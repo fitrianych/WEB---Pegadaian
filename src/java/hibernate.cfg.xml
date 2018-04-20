@@ -49,14 +49,14 @@ Contributor(s):
     <property name="hibernate.default_schema">hr</property>
     <property name="hibernate.connection.autocommit">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-     <property name="hibernate.enable_lazy_load_no_trans">true</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="entities.Customer"/>
-    <mapping class="entities.Angsuran"/>
     <mapping class="entities.Barang"/>
     <mapping class="entities.DetailGadai"/>
     <mapping class="entities.Gadai"/>
     <mapping class="entities.JenisBarang"/>
     <mapping class="entities.Status"/>
+    <mapping class="entities.Angsuran"/>
   </session-factory>
 </hibernate-configuration>

@@ -138,8 +138,17 @@
                                     <input class="form-control" name="txtJenis" type="text">
                                 </div>-->
                 <div class="form-group">
-                <label>Jenis Barang</label>
-                    <input class="form-control" name="txtJenis" type="text">
+                    <label>Jenis Barang</label>
+                    <!--                    <input class="form-control" name="txtJenis" type="text">-->
+                    <select name ="txtJenis" class="form-control">
+                        <%
+                            List<Object> datas2 = new Jenis_BarangDAO().getAll();
+                            for (Object data : datas2) {
+                                JenisBarang jb = (JenisBarang) data;%>
+                        <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
+
+                            }%>
+                    </select>
                 </div>
 
                 <div class="form-group">

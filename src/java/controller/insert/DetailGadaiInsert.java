@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.insert;
 
-import dao.Jenis_BarangDAO;
+import dao.BarangDAO;
+import dao.Detail_GadaiDAO;
+import dao.GadaiDAO;
+import entities.Barang;
+import entities.DetailGadai;
+import entities.Gadai;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +25,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "JenisServlet", urlPatterns = {"/jenisservlet"})
-public class JenisServlet extends HttpServlet {
+@WebServlet(name = "DetailGadaiInsert", urlPatterns = {"/detailgadaiinsert"})
+public class DetailGadaiInsert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,23 +40,43 @@ public class JenisServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        RequestDispatcher dispatcher =null;
+
+        String id_detail = request.getParameter("txtIdDetail");
+        String[] barang = request.getParameterValues("txtBarang");
+        String id_gadai = request.getParameter("txtIdGadai");
+        String keterangan = request.getParameter("txtKeterangan");
         HttpSession session = request.getSession();
-        Jenis_BarangDAO cdao = new Jenis_BarangDAO();
+        RequestDispatcher dis = null;
+        String Pesan = "Gagal Insert Data";
+        Detail_GadaiDAO gdao = new Detail_GadaiDAO();
+        BarangDAO bdao = new BarangDAO();
         try (PrintWriter out = response.getWriter()) {
+            DetailGadai dgad = new DetailGadai();
+            // dgad.setIdDetailGadai(Short.parseShort(id_detail));
+            //dgad.setIdBarang(new Barang(Short.parseShort(barang)));
 
+//            if (barang.length > 0) {
+            for (int i = 0; i < barang.length; i++) {
+                dgad.setIdDetailGadai(Short.parseShort(id_detail));
+                dgad.setIdBarang(new Barang(Short.parseShort(barang[i])));
+                dgad.setIdGadai(new Gadai(Long.parseLong(id_gadai)));
+                dgad.setKeterangan(keterangan);
+                 
+                if (gdao.insert(dgad)) {
 
-            List<Object> datas = new Jenis_BarangDAO().getAll();
-            
-             if (session.getAttribute("Pesan")!=null) {
-                out.print(session.getAttribute("Pesan")+ "<br>");
-                session.removeAttribute("Pesan");
+                    System.out.println(barang[i]);
+                    System.out.println("berhasil");
+                    System.out.println(Pesan = "Berhasil Insert dengan id" + dgad.getIdDetailGadai());
+                }
             }
-            
-            session.setAttribute("dataJenis", datas);
-            dispatcher = request.getRequestDispatcher("view/jenis.jsp");
-            dispatcher.include(request, response);
+            //}
+            out.println(Pesan);
+            dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
+            dis.include(request, response);
+//            for (int i = 0; i < barang.length; i++) {
+//                System.out.println(barang[i]);
+//            }
+
         }
     }
 

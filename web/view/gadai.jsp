@@ -141,7 +141,7 @@
                                         <th>Jatuh Tempo</th>
                                         <th>Jumlah Pinjaman</th>
                                         <th>Status</th>
-                                        <th colspan="2">Aksi</th>
+                                        <th colspan="3">Aksi</th>
 
                                     </tr>
                                 </thead>
@@ -160,6 +160,8 @@
                                         <td><%= b.getIdStatus().getStatus()%></td>
                                         <td><a href="gadaiupdate?id=<%=b.getIdGadai()%>">update</a></td>
                                         <td><a href="gadaidelete?id=<%=b.getIdGadai()%>">delete</a></td>
+                                        <td><a href="angsurantoinsert?id=<%=b.getIdGadai()%>">angsur</a></td>
+                                      
 
                                     </tr>
 
@@ -172,6 +174,7 @@
                     </div>
                 </div>
             </div>
+<!--                                <a href="angsurantoinsert" class="btn btn-primary">Add Angsuran</a>-->
         </div>
         <!-- /#wrapper -->
 

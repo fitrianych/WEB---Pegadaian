@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.update;
 
-import dao.Jenis_BarangDAO;
+import dao.Detail_GadaiDAO;
+import entities.DetailGadai;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "JenisServlet", urlPatterns = {"/jenisservlet"})
-public class JenisServlet extends HttpServlet {
+@WebServlet(name = "DetailGadaiUpdate", urlPatterns = {"/detailgadaiupdate"})
+public class DetailGadaiUpdate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,22 +37,17 @@ public class JenisServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        RequestDispatcher dispatcher =null;
+        String id = request.getParameter("id");
+        RequestDispatcher dis = null;
         HttpSession session = request.getSession();
-        Jenis_BarangDAO cdao = new Jenis_BarangDAO();
         try (PrintWriter out = response.getWriter()) {
-
-
-            List<Object> datas = new Jenis_BarangDAO().getAll();
-            
-             if (session.getAttribute("Pesan")!=null) {
-                out.print(session.getAttribute("Pesan")+ "<br>");
-                session.removeAttribute("Pesan");
-            }
-            
-            session.setAttribute("dataJenis", datas);
-            dispatcher = request.getRequestDispatcher("view/jenis.jsp");
-            dispatcher.include(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            DetailGadai jns = (DetailGadai) new Detail_GadaiDAO().getById(id);
+            session.setAttribute("jns", jns);
+            out.println("<font color = \"red\">update" +jns.getIdDetailGadai()+"</font>");
+        //out.println("<b>"+id);
+        dis = request.getRequestDispatcher("view/update/updatedetailgadai.jsp");
+        dis.include(request, response);
         }
     }
 

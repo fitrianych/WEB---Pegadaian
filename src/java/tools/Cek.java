@@ -5,7 +5,10 @@
  */
 package tools;
 
+import dao.AngsuranDAO;
+import dao.BarangDAO;
 import dao.CustomerDAO;
+import dao.Detail_GadaiDAO;
 import dao.GadaiDAO;
 import dao.Jenis_BarangDAO;
 import java.util.List;
@@ -20,6 +23,7 @@ public class Cek {
 //        System.out.println(datas.size());
         
         //System.out.println(new CustomerDAO().getAutoID());
-        System.out.println(new GadaiDAO().getAutoID());
+        AngsuranDAO aDAO = new AngsuranDAO();
+        System.out.println(aDAO.getAutoID());
     }
 }

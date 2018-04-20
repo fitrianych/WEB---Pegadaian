@@ -65,5 +65,9 @@ public class BarangDAO implements InterfaceDAO {
     public Integer getAutoID() {
         return (Integer) fdao.getById("SELECT MAX(idBarang)+1 FROM Barang");
     }
+    
+        public Long getBarang() {
+        return (Long) fdao.getById("SELECT COUNT(idBarang) from Barang");
+    }
 
 }

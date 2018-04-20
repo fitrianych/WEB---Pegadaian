@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.insert;
 
-import dao.Jenis_BarangDAO;
+import dao.AngsuranDAO;
+import entities.Angsuran;
+import entities.Customer;
+import entities.Gadai;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +28,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "JenisServlet", urlPatterns = {"/jenisservlet"})
-public class JenisServlet extends HttpServlet {
+@WebServlet(name = "AngsuranInsert", urlPatterns = {"/angsuraninsert"})
+public class AngsuranInsert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,23 +43,42 @@ public class JenisServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        RequestDispatcher dispatcher =null;
+
+        String no_transaksi = request.getParameter("txtNoTransaksi");
+        String no_identitas = request.getParameter("txtNoIdentitas");
+        // String nama = request.getParameter("txtNama");
+        String id_gadai = request.getParameter("txtIdGadai");
+        String tgl_angsuran = request.getParameter("txtTglAngsuran");
+        String jml_angsuran = request.getParameter("txtJmlAngsuran");
+
         HttpSession session = request.getSession();
-        Jenis_BarangDAO cdao = new Jenis_BarangDAO();
+        RequestDispatcher dis = null;
+        String Pesan = "Gagal Insert";
+        AngsuranDAO bdao = new AngsuranDAO();
+
+        Date date1 = null;
+
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tgl_angsuran);
+        } catch (ParseException ex) {
+            Logger.getLogger(AngsuranInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try (PrintWriter out = response.getWriter()) {
 
+            Angsuran a = new Angsuran();
+            a.setIdAngsuran(no_transaksi);
+            a.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
+            a.setIdGadai(new Gadai(Long.parseLong(id_gadai)));
+            a.setTanggalAngsuran(date1);
+            a.setJumlahAngsuran(Long.parseLong(jml_angsuran));
 
-            List<Object> datas = new Jenis_BarangDAO().getAll();
-            
-             if (session.getAttribute("Pesan")!=null) {
-                out.print(session.getAttribute("Pesan")+ "<br>");
-                session.removeAttribute("Pesan");
+            if (bdao.insert(a)) {
+                Pesan = "Berhasil Insert dengan id" + a.getIdAngsuran();
             }
-            
-            session.setAttribute("dataJenis", datas);
-            dispatcher = request.getRequestDispatcher("view/jenis.jsp");
-            dispatcher.include(request, response);
+            out.println(Pesan);
+            dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
+            dis.include(request, response);
+
         }
     }
 

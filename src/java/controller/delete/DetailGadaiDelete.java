@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.delete;
 
-import dao.Jenis_BarangDAO;
+import dao.Detail_GadaiDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Fitriany Chairunnisa
  */
-@WebServlet(name = "JenisServlet", urlPatterns = {"/jenisservlet"})
-public class JenisServlet extends HttpServlet {
+@WebServlet(name = "DetailGadaiDelete", urlPatterns = {"/detailgadaidelete"})
+public class DetailGadaiDelete extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,23 +35,21 @@ public class JenisServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        RequestDispatcher dispatcher =null;
-        HttpSession session = request.getSession();
-        Jenis_BarangDAO cdao = new Jenis_BarangDAO();
+
+        String id = request.getParameter("id");
+        RequestDispatcher dis = null;
+        HttpSession sesi = request.getSession();
+        String Pesan = "Gagal Hapus";
+        Detail_GadaiDAO jdao = new Detail_GadaiDAO();
         try (PrintWriter out = response.getWriter()) {
-
-
-            List<Object> datas = new Jenis_BarangDAO().getAll();
-            
-             if (session.getAttribute("Pesan")!=null) {
-                out.print(session.getAttribute("Pesan")+ "<br>");
-                session.removeAttribute("Pesan");
+            /* TODO output your page here. You may use following sample code. */
+            if (jdao.delete(id)) {
+                Pesan = "Berhasil Delete dengan id" + id;
             }
-            
-            session.setAttribute("dataJenis", datas);
-            dispatcher = request.getRequestDispatcher("view/jenis.jsp");
-            dispatcher.include(request, response);
+
+            sesi.setAttribute("Pesan", Pesan);
+            dis = request.getRequestDispatcher("detailgadaiservlet");
+            dis.include(request, response);
         }
     }
 

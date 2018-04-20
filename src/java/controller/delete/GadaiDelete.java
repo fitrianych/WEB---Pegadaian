@@ -5,9 +5,12 @@
  */
 package controller.delete;
 
+import dao.Detail_GadaiDAO;
 import dao.GadaiDAO;
+import entities.DetailGadai;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,17 +39,21 @@ public class GadaiDelete extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String dg = request.getParameter("idDetail");
         String id = request.getParameter("id");
         RequestDispatcher dis = null;
         HttpSession sesi = request.getSession();
         String Pesan = "Gagal Hapus";
-        GadaiDAO jdao = new GadaiDAO();
+        
+        GadaiDAO dgdao = new GadaiDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-                        if (jdao.delete(id)) {
-                Pesan = "Berhasil Delete dengan id" + id;
-            }
-           
+          
+                if (dgdao.delete(id)) {
+                    Pesan = "Berhasil Delete dengan id" + id;
+                }
+            
+            //System.out.println(dg + "id" + id);
             sesi.setAttribute("Pesan", Pesan);
             dis = request.getRequestDispatcher("gadaiservlet");
             dis.include(request, response);

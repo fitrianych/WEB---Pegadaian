@@ -1,11 +1,10 @@
 <%-- 
-    Document   : updatebarang
-    Created on : Apr 18, 2018, 11:11:39 AM
+    Document   : updatedetailgadai
+    Created on : Apr 19, 2018, 10:33:05 AM
     Author     : Fitriany Chairunnisa
 --%>
 
-<%@page import="dao.Jenis_BarangDAO"%>
-<%@page import="entities.Barang"%>
+<%@page import="entities.DetailGadai"%>
 <%@page import="entities.JenisBarang"%>
 <%@page import="entities.Customer"%>
 <%@page import="java.util.List"%>
@@ -114,7 +113,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="barangservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="detailgadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>
@@ -127,43 +126,41 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Barang </h1>
+                    <h1 class="page-header">Update Detail Gadai </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>    
 
 
-            <% Barang brgg = (Barang) session.getAttribute("b");%>
-            <form role="form" action="prosesupdatebarang" method="post">
+            <% DetailGadai jnss = (DetailGadai) session.getAttribute("jns");%>
+            <form role="form" action="prosesupdatedetail" method="post">
                 <div class="form-group">
-                    <label>ID Barang</label>
-                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= brgg.getIdBarang()%>">
+                    <label>ID Detail Barang</label>
+                    <input class="form-control" name="txtIdDetail" readonly="true" type="text" value="<%= jnss.getIdDetailGadai()%>">
 
                 </div>
 
                 <div class="form-group">
-                    <label>Jenis Barang</label>
+<!--                    <label>ID Gadai</label>-->
+                    <input class="form-control hidden" name="txtIdGadai" readonly="true" type="text" value="<%= jnss.getIdGadai().getIdGadai()%>">
 
-                    <select name ="txtJenis" class="form-control">
-                        <%
-                            List<Object> datas2 = new Jenis_BarangDAO().getAll();
-                            for (Object data : datas2) {
-                                JenisBarang jb = (JenisBarang) data;%>
-                        <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
-
-                            }%>
-                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Nama Barang</label>
-                    <input class="form-control" name="txtBarang"  type="text" value="<%= brgg.getNamaBarang()%>">
+<!--                    <label>ID Barang</label>-->
+                    <input class="form-control hidden" name="txtBarang" readonly="true" type="text" value="<%=jnss.getIdBarang().getIdBarang()%>">
+
                 </div>
 
+                <div class="form-group">
+                    <label>Keterangan</label>
+                    <input class="form-control" name="txtKeterangan"  type="text" value="<%= jnss.getKeterangan()%>">
+
+                </div>
 
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                    <a href="barangservlet" class="btn btn-primary">Cancel</a>
+                    <a href="detailgadaiservlet" class="btn btn-primary">Cancel</a>
                 </div>
 
 

@@ -16,21 +16,21 @@ import tools.HibernateUtil;
  *
  * @author Fitriany Chairunnisa
  */
-public class Detail_GadaiDAO implements InterfaceDAO{
-    
+public class Detail_GadaiDAO implements InterfaceDAO {
+
     public SessionFactory factory;
     private Session session;
     private Transaction transaction;
     public FunctionsDAO fdao;
-    
-     public Detail_GadaiDAO() {
-         this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
-         this.factory=HibernateUtil.getSessionFactory();
+
+    public Detail_GadaiDAO() {
+        this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
+        this.factory = HibernateUtil.getSessionFactory();
     }
 
     @Override
     public boolean insert(Object object) {
-       return fdao.insert(object);
+        return fdao.insert(object);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Detail_GadaiDAO implements InterfaceDAO{
 
     @Override
     public boolean delete(Object object) {
-       return fdao.delete(DetailGadai.class, Integer.parseInt(object.toString()));
+        return fdao.delete(DetailGadai.class, Short.parseShort(object.toString()));
     }
 
     @Override
@@ -57,5 +57,11 @@ public class Detail_GadaiDAO implements InterfaceDAO{
     public Object getById(String id) {
         return fdao.getById("from DetailGadai where idGadai='" + id + "'");
     }
-    
+
+    public Integer getAutoID() {
+        return (Integer) fdao.getById("SELECT MAX(idDetailGadai)+1 FROM DetailGadai");
+    }
+
+
+
 }

@@ -58,5 +58,11 @@ public class AngsuranDAO implements InterfaceDAO{
           return fdao.getById("from Angsuran where id_angsuran='" + id + "'");
     }
     
+           public String getAutoID() {
+        return (String) fdao.getById("SELECT CONCAT('TR',LPAD((TO_NUMBER(SUBSTR(MAX(idAngsuran),5,5))+1),5,'0')) FROM Angsuran");
+    }
+    
+
+    
 }
     

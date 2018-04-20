@@ -5,6 +5,7 @@
  */
 package controller.insert;
 
+import dao.Detail_GadaiDAO;
 import dao.GadaiDAO;
 import entities.Customer;
 import entities.Gadai;
@@ -44,15 +45,16 @@ public class GadaiInsert extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("txtID");
+        String no_identitas = request.getParameter("txtIdentitas");
         String tanggal_pengajuan = request.getParameter("txtPengajuan");
         String jatuh_tempo = request.getParameter("txtJatuhTempo");
         String jumlah_pinjaman = request.getParameter("txtPinjaman");
-        String no_identitas = request.getParameter("txtIdentitas");
-        String status = request.getParameter("txtStatus");
+       // String status = request.getParameter("txtStatus");
         HttpSession session = request.getSession();
         RequestDispatcher dis = null;
-        String Pesan = "Gagal Update";
+        String Pesan = "Gagal Insert Data";
         GadaiDAO gdao = new GadaiDAO();
+        Detail_GadaiDAO dgdao = new Detail_GadaiDAO();
 
         Date date1 = null;
         Date date2 = null;
@@ -73,17 +75,19 @@ public class GadaiInsert extends HttpServlet {
 
                 Gadai gad = new Gadai();
                 gad.setIdGadai(Long.parseLong(id));
+                gad.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
                 gad.setTanggalPengajuan(date1);
                 gad.setJatuhTempo(date2);
                 gad.setJumlahPinjaman(Long.parseLong(jumlah_pinjaman));
-                gad.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
-                gad.setIdStatus(new Status(status));
+                gad.setIdStatus(new Status("b"));
 
                 if (gdao.update(gad)) {
-                    Pesan = "Berhasil Update dengan id" + gad.getIdGadai();
+                    Pesan = "Berhasil Insert dengan id" + gad.getIdGadai();
                 }
                 out.println(Pesan);
-                dis = request.getRequestDispatcher("view/insert/insertgadai.jsp");
+                           // session.setAttribute("autoID", dgdao.getAutoID());
+                            session.setAttribute("gdao", gdao.getById(id));
+                dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
                 dis.include(request, response);
             }
     }
