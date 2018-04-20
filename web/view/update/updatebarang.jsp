@@ -148,10 +148,14 @@
                         <%
                             List<Object> datas2 = new Jenis_BarangDAO().getAll();
                             for (Object data : datas2) {
-                                JenisBarang jb = (JenisBarang) data;%>
-                        <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
+                                JenisBarang jb = (JenisBarang) data;
+                        if(brgg.getIdJenis().getIdJenis().equals(jb.getIdJenis())){%>
 
-                            }%>
+                         
+                        <option value="<%=jb.getIdJenis()%>"selected><%=jb.getNamaJenis()%></option><%
+                                }else{%>
+                                <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
+                            }}%>
                     </select>
                 </div>
 

@@ -23,7 +23,7 @@ public class Cek {
 //        List<Object> datas = new CustomerDAO().getAll();
 //        System.out.println(datas.size());
         
-        //System.out.println(new CustomerDAO().getAutoID());
+      //  System.out.println(new Detail_GadaiDAO().getAutoID());
 //        AngsuranDAO aDAO = new AngsuranDAO();
 //        System.out.println(aDAO.getAutoID());
         //Gadai gadd = (Gadai) fdao.getById(id_gadai);

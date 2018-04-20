@@ -150,7 +150,7 @@
 
                                     for (Object data : datas) {
                                         Barang b = (Barang) data;%>
-                                <tbody>
+                                
                                     <tr>
                                         <td><%= b.getIdBarang()%></td>
                                         <td><%= b.getIdJenis().getNamaJenis()%></td>
@@ -160,7 +160,7 @@
 
                                     </tr>
 
-                                </tbody>
+                                
                                 <% }
                                 %>
 

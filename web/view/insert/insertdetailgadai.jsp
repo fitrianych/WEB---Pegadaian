@@ -108,7 +108,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="gadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>

@@ -136,15 +136,15 @@
                     <input class="form-control" name="txtIdentitas" type="text" required="true">
                 </div>
 
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label>Tanggal Pengajuan</label>
-                    <input class="form-control" name="txtPengajuan" type="date" required="true">
-                </div>
+                    <input class="form-control" name="txtPengajuan" type="date" >
+                </div>-->
 
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label>Jatuh Tempo</label>
-                    <input class="form-control" name="txtJatuhTempo" type="date" required="true">
-                </div>
+                    <input class="form-control " name="txtJatuhTempo" type="date" >
+                </div>-->
 
                 <div class="form-group">
                     <label>Jumlah Pinjaman</label>

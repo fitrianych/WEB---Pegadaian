@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +49,7 @@ public class GadaiInsert extends HttpServlet {
         String id = request.getParameter("txtID");
         String no_identitas = request.getParameter("txtIdentitas");
         String tanggal_pengajuan = request.getParameter("txtPengajuan");
-        String jatuh_tempo = request.getParameter("txtJatuhTempo");
+        //String jatuh_tempo = request.getParameter("txtJatuhTempo");
         String jumlah_pinjaman = request.getParameter("txtPinjaman");
         // String status = request.getParameter("txtStatus");
         HttpSession session = request.getSession();
@@ -56,28 +58,53 @@ public class GadaiInsert extends HttpServlet {
         GadaiDAO gdao = new GadaiDAO();
         Detail_GadaiDAO dgdao = new Detail_GadaiDAO();
 
-        Date date1 = null;
-        Date date2 = null;
+        String DATE_FORMAT = "yyyy-MM-dd";
+        Date currentDate = new Date();
 
-        try {
-            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal_pengajuan);
-        } catch (ParseException ex) {
-            Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        LocalDateTime localDateTime = currentDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        localDateTime = localDateTime.plusYears(0).plusMonths(4).plusDays(0);
+        Date date_jt = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-        try {
-            date2 = new SimpleDateFormat("yyyy-MM-dd").parse(jatuh_tempo);
-        } catch (ParseException ex) {
-            Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //Date date1 = null;
+        // Date date2 = null;
+        //Date date2 = null;
+//        try {
+//            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal_pengajuan);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        //Date date2 = null;
+//        try {
+//           
+//           Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(jt);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            //gad.setTanggalPengajuan(date1);
+//        try {
+//           // int jml = 120;
+//          Date date11 = new SimpleDateFormat("yyyy-MM-dd").parse("000-04-00"); 
+//           long jt = date1.getTime() + date11.getTime();
+//           Date date3 = new Date(jt);
+//           SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+//           String dateText = df2.format(date3);
+//           Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(dateText);
+//            System.out.println(dateText);
+//           
+//           gad.setJatuhTempo(date2);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(GadaiInsert.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            gad.setJatuhTempo(date2);
 
             Gadai gad = new Gadai();
             gad.setIdGadai(Long.parseLong(id));
             gad.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
-            gad.setTanggalPengajuan(date1);
-            gad.setJatuhTempo(date2);
+            gad.setTanggalPengajuan(currentDate);
+            gad.setJatuhTempo(date_jt);
+
             gad.setJumlahPinjaman(Long.parseLong(jumlah_pinjaman));
             gad.setIdStatus(new Status("b"));
 
@@ -85,14 +112,7 @@ public class GadaiInsert extends HttpServlet {
                 Pesan = "Berhasil Insert dengan id" + gad.getIdGadai();
             }
             out.println(Pesan);
-            
-            
-//            Gadai gadai = (Gadai) gdao.getById(id);
-//            if (gadai.getJumlahPinjaman()== 0) {
-//                System.out.println("LUNAS");
-//            } else {
-//                System.out.println("BELUM LUNAS");
-//            }
+
             // session.setAttribute("autoID", dgdao.getAutoID());
             session.setAttribute("gdao", gdao.getById(id));
             dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
