@@ -141,7 +141,9 @@
                                         <th>Jatuh Tempo</th>
                                         <th>Jumlah Pinjaman</th>
                                         <th>Status</th>
-                                        <th colspan="3">Aksi</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                        <th>Angsur</th>
 
                                     </tr>
                                 </thead>
@@ -149,23 +151,21 @@
                                     List<Object> datas = (List<Object>) session.getAttribute("dataGadai");
 
                                     for (Object data : datas) {
-                        Gadai b = (Gadai) data;%>
-                                <tbody>
-                                    <tr>
-                                        <td><%= b.getIdGadai()%></td>
-                                        <td><%= b.getNoIdentitas()%></td>
-                                        <td><%= b.getTanggalPengajuan()%></td>
-                                        <td><%= b.getJatuhTempo()%></td>
-                                        <td><%= b.getJumlahPinjaman()%></td>
-                                        <td><%= b.getIdStatus().getStatus()%></td>
-                                        <td><a href="gadaiupdate?id=<%=b.getIdGadai()%>">update</a></td>
-                                        <td><a href="gadaidelete?id=<%=b.getIdGadai()%>">delete</a></td>
-                                        <td><a href="angsurantoinsert?id=<%=b.getIdGadai()%>">angsur</a></td>
-                                      
+                                        Gadai b = (Gadai) data;%>
 
-                                    </tr>
+                                <tr>
+                                    <td><%= b.getIdGadai()%></td>
+                                    <td><%= b.getNoIdentitas()%></td>
+                                    <td><%= b.getTanggalPengajuan()%></td>
+                                    <td><%= b.getJatuhTempo()%></td>
+                                    <td><%= b.getJumlahPinjaman()%></td>
+                                    <td><%= b.getIdStatus().getStatus()%></td>
+                                    <td><a href="gadaiupdate?id=<%=b.getIdGadai()%>">update</a></td>
+                                    <td><a href="gadaidelete?id=<%=b.getIdGadai()%>">delete</a></td>
+                                    <td><a href="angsurantoinsert?id=<%=b.getIdGadai()%>">angsur</a></td>
 
-                                </tbody>
+
+                                </tr>
                                 <% }
                                 %>
 
@@ -174,7 +174,7 @@
                     </div>
                 </div>
             </div>
-<!--                                <a href="angsurantoinsert" class="btn btn-primary">Add Angsuran</a>-->
+            <!--                                <a href="angsurantoinsert" class="btn btn-primary">Add Angsuran</a>-->
         </div>
         <!-- /#wrapper -->
 
@@ -190,6 +190,7 @@
         <!-- DataTables JavaScript -->
         <script src="template/vendor/datatables/js/jquery.dataTables.min.js"></script>
         <script src="template/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+        <script src="template/vendor/datatables-plugins/dataTables.bootstrap.js"></script>
         <script src="template/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
         <!-- Custom Theme JavaScript -->
@@ -203,6 +204,5 @@
                 });
             });
         </script>
-
     </body>
 </html>

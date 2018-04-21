@@ -12,9 +12,11 @@ import entities.Customer;
 import entities.Gadai;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -49,6 +51,9 @@ public class AngsuranInsert extends HttpServlet {
         String no_identitas = request.getParameter("txtNoIdentitas");
         // String nama = request.getParameter("txtNama");
         String id_gadai = request.getParameter("txtIdGadai");
+        String pinjaman = request.getParameter("txtPinjaman");
+        String tgl_pengajuan = request.getParameter("txtTglPengajuan");
+        String jatuh_tempo = request.getParameter("txtTglJatuhTempo");
         String tgl_angsuran = request.getParameter("txtTglAngsuran");
         String jml_angsuran = request.getParameter("txtJmlAngsuran");
 
@@ -56,23 +61,67 @@ public class AngsuranInsert extends HttpServlet {
         RequestDispatcher dis = null;
         String Pesan = "Gagal Insert";
         AngsuranDAO bdao = new AngsuranDAO();
+        Angsuran a = new Angsuran();
         GadaiDAO gdao = new GadaiDAO();
-
+        Gadai g = new Gadai();
         Date date1 = null;
 
+        DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        //String jatuh_tempo = request.getParameter(g.getJatuhTempo() + "");
+
+        Date date2 = null;
+
+        Date date3 = null;
+
         try {
-            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tgl_angsuran);
+            date1 = (Date) date.parse(tgl_angsuran);
         } catch (ParseException ex) {
             Logger.getLogger(AngsuranInsert.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try {
+
+            date2 = (Date) date.parse(jatuh_tempo);
+        } catch (ParseException ex) {
+            Logger.getLogger(AngsuranInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+
+            date3 = (Date) date.parse(tgl_pengajuan);
+        } catch (ParseException ex) {
+            Logger.getLogger(AngsuranInsert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         try (PrintWriter out = response.getWriter()) {
 
-            Angsuran a = new Angsuran();
             a.setIdAngsuran(no_transaksi);
             a.setNoIdentitas(new Customer(Integer.parseInt(no_identitas)));
             a.setIdGadai(new Gadai(Long.parseLong(id_gadai)));
+
             a.setTanggalAngsuran(date1);
             a.setJumlahAngsuran(Long.parseLong(jml_angsuran));
+
+            long bedaHari = (date1.getTime() - date2.getTime());
+            long days = TimeUnit.MILLISECONDS.toDays(bedaHari);
+
+            Long pinjam = Long.parseLong(pinjaman);
+            System.out.println(days);
+
+            if (days >= 7) {
+                //long denda = (long) (TimeUnit.MILLISECONDS.toDays(bedaHari));
+
+                //double total_denda = days * new Double(0.01).longValue() * pinjam;
+                double total_denda = days * 0.01 * pinjam;
+                a.setDenda(new Double(total_denda).longValue());
+            } else {
+                a.setDenda(Long.valueOf(0));
+                System.out.println("tidak ada denda");
+            }
+            double x = Double.parseDouble(a.getDenda() + "");
+            double y = Double.parseDouble(a.getJumlahAngsuran() + "");
+            double hasil = x + y;
+            a.setTotal(new Double(hasil).longValue());
 
             if (bdao.insert(a)) {
                 Pesan = "Berhasil Insert dengan id" + a.getIdAngsuran();
@@ -82,29 +131,28 @@ public class AngsuranInsert extends HttpServlet {
                     gdao.update(id_gadai, "a");
 
                 }
+
             }
+
+//            if (bdao.update(a)) {
+//            }
             out.println(Pesan);
             dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
             dis.include(request, response);
 
         }
     }
-        public boolean cek(String id){
+
+    public boolean cek(String id) {
         Gadai gadai = (Gadai) new GadaiDAO().getById(id);
         if (gadai.getJumlahPinjaman() == 0) {
             System.out.println("LUNAS");
-            
-            //return gDAO.update(gadai);
-            //System.out.println(gadai.getIdStatus().equals("a"));
             return true;
-        }
-        else
-        {
+        } else {
             System.out.println("BELUM LUNAS");
             return false;
-            //return gDAO.update(gadai);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

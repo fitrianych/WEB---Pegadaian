@@ -140,7 +140,8 @@
                                         <th>ID Gadai</th>
                                         <th>Nama Barang</th>
                                         <th>Keterangan</th>
-                                        <th colspan="2">Aksi</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
 
                                     </tr>
                                 </thead>

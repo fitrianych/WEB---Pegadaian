@@ -129,10 +129,10 @@
             </div> 
 
 
-           
+
             <% Gadai gadd = (Gadai) session.getAttribute("gad");%>
             <% String autoid = (String) session.getAttribute("autoID");%>
-            
+
 
             <form role="form" action="angsuraninsert" method="post">
                 <!--                <div class="form-group">
@@ -141,7 +141,7 @@
                 <!--                </div>-->
 
                 <div class="form-group">
-<!--                    <label>No. Transaksi</label>-->
+                    <!--                    <label>No. Transaksi</label>-->
                     <input class="form-control hidden"  name="txtNoTransaksi" type="text" value="<%=autoid%>"> 
                 </div>
 
@@ -150,11 +150,24 @@
                     <input class="form-control"  name="txtNoIdentitas" type="text" value="<%= gadd.getNoIdentitas().getNoIdentitas()%>"> 
                 </div>
 
-           
-
                 <div class="form-group">
                     <label>ID Gadai</label>
                     <input class="form-control"  name="txtIdGadai" type="text" value="<%= gadd.getIdGadai()%>">
+                </div>
+
+                <div class="form-group">
+                    <label>Jumlah Pinjaman</label>
+                    <input class="form-control" readonly="true" name="txtPinjaman" type="text" value="<%= gadd.getJumlahPinjaman()%>">
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Pengajuan</label>
+                    <input class="form-control"  readonly="true"  name="txtTglPengajuan" type="text" value="<%= gadd.getTanggalPengajuan()%>">
+                </div>
+
+                <div class="form-group">
+                    <label>Jatuh Tempo</label>
+                    <input class="form-control" readonly="true"  name="txtTglJatuhTempo" type="text" value="<%= gadd.getJatuhTempo()%>">
                 </div>
 
                 <div class="form-group">

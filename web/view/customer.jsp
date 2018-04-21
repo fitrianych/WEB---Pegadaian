@@ -102,16 +102,16 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
+<!--                            <li class="sidebar-search">
                                 <div class="input-group custom-search-form">
                                     <input type="text" class="form-control" placeholder="Search...">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
+                                        <a href="searchcustomer" class="btn btn-default" type="button">
                                             <i class="fa fa-search"></i>
-                                        </button>
+                                        </a>
                                     </span>
                                 </div>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
@@ -148,7 +148,8 @@
                                         <th>No Telp</th>
                                         <th>Pekerjaan</th>
                                         <th>Alamat</th>
-                                        <th colspan="2">Aksi</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <%
@@ -158,7 +159,7 @@
 
                                     for (Object data : datas) {
                                         Customer c = (Customer) data;%>
-                                <tbody>
+                                
                                     <tr class="odd gradeX">
                                         <td><%= c.getNoIdentitas()%></td>
                                         <td><%= c.getNama()%></td>
@@ -170,7 +171,7 @@
                                         <td><a href="customerdelete?id=<%=c.getNoIdentitas()%>">delete</a></td>
                                     </tr>
 
-                                </tbody>
+                                
                                 <% }
                                 %>
 

@@ -48,7 +48,7 @@ public class GadaiInsert extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("txtID");
         String no_identitas = request.getParameter("txtIdentitas");
-        String tanggal_pengajuan = request.getParameter("txtPengajuan");
+        //String tanggal_pengajuan = request.getParameter("txtPengajuan");
         //String jatuh_tempo = request.getParameter("txtJatuhTempo");
         String jumlah_pinjaman = request.getParameter("txtPinjaman");
         // String status = request.getParameter("txtStatus");

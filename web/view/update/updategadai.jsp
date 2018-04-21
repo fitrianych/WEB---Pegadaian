@@ -4,6 +4,8 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="entities.Gadai"%>
 <%@page import="entities.Barang"%>
 <%@page import="entities.JenisBarang"%>
@@ -133,7 +135,12 @@
             </div>    
 
 
-            <% Gadai brgg = (Gadai) session.getAttribute("g");%>
+            <% Gadai brgg = (Gadai) session.getAttribute("g");
+            DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+            String tgl = dateformat.format(brgg.getTanggalPengajuan());
+            String tgl1 = dateformat.format(brgg.getJatuhTempo());
+            
+            %>
             <form role="form" action="prosesupdategadai" method="post">
                 <div class="form-group">
                     <label>ID Gadai</label>

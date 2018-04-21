@@ -131,8 +131,6 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 
-
-
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
@@ -155,7 +153,7 @@
 
                                     for (Object data : datas) {
                                         Angsuran b = (Angsuran) data;%>
-                                <tbody>
+<!--                                <tbody>-->
                                     <tr>
                                         <td><%= b.getIdAngsuran()%></td>
                                         <td><%= b.getNoIdentitas()%></td>
@@ -171,7 +169,7 @@
 
                                     </tr>
 
-                                </tbody>
+<!--                                </tbody>-->
                                 <% }
                                 %>
 

@@ -139,7 +139,8 @@
                                         <th>ID Barang</th>
                                         <th>Jenis Barang</th>
                                         <th>Nama Barang</th>
-                                        <th colspan="2">Aksi</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
 
                                     </tr>
                                 </thead>
