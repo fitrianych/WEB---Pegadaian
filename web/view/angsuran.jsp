@@ -153,23 +153,23 @@
 
                                     for (Object data : datas) {
                                         Angsuran b = (Angsuran) data;%>
-<!--                                <tbody>-->
-                                    <tr>
-                                        <td><%= b.getIdAngsuran()%></td>
-                                        <td><%= b.getNoIdentitas()%></td>
-                                        <td><%= b.getNoIdentitas().getNama()%></td>
-                                        <td><%= b.getIdGadai()%></td>
-                                        <td><%= b.getIdGadai().getTanggalPengajuan()%></td>
-                                        <td><%= b.getIdGadai().getJatuhTempo()%></td>
-                                        <td><%= b.getTanggalAngsuran()%></td>
-                                        <td><%= b.getJumlahAngsuran()%></td>
-                                        <td><%= b.getIdGadai().getJumlahPinjaman()%></td>
-                                        <td><%= b.getDenda()%></td>
-                                        <td><%= b.getTotal()%></td>
+                                <!--                                <tbody>-->
+                                <tr>
+                                    <td><%= b.getIdAngsuran()%></td>
+                                    <td><%= b.getNoIdentitas()%></td>
+                                    <td><%= b.getNoIdentitas().getNama()%></td>
+                                    <td><%= b.getIdGadai()%></td>
+                                    <td><%= b.getIdGadai().getTanggalPengajuan()%></td>
+                                    <td><%= b.getIdGadai().getJatuhTempo()%></td>
+                                    <td><%= b.getTanggalAngsuran()%></td>
+                                    <td><%= b.getJumlahAngsuran()%></td>
+                                    <td><%= b.getIdGadai().getJumlahPinjaman()%></td>
+                                    <td><%= b.getDenda()%></td>
+                                    <td><%= b.getTotal()%></td>
 
-                                    </tr>
+                                </tr>
 
-<!--                                </tbody>-->
+                                <!--                                </tbody>-->
                                 <% }
                                 %>
 
@@ -177,6 +177,9 @@
                         </div>
                     </div>
                 </div>
+<!--                <form name="report" action="reportangsuran">
+                    <input type="submit" value="Print Data Angsuran" name="btnver" class="btn btn-primary">
+                </form>  -->
             </div>
         </div>
         <!-- /#wrapper -->

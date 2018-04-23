@@ -37,36 +37,55 @@ public class ProsesUpdateCustomer extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String id = request.getParameter("txtID");
         String nama = request.getParameter("txtNama");
         String jenis_kelamin = request.getParameter("txtJK");
         String no_telp = request.getParameter("txtNoTelp");
         String pekerjaan = request.getParameter("txtPekerjaan");
         String alamat = request.getParameter("txtAlamat");
-        
+
         HttpSession session = request.getSession();
         RequestDispatcher dis = null;
         String Pesan = "Gagal Update";
         CustomerDAO cdao = new CustomerDAO();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          Customer cst = new Customer();
+            Customer cst = new Customer();
 //          cst.setNoIdentitas(BigDecimal.valueOf(Long.valueOf(id)));
-          cst.setNoIdentitas(Integer.parseInt(id));
-          cst.setNama(nama);
-          cst.setJenisKelamin(jenis_kelamin);
-          cst.setNoTelp(no_telp);
-          cst.setPekerjaan(pekerjaan);
-          cst.setAlamat(alamat);
-          
-          if(cdao.update(cst)){
-              Pesan = "Berhasil Update dengan id" +cst.getNoIdentitas();
-          }
-          out.println(Pesan);
-          dis = request.getRequestDispatcher("view/update/updatecustomer.jsp");
-        dis.include(request, response);
-        }catch(Exception ex){
+            cst.setNoIdentitas(Integer.parseInt(id));
+            cst.setNama(nama);
+            cst.setJenisKelamin(jenis_kelamin);
+            cst.setNoTelp(no_telp);
+            cst.setPekerjaan(pekerjaan);
+            cst.setAlamat(alamat);
+
+            if (cdao.update(cst)) {
+                //Pesan = "Berhasil Update dengan id" +cst.getNoIdentitas();
+                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.println("<script>");
+                out.println("$(document).ready(function(){");
+                out.println("swal('Good job!', 'Berhasil Update Data!', 'success');");
+                out.println("});");
+                out.println("</script>");
+                dis = request.getRequestDispatcher("view/update/updatecustomer.jsp");
+                dis.include(request, response);
+            } else {
+                //out.println(id+", "+jenis);
+
+                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.println("<script>");
+                out.println("$(document).ready(function(){");
+                out.println("swal('Oops...', 'Gagal Update Data !!', 'error');");
+                out.println("});");
+                out.println("</script>");
+                //out.println(Pesan);
+                dis = request.getRequestDispatcher("view/update/updatecustomer.jsp");
+                dis.include(request, response);
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

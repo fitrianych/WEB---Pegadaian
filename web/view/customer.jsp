@@ -3,7 +3,7 @@
     Created on : Apr 16, 2018, 1:16:43 PM
     Author     : Fitriany Chairunnisa
 --%>
- 
+
 <%@page import="entities.Customer"%>
 <%@page import="dao.CustomerDAO"%>
 <%@page import="java.util.List"%>
@@ -102,16 +102,16 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-<!--                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <span class="input-group-btn">
-                                        <a href="searchcustomer" class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            </li>-->
+                            <!--                            <li class="sidebar-search">
+                                                            <div class="input-group custom-search-form">
+                                                                <input type="text" class="form-control" placeholder="Search...">
+                                                                <span class="input-group-btn">
+                                                                    <a href="searchcustomer" class="btn btn-default" type="button">
+                                                                        <i class="fa fa-search"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </li>-->
                             <li>
                                 <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
@@ -159,19 +159,19 @@
 
                                     for (Object data : datas) {
                                         Customer c = (Customer) data;%>
-                                
-                                    <tr class="odd gradeX">
-                                        <td><%= c.getNoIdentitas()%></td>
-                                        <td><%= c.getNama()%></td>
-                                        <td><%= c.getJenisKelamin()%></td>
-                                        <td><%= c.getNoTelp()%></td>
-                                        <td><%= c.getPekerjaan()%></td>
-                                        <td><%= c.getAlamat()%></td>
-                                        <td><a href="customerupdate?id=<%=c.getNoIdentitas()%>">update</a></td>
-                                        <td><a href="customerdelete?id=<%=c.getNoIdentitas()%>">delete</a></td>
-                                    </tr>
 
-                                
+                                <tr class="odd gradeX">
+                                    <td><%= c.getNoIdentitas()%></td>
+                                    <td><%= c.getNama()%></td>
+                                    <td><%= c.getJenisKelamin()%></td>
+                                    <td><%= c.getNoTelp()%></td>
+                                    <td><%= c.getPekerjaan()%></td>
+                                    <td><%= c.getAlamat()%></td>
+                                    <td><a href="customerupdate?id=<%=c.getNoIdentitas()%>">update</a></td>
+                                    <td><a href="${pageContext.request.contextPath}/customerdelete?id=<%=c.getNoIdentitas()%>">delete</a></td>
+                                </tr>
+
+
                                 <% }
                                 %>
 
@@ -180,57 +180,61 @@
                             </table>
                         </div>
                     </div>
-                </div>
+<!--                    <form name="report" action="reportservlet">
+                        <input type="submit" value="Print Data Customer" name="btnver" class="btn btn-primary">
+                    </form>  -->
+                </div>           
+
             </div>
-<!--            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Form Customer</h1>
-                </div>
-            </div> -->
-<!--            <form role="form" action="customerinsert" method="post">
-                <div class="form-group">
-                    <label>No. Identitas</label>
-                    <input class="form-control"  name="txtID" type="text" >
-                                                                <p class="help-block">Example block-level help text here.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Nama</label>
-                    <input class="form-control" name="txtNama" type="text">
-                                                                <p class="help-block">Example block-level help text here.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                    <input class="form-control" name="txtJK" type="text">
-                                                                <p class="help-block">Example block-level help text here.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>No. Telp</label>
-                    <input class="form-control" name="txtNoTelp" type="text">
-                                                                <p class="help-block">Example block-level help text here.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Pekerjaan</label>
-                    <input class="form-control" name="txtPekerjaan" type="text">
-                                                                <p class="help-block">Example block-level help text here.</p>
-                </div>
-
-                <div class="form-group">
-                    <label>Alamat</label>
-                    <input class="form-control" name="txtAlamat" type="text">
-                                                                <p class="help-block">Example block-level help text here.</p>
-                </div>
-
-
-
-                <div class="form-group">
-                                        <button type="button" name="submit" class="btn btn-primary">Tambah</button>
-                    <input type="submit" class="btn btn-primary" value="Insert" name="submit">
-                </div>
-            </form>-->
+            <!--            <div class="row">
+                            <div class="col-lg-12">
+                                <h1 class="page-header">Form Customer</h1>
+                            </div>
+                        </div> -->
+            <!--            <form role="form" action="customerinsert" method="post">
+                            <div class="form-group">
+                                <label>No. Identitas</label>
+                                <input class="form-control"  name="txtID" type="text" >
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input class="form-control" name="txtNama" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <input class="form-control" name="txtJK" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>No. Telp</label>
+                                <input class="form-control" name="txtNoTelp" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Pekerjaan</label>
+                                <input class="form-control" name="txtPekerjaan" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <input class="form-control" name="txtAlamat" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+            
+            
+                            <div class="form-group">
+                                                    <button type="button" name="submit" class="btn btn-primary">Tambah</button>
+                                <input type="submit" class="btn btn-primary" value="Insert" name="submit">
+                            </div>
+                        </form>-->
         </div>
 
 

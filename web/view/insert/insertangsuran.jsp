@@ -134,7 +134,7 @@
             <% String autoid = (String) session.getAttribute("autoID");%>
 
 
-            <form role="form" action="angsuraninsert" method="post">
+            <form role="form" action="${pageContext.request.contextPath}/angsuraninsert" method="post">
                 <!--                <div class="form-group">
                                     <label>ID Barang</label>-->
 

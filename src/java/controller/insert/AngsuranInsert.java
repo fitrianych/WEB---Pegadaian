@@ -108,16 +108,38 @@ public class AngsuranInsert extends HttpServlet {
             Long pinjam = Long.parseLong(pinjaman);
             System.out.println(days);
 
-            if (days >= 7) {
-                //long denda = (long) (TimeUnit.MILLISECONDS.toDays(bedaHari));
+//                if (days >= 7) {
+//                    //long denda = (long) (TimeUnit.MILLISECONDS.toDays(bedaHari));
+//
+//                    //double total_denda = days * new Double(0.01).longValue() * pinjam;
+//                    double total_denda = days * 0.01 * pinjam;
+//                    a.setDenda(new Double(total_denda).longValue());
+//                } else {
+//                    a.setDenda(Long.valueOf(0));
+//                    System.out.println("tidak ada denda");
+//                }
+            if (days > 30) {
+                System.out.println("hangus");
+                gdao.update(id_gadai, "c");
 
-                //double total_denda = days * new Double(0.01).longValue() * pinjam;
+                //a.setDenda(Long.valueOf(0));
+                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.println("<script>");
+                out.println("$(document).ready(function(){");
+                out.println("swal('Maaf!', 'Anda telah melewati masa tenggang !', 'error');");
+                out.println("});");
+                out.println("</script>");
+                dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
+                dis.include(request, response);
+            } else if (days >= 7 && days <= 30) {
                 double total_denda = days * 0.01 * pinjam;
                 a.setDenda(new Double(total_denda).longValue());
             } else {
                 a.setDenda(Long.valueOf(0));
                 System.out.println("tidak ada denda");
             }
+
             double x = Double.parseDouble(a.getDenda() + "");
             double y = Double.parseDouble(a.getJumlahAngsuran() + "");
             double hasil = x + y;
@@ -131,15 +153,32 @@ public class AngsuranInsert extends HttpServlet {
                     gdao.update(id_gadai, "a");
 
                 }
+                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.println("<script>");
+                out.println("$(document).ready(function(){");
+                out.println("swal('Good job!', 'Berhasil !', 'success');");
+                out.println("});");
+                out.println("</script>");
+                dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
+                dis.include(request, response);
 
+            } else {
+                //out.println(id+", "+jenis);
+
+                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.println("<script>");
+                out.println("$(document).ready(function(){");
+                out.println("swal('Oops...', 'Gagal Menambahkan Data !!', 'error');");
+                out.println("});");
+                out.println("</script>");
+                out.println(Pesan);
+
+                //out.println(Pesan);
+                dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
+                dis.include(request, response);
             }
-
-//            if (bdao.update(a)) {
-//            }
-            out.println(Pesan);
-            dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
-            dis.include(request, response);
-
         }
     }
 

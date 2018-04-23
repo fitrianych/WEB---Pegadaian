@@ -131,7 +131,7 @@
 
 
             <% Customer cuss = (Customer) session.getAttribute("cus");%>
-            <form role="form" action="prosesupdatecustomer" method="post">
+            <form role="form" action="${pageContext.request.contextPath}/prosesupdatecustomer" method="post">
                 <div class="form-group">
                     <label>No. Identitas</label>
                     <input class="form-control" name="txtID" readonly="true" type="text" value="<%= cuss.getNoIdentitas()%>">

@@ -132,7 +132,7 @@
 
 
             <% JenisBarang jnss = (JenisBarang) session.getAttribute("jns");%>
-            <form role="form" action="prosesupdatejenis" method="post">
+            <form role="form" action="${pageContext.request.contextPath}/prosesupdatejenis" method="post">
                 <div class="form-group">
                     <label>ID Jenis</label>
                     <input class="form-control" name="txtID" readonly="true" type="text" value="<%= jnss.getIdJenis()%>">

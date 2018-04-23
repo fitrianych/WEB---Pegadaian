@@ -125,7 +125,7 @@
             </div> 
 
             <% int autoid = (int) session.getAttribute("autoID");%>
-            <form role="form" action="jenisinsert" method="post">
+            <form role="form" action="${pageContext.request.contextPath}/jenisinsert" method="post">
                 <!--                <div class="form-group">
                                     <label>ID Jenis</label>-->
                 <input class="form-control hidden"  name="txtID" type="text" value="<%= autoid%>"> 

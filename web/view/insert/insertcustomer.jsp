@@ -133,7 +133,7 @@
             </div> 
 
 
-            <form role="form" action="customerinsert" method="post">
+            <form role="form" action="${pageContext.request.contextPath}/customerinsert" method="post">
 
 
                 <div class="form-group">
