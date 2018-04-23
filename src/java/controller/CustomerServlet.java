@@ -75,7 +75,9 @@ public class CustomerServlet extends HttpServlet {
         HttpSession session = request.getSession();
         CustomerDAO cdao = new CustomerDAO();
         try (PrintWriter out = response.getWriter()) {
-
+            if (session.getAttribute("login")== null) {
+                response.sendRedirect("login.html");
+            }
         
              List<Object> datas = new CustomerDAO().getAll();
             //     if(cdao.delete(id)){
@@ -86,7 +88,7 @@ public class CustomerServlet extends HttpServlet {
                 out.print(session.getAttribute("Pesan")+ "<br>");
                 session.removeAttribute("Pesan");
             }
-        
+            
             session.setAttribute("dataCustomer", datas);
             dispatcher = request.getRequestDispatcher("view/customer.jsp");
             dispatcher.include(request, response);

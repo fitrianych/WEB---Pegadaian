@@ -5,9 +5,11 @@
  */
 package dao;
 
+import entities.Usermanagement;
 import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.Hibernate;
+import tools.BCrypt;
 import tools.HibernateUtil;
 
 /**
@@ -51,7 +53,12 @@ public class UserManagementDAO implements InterfaceDAO{
 
     @Override
     public Object getById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return fdao.getById("FROM Usermanagement where id = "+id+"");
+    }
+    
+        public boolean login(String id, String password) {
+        Usermanagement um = (Usermanagement) getById(id);
+        return BCrypt.checkpw(password, um.getPassword());
     }
     
 }

@@ -58,5 +58,6 @@ Contributor(s):
     <mapping class="entities.JenisBarang"/>
     <mapping class="entities.Status"/>
     <mapping class="entities.Angsuran"/>
+    <mapping class="entities.Usermanagement"/>
   </session-factory>
 </hibernate-configuration>
