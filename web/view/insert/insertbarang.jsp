@@ -145,6 +145,7 @@
                             List<Object> datas2 = new Jenis_BarangDAO().getAll();
                             for (Object data : datas2) {
                                 JenisBarang jb = (JenisBarang) data;%>
+                                
                         <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
 
                             }%>

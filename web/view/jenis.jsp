@@ -122,27 +122,35 @@
                 <!-- /.col-lg-12 -->
             </div>    
 
-            <div class="row">
+            <div class="row"> 
+
                 <div class="col-lg-12">
                     <div class="panel panel-default">
+
                         <div class="panel-heading">
                             <a href="jenistoinsert" class="btn btn-primary">Add Jenis</a>
+
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <%if (session.getAttribute("Pesan") != null) { %>
+                                <div class="alert alert-success alert-dismissable">  
+                                    <%out.print(session.getAttribute("Pesan") + "<br>");
+                                    session.removeAttribute("Pesan"); %> 
+                                </div>
+
+                                   <% }%>     
+
                                 <thead>
                                     <tr>
                                         <th>ID Jenis</th>
                                         <th>Jenis</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>                        
+                                        <th>Aksi</th>                        
                                     </tr>
                                 </thead>
-                                <%
-                                    //List<Object> datas = new CustomerDAO().getAll();
-
+                                <%                                   
                                     List<Object> datas = (List<Object>) session.getAttribute("dataJenis");
 
                                     for (Object data : datas) {
@@ -151,11 +159,29 @@
                                     <tr>
                                         <td><%= jb.getIdJenis()%></td>
                                         <td><%= jb.getNamaJenis()%></td>
-                                        <td><a href="jenisupdate?id=<%=jb.getIdJenis()%>">update</a></td>
-                                        <td><a href="jenisdelete?id=<%=jb.getIdJenis()%>">delete</a></td>
+                                        <td><a href="jenisupdate?id=<%=jb.getIdJenis()%>" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>
+                                            <button data-toggle="modal" data-target="#myModal<%=jb.getIdJenis()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
 
                                     </tr>
-
+                            <div class="modal fade" id="myModal<%=jb.getIdJenis()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           Are You Sure to Delete?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                                            <a href="jenisdelete?id=<%=jb.getIdJenis()%>" type="button" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
                                 </tbody>
                                 <% }
                                 %>

@@ -36,11 +36,8 @@ public class LogOut extends HttpServlet {
         
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             session.removeAttribute("login");
             session.invalidate();
-            //String Pesan = "Berhasil";
-//            out.println(Pesan);
             response.sendRedirect("login.html");
         }
     }

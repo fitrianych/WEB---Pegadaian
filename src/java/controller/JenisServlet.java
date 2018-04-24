@@ -36,20 +36,21 @@ public class JenisServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        RequestDispatcher dispatcher =null;
+
+        RequestDispatcher dispatcher = null;
         HttpSession session = request.getSession();
         Jenis_BarangDAO cdao = new Jenis_BarangDAO();
         try (PrintWriter out = response.getWriter()) {
-
+            if (session.getAttribute("login") == null) {
+                response.sendRedirect("login.html");
+            }
 
             List<Object> datas = new Jenis_BarangDAO().getAll();
-            
-             if (session.getAttribute("Pesan")!=null) {
-                out.print(session.getAttribute("Pesan")+ "<br>");
-                session.removeAttribute("Pesan");
-            }
-            
+
+//             if (session.getAttribute("Pesan")!=null) {
+//                out.print(session.getAttribute("Pesan")+ "<br>");
+//                session.removeAttribute("Pesan");
+//            }
             session.setAttribute("dataJenis", datas);
             dispatcher = request.getRequestDispatcher("view/jenis.jsp");
             dispatcher.include(request, response);

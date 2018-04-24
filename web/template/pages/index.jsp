@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : index
+    Created on : Apr 24, 2018, 11:03:20 AM
+    Author     : Fitriany Chairunnisa
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
     <head>
@@ -81,7 +87,13 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
-                    
+                       <%if (session.getAttribute("Pesan") != null) { %>
+                                <div class="alert alert-success alert-dismissable">  
+                                    <%out.print(session.getAttribute("Pesan") + "<br>");
+                                        session.removeAttribute("Pesan"); %> 
+                                </div>
+
+                                <% }%> 
                     
                 </div>
                 <!-- /.navbar-header -->

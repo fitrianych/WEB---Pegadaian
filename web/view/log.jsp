@@ -1,3 +1,10 @@
+<%-- 
+    Document   : log
+    Created on : Apr 24, 2018, 10:20:19 AM
+    Author     : Fitriany Chairunnisa
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,16 +19,16 @@
         <title>Admin -- Pegadaian</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="template/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+        <link href="../template/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="template/dist/css/sb-admin-2.css" rel="stylesheet">
+        <link href="../template/dist/css/sb-admin-2.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="template/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../template/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,10 +42,12 @@
     <body>
 
         <div class="container">
+           
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
+                             
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
@@ -57,9 +66,6 @@
                                     </div>
                                     <!-- Change this to a button or input when using this as a form -->
                                     <button  class="btn btn-lg btn-success btn-block" value="Login" type="submit">Login</button>
-                                    <script>
-                                       
-                                    </script>
                                 </fieldset>
                             </form>
                         </div>
@@ -69,21 +75,22 @@
         </div>
 
         <!-- jQuery -->
-        <script src="template/vendor/jquery/jquery.min.js"></script>
+        <script src="../template/vendor/jquery/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="template/vendor/metisMenu/metisMenu.min.js"></script>
+        <script src="../template/vendor/metisMenu/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="template/dist/js/sb-admin-2.js"></script>
-        <!--        <script src="template/dist/js/jquery.backstretch.min.js"></script>
-                <script>
-                    $.backstretch("template/dist/img/logo.jpg");
-                </script>-->
+        <script src="../template/dist/js/sb-admin-2.js"></script>
+<!--        <script src="template/dist/js/jquery.backstretch.min.js"></script>
+        <script>
+            $.backstretch("template/dist/img/logo.jpg");
+        </script>-->
 
     </body>
 
 </html>
+

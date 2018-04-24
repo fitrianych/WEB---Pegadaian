@@ -123,6 +123,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Form Detail Gadai</h1>
+                    <%if (session.getAttribute("Pesan") != null) { %>
+                    <div class="alert alert-success alert-dismissable">  
+                        <%out.print(session.getAttribute("Pesan") + "<br>");
+                                        session.removeAttribute("Pesan"); %> 
+                    </div>
+
+                    <% }%> 
                 </div>
                 <!-- /.col-lg-12 -->
             </div> 
@@ -146,9 +153,9 @@
                         List<Object> datas2 = new BarangDAO().getAll();
                         for (Object data : datas2) {
                             Barang b = (Barang) data;%>
-                            <input type="checkbox" name ="txtBarang" value="<%=b.getIdBarang()%>"><%=b.getNamaBarang()%></option><%
+                    <input type="checkbox" name ="txtBarang" value="<%=b.getIdBarang()%>"><%=b.getNamaBarang()%></option><%
 
-                        }%>
+                                }%>
 
                 </div>
 

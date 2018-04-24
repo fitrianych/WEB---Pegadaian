@@ -51,33 +51,14 @@ public class JenisInsert extends HttpServlet {
             jns.setNamaJenis(jenis);
 
             if (jdao.insert(jns)) {
-                //Pesan = "Berhasil Insert dengan id" + jns.getIdJenis();
+                Pesan = "Berhasil Insert dengan id" + jns.getIdJenis();
 
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Good job!', 'Berhasil Menambahkan Data!', 'success');");
-                out.println("});");
-                out.println("</script>");
-
-                dis = request.getRequestDispatcher("view/insert/insertjenis.jsp");
-                dis.include(request, response);
-            } else {
-                //out.println(id+", "+jenis);
-
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Oops...', 'Gagal Menambahkan Data !!', 'error');");
-                out.println("});");
-                out.println("</script>");
-
+            } 
                 //out.println(Pesan);
-                dis = request.getRequestDispatcher("view/insert/insertjenis.jsp");
+                session.setAttribute("Pesan", Pesan);
+                dis = request.getRequestDispatcher("jenisservlet");
                 dis.include(request, response);
-            }
+            
         }
     }
 

@@ -58,8 +58,9 @@ public class BarangInsert extends HttpServlet {
             if (bdao.insert(brg)) {
                 Pesan = "Berhasil Insert dengan id" + brg.getIdBarang();
             }
-            out.println(Pesan);
-            dis = request.getRequestDispatcher("view/insert/insertbarang.jsp");
+            //out.println(Pesan);
+            session.setAttribute("Pesan", Pesan);
+            dis = request.getRequestDispatcher("barangservlet");
             dis.include(request, response);
         }
     }

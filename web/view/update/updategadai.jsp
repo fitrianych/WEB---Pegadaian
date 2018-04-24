@@ -150,13 +150,10 @@
 
                 <div class="form-group">
                     <label>Tanggal Pengajuan</label>
-                    <input class="form-control" name="txtPengajuan"  type="date" value="<%=brgg.getTanggalPengajuan()%>">
+                    <input class="form-control" name="txtPengajuan"  type="date" value="<%=tgl%>">
                 </div>
 
-                <div class="form-group">
-                    <label>Jatuh Tempo</label>
-                    <input class="form-control" name="txtJatuhTempo"  type="date" value="<%= brgg.getJatuhTempo()%>">
-                </div>
+                
 
                 <div class="form-group">
                     <label>Jumlah Pinjaman</label>

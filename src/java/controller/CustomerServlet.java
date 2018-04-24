@@ -84,10 +84,10 @@ public class CustomerServlet extends HttpServlet {
            // Pesan = "Terhapus";
            // session.setAttribute("Pesan", Pesan);
             
-            if (session.getAttribute("Pesan")!=null) {
-                out.print(session.getAttribute("Pesan")+ "<br>");
-                session.removeAttribute("Pesan");
-            }
+//            if (session.getAttribute("Pesan")!=null) {
+//                out.print(session.getAttribute("Pesan")+ "<br>");
+//                session.removeAttribute("Pesan");
+//            }
             
             session.setAttribute("dataCustomer", datas);
             dispatcher = request.getRequestDispatcher("view/customer.jsp");

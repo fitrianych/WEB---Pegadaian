@@ -44,7 +44,7 @@ public class GadaiUpdate extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             Gadai g = (Gadai) new GadaiDAO().getById(id);
             session.setAttribute("g", g);
-            out.println("<font color = \"red\">update" + g.getIdGadai()+ "</font>");
+           // out.println("<font color = \"red\">update" + g.getIdGadai()+ "</font>");
             dis = request.getRequestDispatcher("view/update/updategadai.jsp");
             dis.include(request, response);
         }

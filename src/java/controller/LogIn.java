@@ -58,8 +58,8 @@ public class LogIn extends HttpServlet {
                 er = "Login Gagal";
                 dispatcher = request.getRequestDispatcher("login.html");
             }
-            //session.setAttribute("pesan", er);
-            out.println(er);
+            session.setAttribute("er", er);
+            //out.println(er);
             session.setAttribute("login", ID);
             dispatcher.include(request, response);
         }

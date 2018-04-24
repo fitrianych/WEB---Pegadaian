@@ -41,13 +41,16 @@ public class DetailGadaiServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Detail_GadaiDAO cdao = new Detail_GadaiDAO();
         try (PrintWriter out = response.getWriter()) {
+            if (session.getAttribute("login")== null) {
+                response.sendRedirect("login.html");
+            }
 
             List<Object> datas = new Detail_GadaiDAO().getAll();
 
-             if (session.getAttribute("Pesan")!=null) {
-                out.print(session.getAttribute("Pesan")+ "<br>");
-                session.removeAttribute("Pesan");
-            }
+//             if (session.getAttribute("Pesan")!=null) {
+//                out.print(session.getAttribute("Pesan")+ "<br>");
+//                session.removeAttribute("Pesan");
+//            }
              
             session.setAttribute("dataDetail", datas);
             dispatcher = request.getRequestDispatcher("view/detailgadai.jsp");

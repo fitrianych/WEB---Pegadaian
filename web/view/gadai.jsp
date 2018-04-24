@@ -133,6 +133,13 @@
                         <div class="panel-body">
 
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <%if (session.getAttribute("Pesan") != null) { %>
+                                <div class="alert alert-success alert-dismissable">  
+                                    <%out.print(session.getAttribute("Pesan") + "<br>");
+                                        session.removeAttribute("Pesan"); %> 
+                                </div>
+
+                                <% }%> 
                                 <thead>
                                     <tr>
                                         <th>ID Gadai</th>
@@ -141,9 +148,8 @@
                                         <th>Jatuh Tempo</th>
                                         <th>Jumlah Pinjaman</th>
                                         <th>Status</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
-                                        <th>Angsur</th>
+                                        <th>Aksi</th>
+                                        
 
                                     </tr>
                                 </thead>
@@ -160,11 +166,13 @@
                                     <td><%= b.getJatuhTempo()%></td>
                                     <td><%= b.getJumlahPinjaman()%></td>
                                     <td><%= b.getIdStatus().getStatus()%></td>
-                                    <td><a href="gadaiupdate?id=<%=b.getIdGadai()%>">update</a></td>
-                                    <td><a href="gadaidelete?id=<%=b.getIdGadai()%>">delete</a></td>
-                                    <td><a href="angsurantoinsert?id=<%=b.getIdGadai()%>">angsur</a></td>
-
-
+                                    <td>
+                                        <!--                                    <a href="gadaidelete?id=
+                                        <%--<%=b.getIdGadai()%>--%>
+                                        ">delete</a>-->
+                                    <a href="angsurantoinsert?id=<%=b.getIdGadai()%>" class="btn btn-warning">angsur</a>
+                                    <a href="gadaiupdate?id=<%=b.getIdGadai()%>" class="btn btn-success">perpanjang</a>
+                                    </td>
                                 </tr>
                                 <% }
                                 %>

@@ -110,36 +110,15 @@ public class GadaiInsert extends HttpServlet {
 
            
             if (gdao.update(gad)) {
-                //Pesan = "Berhasil Insert dengan id" + gad.getIdGadai();
-
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Good job!', 'Berhasil Menambahkan Data!', 'success');");
-                out.println("});");
-                out.println("</script>");
-
-                session.setAttribute("gdao", gdao.getById(id));
-                dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
-                dis.include(request, response);
-            } else {
-                //out.println(id+", "+jenis);
-
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Oops...', 'Gagal Menambahkan Data !!', 'error');");
-                out.println("});");
-                out.println("</script>");
-                //out.println(Pesan);
+                Pesan = "Berhasil Insert dengan id" + gad.getIdGadai();
+            } 
 
                 // session.setAttribute("autoID", dgdao.getAutoID());
                 session.setAttribute("gdao", gdao.getById(id));
+                session.setAttribute("Pesan", Pesan);
                 dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
                 dis.include(request, response);
-            }
+            
         }
     }
 

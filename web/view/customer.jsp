@@ -140,6 +140,13 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <%if (session.getAttribute("Pesan") != null) { %>
+                                <div class="alert alert-success alert-dismissable">  
+                                    <%out.print(session.getAttribute("Pesan") + "<br>");
+                                        session.removeAttribute("Pesan"); %> 
+                                </div>
+
+                                <% }%> 
                                 <thead>
                                     <tr>
                                         <th>No. Identitas</th>
@@ -148,8 +155,8 @@
                                         <th>No Telp</th>
                                         <th>Pekerjaan</th>
                                         <th>Alamat</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+                                        <th>Aksi</th>
+
                                     </tr>
                                 </thead>
                                 <%
@@ -167,10 +174,28 @@
                                     <td><%= c.getNoTelp()%></td>
                                     <td><%= c.getPekerjaan()%></td>
                                     <td><%= c.getAlamat()%></td>
-                                    <td><a href="customerupdate?id=<%=c.getNoIdentitas()%>">update</a></td>
-                                    <td><a href="${pageContext.request.contextPath}/customerdelete?id=<%=c.getNoIdentitas()%>">delete</a></td>
+                                    <td><a href="customerupdate?id=<%=c.getNoIdentitas()%>"class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>
+                                        <button data-toggle="modal" data-target="#myModal<%=c.getNoIdentitas()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
                                 </tr>
-
+                                <div class="modal fade" id="myModal<%=c.getNoIdentitas()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are You Sure to Delete?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                                                <a href="customerdelete?id=<%=c.getNoIdentitas()%>" type="button" class="btn btn-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
 
                                 <% }
                                 %>
@@ -180,9 +205,9 @@
                             </table>
                         </div>
                     </div>
-<!--                    <form name="report" action="reportservlet">
-                        <input type="submit" value="Print Data Customer" name="btnver" class="btn btn-primary">
-                    </form>  -->
+                    <!--                    <form name="report" action="reportservlet">
+                                            <input type="submit" value="Print Data Customer" name="btnver" class="btn btn-primary">
+                                        </form>  -->
                 </div>           
 
             </div>

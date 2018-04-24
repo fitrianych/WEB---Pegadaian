@@ -109,7 +109,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="angsuranservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="gadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
                         </ul>
                     </div>
@@ -147,12 +147,12 @@
 
                 <div class="form-group">
                     <label>No. Identitas</label>
-                    <input class="form-control"  name="txtNoIdentitas" type="text" value="<%= gadd.getNoIdentitas().getNoIdentitas()%>"> 
+                    <input class="form-control"  name="txtNoIdentitas" readonly="true" type="text" value="<%= gadd.getNoIdentitas().getNoIdentitas()%>"> 
                 </div>
 
                 <div class="form-group">
                     <label>ID Gadai</label>
-                    <input class="form-control"  name="txtIdGadai" type="text" value="<%= gadd.getIdGadai()%>">
+                    <input class="form-control"  name="txtIdGadai" readonly="true" type="text" value="<%= gadd.getIdGadai()%>">
                 </div>
 
                 <div class="form-group">

@@ -42,23 +42,16 @@ public class GadaiServlet extends HttpServlet {
         GadaiDAO cdao = new GadaiDAO();
 
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet GadaiServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet GadaiServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
+            if (session.getAttribute("login")== null) {
+                response.sendRedirect("login.html");
+            }
 
             List<Object> datas = new GadaiDAO().getAll();
 
-            if (session.getAttribute("Pesan") != null) {
-                out.print(session.getAttribute("Pesan") + "<br>");
-                session.removeAttribute("Pesan");
-            }
+//            if (session.getAttribute("Pesan") != null) {
+//                out.print(session.getAttribute("Pesan") + "<br>");
+//                session.removeAttribute("Pesan");
+//            }
 
             session.setAttribute("dataGadai", datas);
             dispatcher = request.getRequestDispatcher("view/gadai.jsp");

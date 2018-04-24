@@ -40,6 +40,9 @@ public class AngsuranServlet extends HttpServlet {
         RequestDispatcher dispatcher =null;
         HttpSession session = request.getSession();
         try (PrintWriter out = response.getWriter()) {
+            if (session.getAttribute("login")== null) {
+                response.sendRedirect("login.html");
+            }
             /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");

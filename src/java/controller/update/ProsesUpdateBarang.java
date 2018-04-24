@@ -42,7 +42,7 @@ public class ProsesUpdateBarang extends HttpServlet {
         String jenis = request.getParameter("txtJenis");
         String namaBarang = request.getParameter("txtBarang");
         
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         RequestDispatcher dis = null;
         String Pesan = "Gagal Update";
         BarangDAO bdao = new BarangDAO();
@@ -56,8 +56,9 @@ public class ProsesUpdateBarang extends HttpServlet {
           if(bdao.update(brg)){
               Pesan = "Berhasil Update dengan id" +brg.getIdBarang();
           }
-          out.println(Pesan);
-          dis = request.getRequestDispatcher("view/update/updatebarang.jsp");
+          //out.println(Pesan);
+          session.setAttribute("Pesan", Pesan);
+          dis = request.getRequestDispatcher("barangservlet");
         dis.include(request, response);
         }
     }

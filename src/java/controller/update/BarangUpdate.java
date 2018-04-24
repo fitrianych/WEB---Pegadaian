@@ -44,8 +44,8 @@ public class BarangUpdate extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             Barang b = (Barang) new BarangDAO().getById(id);
             session.setAttribute("b", b);
-            out.println("<font color = \"red\">update" +b.getNamaBarang()+"</font>");
-        out.println("<b>"+id+", "+b.getIdJenis().getIdJenis()+",");
+            //out.println("<font color = \"red\">update" +b.getNamaBarang()+"</font>");
+        //out.println("<b>"+id+", "+b.getIdJenis().getIdJenis()+",");
         dis = request.getRequestDispatcher("view/update/updatebarang.jsp");
         dis.include(request, response);
         }

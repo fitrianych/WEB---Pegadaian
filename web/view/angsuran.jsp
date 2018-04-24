@@ -126,8 +126,15 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Angsuran
+                            <%if (session.getAttribute("Pesan") != null) { %>
+                            <div class="alert alert-success alert-dismissable">  
+                                <%out.print(session.getAttribute("Pesan") + "<br>");
+                                    session.removeAttribute("Pesan"); %> 
+                            </div>
+
+                            <% }%>
                         </div>
+
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 
@@ -177,9 +184,9 @@
                         </div>
                     </div>
                 </div>
-<!--                <form name="report" action="reportangsuran">
-                    <input type="submit" value="Print Data Angsuran" name="btnver" class="btn btn-primary">
-                </form>  -->
+                <!--                <form name="report" action="reportangsuran">
+                                    <input type="submit" value="Print Data Angsuran" name="btnver" class="btn btn-primary">
+                                </form>  -->
             </div>
         </div>
         <!-- /#wrapper -->

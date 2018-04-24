@@ -131,37 +131,57 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 
-
-
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <%if (session.getAttribute("Pesan") != null) { %>
+                                <div class="alert alert-success alert-dismissable">  
+                                    <%out.print(session.getAttribute("Pesan") + "<br>");
+                                        session.removeAttribute("Pesan"); %> 
+                                </div>
+
+                                <% }%> 
                                 <thead>
                                     <tr>
                                         <th>ID Barang</th>
                                         <th>Jenis Barang</th>
                                         <th>Nama Barang</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+                                        <th>Aksi</th>
+
 
                                     </tr>
                                 </thead>
                                 <%
-                                    //List<Object> datas = new CustomerDAO().getAll();
-
                                     List<Object> datas = (List<Object>) session.getAttribute("dataBarang");
 
                                     for (Object data : datas) {
                                         Barang b = (Barang) data;%>
-                                
-                                    <tr>
-                                        <td><%= b.getIdBarang()%></td>
-                                        <td><%= b.getIdJenis().getNamaJenis()%></td>
-                                        <td><%= b.getNamaBarang()%></td>
-                                        <td><a href="barangupdate?id=<%=b.getIdBarang()%>">update</a></td>
-                                        <td><a href="barangdelete?id=<%=b.getIdBarang()%>">delete</a></td>
 
-                                    </tr>
+                                <tr>
+                                    <td><%= b.getIdBarang()%></td>
+                                    <td><%= b.getIdJenis().getNamaJenis()%></td>
+                                    <td><%= b.getNamaBarang()%></td>
+                                    <td><a href="barangupdate?id=<%=b.getIdBarang()%>"class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>
+                                        <button data-toggle="modal" data-target="#myModal<%=b.getIdBarang()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
+                                </tr>
+                                <div class="modal fade" id="myModal<%=b.getIdBarang()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are You Sure to Delete?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                                                <a href="barangdelete?id=<%=b.getIdBarang()%>" type="button" class="btn btn-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
 
-                                
                                 <% }
                                 %>
 

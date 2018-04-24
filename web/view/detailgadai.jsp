@@ -140,8 +140,8 @@
                                         <th>ID Gadai</th>
                                         <th>Nama Barang</th>
                                         <th>Keterangan</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+<!--                                        <th>Update</th>
+                                        <th>Delete</th>-->
 
                                     </tr>
                                 </thead>
@@ -158,9 +158,13 @@
                                         <td><%= dg.getIdGadai()%></td>
                                         <td><%= dg.getIdBarang().getNamaBarang()%></td>
                                         <td><%= dg.getKeterangan()%></td>
-                                        <td><a href="detailgadaiupdate?id=<%=dg.getIdDetailGadai()%>">update</a></td>
-                                        <td><a href="detailgadaidelete?id=<%=dg.getIdDetailGadai()%>">delete</a></td>
-                                       
+<!--                                        <td><a href="detailgadaiupdate?id=
+<%--<%=dg.getIdDetailGadai()%>--%>
+">update</a></td>
+                                        <td><a href="detailgadaidelete?id=
+<%--<%=dg.getIdDetailGadai()%>--%>
+">delete</a></td>
+                                       -->
                                     </tr>
 
                                 </tbody>

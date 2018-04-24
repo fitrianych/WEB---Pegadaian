@@ -153,32 +153,34 @@ public class AngsuranInsert extends HttpServlet {
                     gdao.update(id_gadai, "a");
 
                 }
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Good job!', 'Berhasil !', 'success');");
-                out.println("});");
-                out.println("</script>");
-                dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
-                dis.include(request, response);
+//                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+//                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+//                out.println("<script>");
+//                out.println("$(document).ready(function(){");
+//                out.println("swal('Good job!', 'Berhasil !', 'success');");
+//                out.println("});");
+//                out.println("</script>");
+//                dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
+//                dis.include(request, response);
 
-            } else {
+            } 
+            //else {
                 //out.println(id+", "+jenis);
 
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Oops...', 'Gagal Menambahkan Data !!', 'error');");
-                out.println("});");
-                out.println("</script>");
-                out.println(Pesan);
+//                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+//                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+//                out.println("<script>");
+//                out.println("$(document).ready(function(){");
+//                out.println("swal('Oops...', 'Gagal Menambahkan Data !!', 'error');");
+//                out.println("});");
+//                out.println("</script>");
+//                out.println(Pesan);
 
                 //out.println(Pesan);
-                dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
+                session.setAttribute("Pesan", Pesan);
+                dis = request.getRequestDispatcher("angsuranservlet");
                 dis.include(request, response);
-            }
+//            }
         }
     }
 

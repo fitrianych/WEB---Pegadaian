@@ -41,13 +41,16 @@ public class BarangServlet extends HttpServlet {
         HttpSession session = request.getSession();
         BarangDAO bdao = new BarangDAO();
         try (PrintWriter out = response.getWriter()) {
+            if (session.getAttribute("login")== null) {
+                response.sendRedirect("login.html");
+            }
 
             List<Object> datas = new BarangDAO().getAll();
 
-            if (session.getAttribute("Pesan") != null) {
-                out.print(session.getAttribute("Pesan") + "<br>");
-                session.removeAttribute("Pesan");
-            }
+//            if (session.getAttribute("Pesan") != null) {
+//                out.print(session.getAttribute("Pesan") + "<br>");
+//                session.removeAttribute("Pesan");
+//            }
             session.setAttribute("dataBarang", datas);
             dispatcher = request.getRequestDispatcher("view/barang.jsp");
             dispatcher.include(request, response);

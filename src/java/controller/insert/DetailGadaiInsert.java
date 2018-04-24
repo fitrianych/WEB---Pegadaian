@@ -66,31 +66,14 @@ public class DetailGadaiInsert extends HttpServlet {
                 System.out.println(barang[i]);
                 if (gdao.insert(dgad)) {
 //                    System.out.println("berhasil");
-//                    System.out.println(Pesan = "Berhasil Insert dengan id" + dgad.getIdDetailGadai());
-                    out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                    out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                    out.println("<script>");
-                    out.println("$(document).ready(function(){");
-                    out.println("swal('Good job!', 'Berhasil Menambahkan Data!', 'success');");
-                    out.println("});");
-                    out.println("</script>");
-                    dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
-                    dis.include(request, response);
-                } else {
-                    //out.println(id+", "+jenis);
+                    Pesan = "Berhasil Insert dengan id" + dgad.getIdDetailGadai();
 
-                    out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                    out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                    out.println("<script>");
-                    out.println("$(document).ready(function(){");
-                    out.println("swal('Oops...', 'Gagal Menambahkan Data !!', 'error');");
-                    out.println("});");
-                    out.println("</script>");
-                    //out.println(Pesan);
-                    dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
+                } 
+                session.setAttribute("Pesan", Pesan);
+                    dis = request.getRequestDispatcher("gadaiservlet");
                     dis.include(request, response);
                 }
-            }
+            
 //            for (int i = 0; i < barang.length; i++) {
 //                System.out.println(barang[i]);
 //            }

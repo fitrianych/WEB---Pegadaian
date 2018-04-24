@@ -61,30 +61,12 @@ public class ProsesUpdateCustomer extends HttpServlet {
             cst.setAlamat(alamat);
 
             if (cdao.update(cst)) {
-                //Pesan = "Berhasil Update dengan id" +cst.getNoIdentitas();
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Good job!', 'Berhasil Update Data!', 'success');");
-                out.println("});");
-                out.println("</script>");
-                dis = request.getRequestDispatcher("view/update/updatecustomer.jsp");
-                dis.include(request, response);
-            } else {
-                //out.println(id+", "+jenis);
-
-                out.println("<script src = 'https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Oops...', 'Gagal Update Data !!', 'error');");
-                out.println("});");
-                out.println("</script>");
-                //out.println(Pesan);
-                dis = request.getRequestDispatcher("view/update/updatecustomer.jsp");
-                dis.include(request, response);
+                Pesan = "Berhasil Update dengan id" + cst.getNoIdentitas();
             }
+            session.setAttribute("Pesan", Pesan);
+            dis = request.getRequestDispatcher("customerservlet");
+            dis.include(request, response);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
