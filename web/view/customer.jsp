@@ -179,7 +179,7 @@
                     <h1 class="page-header">Tabel Customer</h1>
                 </div> 
                 <!-- /.col-lg-12 -->
-            </div>    
+            </div>     
 
             <div class="row">
                 <div class="col-lg-12">
