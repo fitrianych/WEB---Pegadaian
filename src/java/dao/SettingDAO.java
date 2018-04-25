@@ -15,14 +15,14 @@ import tools.HibernateUtil;
  *
  * @author Fitriany Chairunnisa
  */
-public class StatusDAO implements InterfaceDAO {
+public class SettingDAO implements InterfaceDAO {
 
     public SessionFactory factory;
     private Session session;
     private Transaction transaction;
     public FunctionsDAO fdao;
 
-    public StatusDAO() {
+    public SettingDAO() {
         this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
         this.factory = HibernateUtil.getSessionFactory();
     }
@@ -44,18 +44,22 @@ public class StatusDAO implements InterfaceDAO {
 
     @Override
     public List<Object> getAll() {
-        return fdao.getAll("FROM Status");
+        return fdao.getAll("FROM Setting order by id asc");
     }
 
     @Override
     public List<Object> search(String category, String search) {
-        return fdao.getAll("FROM Status WHERE idStatus LIKE '%" + search + "%'");
-
+        return fdao.getAll("FROM Setting WHERE " + category + " LIKE '%" + search + "%'");
+   
     }
 
     @Override
     public Object getById(String id) {
-        return fdao.getById("from Status where idStatus='" + id + "'");
+        return fdao.getById("from Setting where id='" + id + "'");
+
+    }
+    public Object getKet(String id){
+        return fdao.getById("SELECT keterangan from setting where id='"+id+"'");
     }
 
 }

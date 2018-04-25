@@ -59,5 +59,6 @@ Contributor(s):
     <mapping class="entities.Status"/>
     <mapping class="entities.Angsuran"/>
     <mapping class="entities.Usermanagement"/>
+    <mapping class="entities.Setting"/>
   </session-factory>
 </hibernate-configuration>

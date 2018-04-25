@@ -38,7 +38,7 @@ public class LogOut extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             session.removeAttribute("login");
             session.invalidate();
-            response.sendRedirect("login.html");
+            response.sendRedirect("log.jsp");
         }
     }
 

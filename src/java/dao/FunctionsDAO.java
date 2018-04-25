@@ -19,17 +19,17 @@ import tools.HibernateUtil;
  */
 public class FunctionsDAO {
 
-     private Session session;
+    private Session session;
     private Transaction transaction;
     private SessionFactory factory;
     public FunctionsDAO fdao;
 
     public FunctionsDAO(SessionFactory factory) {
         this.factory = factory;
-        this.factory=HibernateUtil.getSessionFactory();
+        this.factory = HibernateUtil.getSessionFactory();
     }
-    
-         public boolean insert(Object object) {
+
+    public boolean insert(Object object) {
         boolean flag = false;
         try {
             session = factory.openSession();
@@ -47,8 +47,8 @@ public class FunctionsDAO {
         }
         return flag;
     }
-    
-       public List<Object> getAll(String query) {
+
+    public List<Object> getAll(String query) {
         List<Object> data = new ArrayList<>();
         try {
             session = factory.openSession();
@@ -67,8 +67,8 @@ public class FunctionsDAO {
         }
         return data;
     }
-       
-           public Object getById(String query) {
+
+    public Object getById(String query) {
         Object obj = new Object();
         try {
             session = factory.openSession();
@@ -85,8 +85,9 @@ public class FunctionsDAO {
         }
         return obj;
     }
-           
-              public Object getByIdJns(String query) {
+
+
+    public Object getByIdJns(String query) {
         Object obj = new Object();
         try {
             session = factory.openSession();
@@ -103,8 +104,8 @@ public class FunctionsDAO {
         }
         return obj;
     }
-           
-        public boolean delete(Class type, Serializable srlzbl) {
+
+    public boolean delete(Class type, Serializable srlzbl) {
         boolean flag = false;
         try {
             session = factory.openSession();
@@ -123,5 +124,5 @@ public class FunctionsDAO {
         }
         return flag;
     }
-    
+
 }

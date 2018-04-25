@@ -115,6 +115,56 @@
                             <li>
                                 <a href="customerservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -133,7 +183,7 @@
             </div> 
 
 
-            <form role="form" action="${pageContext.request.contextPath}/customerinsert" method="post">
+            <form role="form" action="customerinsert" method="post">
 
 
                 <div class="form-group">
@@ -148,17 +198,11 @@
                     <!--                                            <p class="help-block">Example block-level help text here.</p>-->
                 </div>
 
-                <!--                <div class="form-group">
-                                    <label>Jenis Kelamin</label>
-                                    <input class="form-control" name="txtJK" type="text">-->
-                <!--                                            <p class="help-block">Example block-level help text here.</p>-->
-                <!--                </div>-->
-
                 <div class="form-group">
                     <label>Jenis Kelamin</label>
                 </div>
                 <div class="form-group">
-                    <input type="radio" name="txtJK" value="Laki-Laki" > Laki-Laki
+                    <input type="radio" name="txtJK" value="Laki-Laki" checked="true"> Laki-Laki
                     <input type="radio" name="txtJK" value="Perempuan" > Perempuan <br>
 
                 </div>

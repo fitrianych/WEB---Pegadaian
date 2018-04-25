@@ -4,6 +4,8 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entities.Angsuran"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -105,7 +107,57 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="view/index.jsp"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
                             </li>
                         </ul>
                     </div>
@@ -159,16 +211,21 @@
                                     List<Object> datas = (List<Object>) session.getAttribute("dataAngsuran");
 
                                     for (Object data : datas) {
-                                        Angsuran b = (Angsuran) data;%>
+                                        Angsuran b = (Angsuran) data;
+                                        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+                                        String tgl = dateformat.format(b.getIdGadai().getTanggalPengajuan());
+                                        String tgl1 = dateformat.format(b.getIdGadai().getJatuhTempo());
+                                        String tgl2 = dateformat.format(b.getTanggalAngsuran());
+                                %>
                                 <!--                                <tbody>-->
                                 <tr>
                                     <td><%= b.getIdAngsuran()%></td>
                                     <td><%= b.getNoIdentitas()%></td>
                                     <td><%= b.getNoIdentitas().getNama()%></td>
                                     <td><%= b.getIdGadai()%></td>
-                                    <td><%= b.getIdGadai().getTanggalPengajuan()%></td>
-                                    <td><%= b.getIdGadai().getJatuhTempo()%></td>
-                                    <td><%= b.getTanggalAngsuran()%></td>
+                                    <td><%= tgl%></td>
+                                    <td><%= tgl1%></td>
+                                    <td><%= tgl2%></td>
                                     <td><%= b.getJumlahAngsuran()%></td>
                                     <td><%= b.getIdGadai().getJumlahPinjaman()%></td>
                                     <td><%= b.getDenda()%></td>

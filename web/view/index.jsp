@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%-- 
+    Document   : index
+    Created on : Apr 24, 2018, 11:03:20 AM
+    Author     : Fitriany Chairunnisa
+--%>
+
+<%@page import="entities.Usermanagement"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
     <head>
@@ -8,25 +15,25 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>COBA</title>
+        <title>Pegadaian v1.0</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+        <link href="./template/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
         <!-- DataTables CSS -->
-        <link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="./template/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
         <!-- DataTables Responsive CSS -->
-        <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+        <link href="./template/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+        <link href="./template/dist/css/sb-admin-2.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="./template/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,22 +49,22 @@
         <title>Pegadaian v1.0</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+        <link href="./template/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
         <!-- DataTables CSS -->
-        <link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="./template/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
         <!-- DataTables Responsive CSS -->
-        <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+        <link href="./template/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+        <link href="./template/dist/css/sb-admin-2.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="./template/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -81,20 +88,29 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
-                    
+                       <%if (session.getAttribute("Pesan") != null) { %>
+                                <div class="alert alert-success alert-dismissable">  
+                                    <%out.print(session.getAttribute("Pesan") + "<br>");
+                                        session.removeAttribute("Pesan"); %> 
+                                </div>
+
+                                <% }%> 
                     
                 </div>
                 <!-- /.navbar-header -->
+                <% Usermanagement us = (Usermanagement) session.getAttribute("u");%>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i>Hi, <%=us.getUsername()%></i>
                         </a>
                         
 
                                 <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="../../logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                                       
+                                    <li><a href="./logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                        
+                                    
                                     </li>
                                 </ul>
                                 <!-- /.dropdown-user -->
@@ -119,20 +135,20 @@
                                         <!-- /input-group -->
                                     </li>
                                     <li>
-                                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+<!--                                        <a href="./login?ID=<%-- session.getAttribute("login")%>&password=<%=session.getAttribute("login1")--%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>-->
                                         
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="../../customerservlet">Customer</a>
+                                                <a href="./customerservlet">Customer</a>
                                             </li>
                                             <li>
-                                                <a href="../../gadaiservlet">Gadai</a>
+                                                <a href="./gadaiservlet">Gadai</a>
                                             </li>
                                             <li>
-                                                <a href="../../angsuranservlet">Angsuran</a>
+                                                <a href="./angsuranservlet">Angsuran</a>
                                             </li>
                                         </ul>
                                         <!-- /.nav-second-level -->
@@ -142,13 +158,13 @@
                                         <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="../../jenisservlet">Jenis Barang</a>
+                                                <a href="./jenisservlet">Jenis Barang</a>
                                             </li>
                                             <li>
-                                                <a href="../../barangservlet">List Barang</a>
+                                                <a href="./barangservlet">List Barang</a>
                                             </li>
                                             <li>
-                                                <a href="../../detailgadaiservlet">Detail Barang</a>
+                                                <a href="./detailgadaiservlet">Detail Barang</a>
                                             </li>
                                         </ul>
                                         <!-- /.nav-second-level -->
@@ -158,13 +174,13 @@
                                         <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a href="../../reportservlet">Customer</a>
+                                                <a href="./reportservlet">Customer</a>
                                             </li>
                                             <li>
-                                                <a href="../../reportangsuran">Angsuran</a>
+                                                <a href="./reportangsuran">Angsuran</a>
                                             </li>
                                             <li>
-                                                <a href="../../reportgadai">Gadai</a>
+                                                <a href="./reportgadai">Gadai</a>
                                             </li>
                                             <li>
                                                 <a href="morris.html">Filter</a>
@@ -180,13 +196,14 @@
                         <!-- /.navbar-static-side -->
                         </nav>
 
-                        <div id="page-wrapper">
+                        <div id="page-wrapper">                            
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h1 class="page-header">Dashboard</h1>
+                                    <h1 class="page-header">Welcome, <%=us.getUsername()%></h1>
                                 </div>
-                                <!-- /.col-lg-12 -->
                             </div>
+                                <!-- /.col-lg-12 -->
+                             
                             <!-- /.row -->
                             <div class="row">
                                 <div class="col-lg-3 col-md-6">
@@ -288,21 +305,21 @@
                         <!-- /#wrapper -->
 
                         <!-- jQuery -->
-                        <script src="../vendor/jquery/jquery.min.js"></script>
+                        <script src="./template/vendor/jquery/jquery.min.js"></script>
 
                         <!-- Bootstrap Core JavaScript -->
-                        <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+                        <script src="./template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
                         <!-- Metis Menu Plugin JavaScript -->
-                        <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+                        <script src="./template/vendor/metisMenu/metisMenu.min.js"></script>
 
                         <!-- DataTables JavaScript -->
-                        <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-                        <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-                        <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+                        <script src="./template/vendor/datatables/js/jquery.dataTables.min.js"></script>
+                        <script src="./template/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+                        <script src="./template/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
                         <!-- Custom Theme JavaScript -->
-                        <script src="../dist/js/sb-admin-2.js"></script>
+                        <script src="./template/dist/js/sb-admin-2.js"></script>
 
                         <!-- Page-Level Demo Scripts - Tables - Use for reference -->
                         <script>

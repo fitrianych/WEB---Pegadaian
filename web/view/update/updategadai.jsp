@@ -118,6 +118,56 @@
                             <li>
                                 <a href="gadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -136,10 +186,10 @@
 
 
             <% Gadai brgg = (Gadai) session.getAttribute("g");
-            DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-            String tgl = dateformat.format(brgg.getTanggalPengajuan());
-            String tgl1 = dateformat.format(brgg.getJatuhTempo());
-            
+                DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+                String tgl = dateformat.format(brgg.getTanggalPengajuan());
+                String tgl1 = dateformat.format(brgg.getJatuhTempo());
+
             %>
             <form role="form" action="prosesupdategadai" method="post">
                 <div class="form-group">
@@ -153,7 +203,7 @@
                     <input class="form-control" name="txtPengajuan"  type="date" value="<%=tgl%>">
                 </div>
 
-                
+
 
                 <div class="form-group">
                     <label>Jumlah Pinjaman</label>

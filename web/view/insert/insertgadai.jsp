@@ -107,6 +107,56 @@
                             <li>
                                 <a href="gadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -125,7 +175,7 @@
             </div> 
 
             <% long autoid = (long) session.getAttribute("autoID");%>
-            <form role="form" action="${pageContext.request.contextPath}/gadaiinsert" method="post">
+            <form role="form" action="gadaiinsert" method="post">
                 <!--                <div class="form-group">
                                     <label>ID Jenis</label>-->
                 <input class="form-control hidden"  name="txtID" type="text" value="<%= autoid%>"> 
@@ -136,28 +186,10 @@
                     <input class="form-control" name="txtIdentitas" type="text" required="true">
                 </div>
 
-<!--                <div class="form-group">
-                    <label>Tanggal Pengajuan</label>
-                    <input class="form-control" name="txtPengajuan" type="date" >
-                </div>-->
-
-<!--                <div class="form-group">
-                    <label>Jatuh Tempo</label>
-                    <input class="form-control " name="txtJatuhTempo" type="date" >
-                </div>-->
-
                 <div class="form-group">
                     <label>Jumlah Pinjaman</label>
                     <input class="form-control" name="txtPinjaman" type="text" required="true">
                 </div>
-
-
-<!--                <div class="form-group">
-                    <label>Status</label>
-                    <input class="form-control" name="txtStatus" type="text" required="true">
-                </div>-->
-
-
                 <div class="form-group">
 
                     <input type="submit" class="btn btn-primary" value="Insert" name="submit">

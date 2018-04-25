@@ -7,18 +7,17 @@ package controller.insert;
 
 import dao.Detail_GadaiDAO;
 import dao.GadaiDAO;
+import dao.SettingDAO;
 import entities.Customer;
 import entities.Gadai;
+import entities.Setting;
 import entities.Status;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static java.lang.reflect.Array.set;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,9 +59,17 @@ public class GadaiInsert extends HttpServlet {
 
         String DATE_FORMAT = "yyyy-MM-dd";
         Date currentDate = new Date();
+        Setting sett = (Setting) new SettingDAO().search("nama", "Bulan Jatuh Tempo").get(0);
+        int a = sett.getKeterangan();
+
+        Setting thn = (Setting) new SettingDAO().search("nama", "Tahun Jatuh Tempo").get(0);
+        int b = thn.getKeterangan();
+
+        Setting hari = (Setting) new SettingDAO().search("nama", "Hari Jatuh Tempo").get(0);
+        int c = sett.getKeterangan();
 
         LocalDateTime localDateTime = currentDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        localDateTime = localDateTime.plusYears(0).plusMonths(4).plusDays(0);
+        localDateTime = localDateTime.plusYears(b).plusMonths(a).plusDays(c);
         Date date_jt = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
         //Date date1 = null;
@@ -108,17 +115,16 @@ public class GadaiInsert extends HttpServlet {
             gad.setJumlahPinjaman(Long.parseLong(jumlah_pinjaman));
             gad.setIdStatus(new Status("b"));
 
-           
             if (gdao.update(gad)) {
                 Pesan = "Berhasil Insert dengan id" + gad.getIdGadai();
-            } 
+            }
 
-                // session.setAttribute("autoID", dgdao.getAutoID());
-                session.setAttribute("gdao", gdao.getById(id));
-                session.setAttribute("Pesan", Pesan);
-                dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
-                dis.include(request, response);
-            
+            // session.setAttribute("autoID", dgdao.getAutoID());
+            session.setAttribute("gdao", gdao.getById(id));
+            session.setAttribute("Pesan", Pesan);
+            dis = request.getRequestDispatcher("view/insert/insertdetailgadai.jsp");
+            dis.include(request, response);
+
         }
     }
 

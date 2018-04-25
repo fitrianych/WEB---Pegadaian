@@ -7,9 +7,11 @@ package controller.insert;
 
 import dao.AngsuranDAO;
 import dao.GadaiDAO;
+import dao.SettingDAO;
 import entities.Angsuran;
 import entities.Customer;
 import entities.Gadai;
+import entities.Setting;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -118,7 +120,20 @@ public class AngsuranInsert extends HttpServlet {
 //                    a.setDenda(Long.valueOf(0));
 //                    System.out.println("tidak ada denda");
 //                }
-            if (days > 30) {
+            Setting sett = (Setting) new SettingDAO().search("nama", "Batas Hangus").get(0);
+            int hangus = sett.getKeterangan();
+            
+            Setting tenggang = (Setting) new SettingDAO().search("nama", "Masa Tenggang").get(0);
+            int masa_tenggang = tenggang.getKeterangan();
+            
+            Setting den = (Setting) new SettingDAO().search("nama", "Denda").get(0);
+            int denda = den.getKeterangan();
+            
+            Setting pem = (Setting) new SettingDAO().search("nama", "Pembagi Denda").get(0);
+            int pembagi = pem.getKeterangan();
+
+
+            if (days > hangus) {
                 System.out.println("hangus");
                 gdao.update(id_gadai, "c");
 
@@ -127,13 +142,13 @@ public class AngsuranInsert extends HttpServlet {
                 out.println("<script src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                 out.println("<script>");
                 out.println("$(document).ready(function(){");
-                out.println("swal('Maaf!', 'Anda telah melewati masa tenggang !', 'error');");
+                out.println("swal('Maaf, Anda telah melewati masa tenggang!', 'Barang akan di lelang !', 'error');");
                 out.println("});");
                 out.println("</script>");
                 dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
                 dis.include(request, response);
-            } else if (days >= 7 && days <= 30) {
-                double total_denda = days * 0.01 * pinjam;
+            } else if (days >= masa_tenggang && days <= hangus) {
+                double total_denda = days * denda/pembagi * pinjam;
                 a.setDenda(new Double(total_denda).longValue());
             } else {
                 a.setDenda(Long.valueOf(0));

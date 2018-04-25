@@ -113,7 +113,57 @@
                                                             </div>
                                                         </li>-->
                             <li>
-                                <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
                             </li>
                         </ul>
                     </div>
@@ -135,7 +185,68 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="customertoinsert" class="btn btn-primary">Add Customer</a>
+                            <!--                            <a href="customertoinsert" class="btn btn-primary">Add Customer</a>-->
+
+                            <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-circle"><i class="fa fa-plus"></i></button>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Form Customer</h4>
+                                        </div>
+                                        <form role="form" action="customerinsert" method="post">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label>No. Identitas</label>
+                                                    <input class="form-control"  name="txtID" type="text" >
+                                                    <!--                                            <p class="help-block">Example block-level help text here.</p>-->
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Nama</label>
+                                                    <input class="form-control" name="txtNama" type="text">
+                                                    <!--                                            <p class="help-block">Example block-level help text here.</p>-->
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Jenis Kelamin</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="radio" name="txtJK" value="Laki-Laki" checked="true"> Laki-Laki
+                                                    <input type="radio" name="txtJK" value="Perempuan" > Perempuan <br>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>No. Telp</label>
+                                                    <input class="form-control" name="txtNoTelp" type="text">
+                                                    <!--                                            <p class="help-block">Example block-level help text here.</p>-->
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Pekerjaan</label>
+                                                    <input class="form-control" name="txtPekerjaan" type="text">
+                                                    <!--                                            <p class="help-block">Example block-level help text here.</p>-->
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Alamat</label>
+                                                    <input class="form-control" name="txtAlamat" type="text">
+                                                    <!--                                            <p class="help-block">Example block-level help text here.</p>-->
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" class="btn btn-primary" value="Insert" name="submit">
+                                                <a href="customerservlet" class="btn btn-danger">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -174,8 +285,11 @@
                                     <td><%= c.getNoTelp()%></td>
                                     <td><%= c.getPekerjaan()%></td>
                                     <td><%= c.getAlamat()%></td>
-                                    <td><a href="customerupdate?id=<%=c.getNoIdentitas()%>"class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>
-                                        <button data-toggle="modal" data-target="#myModal<%=c.getNoIdentitas()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
+                                    <td>
+
+                                        <button data-toggle="modal" data-target="#myModaledit<%=c.getNoIdentitas()%>" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button>
+<!--                                        <button data-toggle="modal" data-target="#myModal<%--=c.getNoIdentitas()--%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>-->
+                                    </td>
                                 </tr>
                                 <div class="modal fade" id="myModal<%=c.getNoIdentitas()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -191,6 +305,73 @@
                                                 <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
                                                 <a href="customerdelete?id=<%=c.getNoIdentitas()%>" type="button" class="btn btn-danger">Delete</a>
                                             </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+
+                                <div class="modal fade" id="myModaledit<%=c.getNoIdentitas()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">Form Update</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <% Customer cuss = (Customer) session.getAttribute("cus");%>
+                                                <form role="form" action="prosesupdatecustomer" method="post">
+                                                    <div class="form-group">
+                                                        <label>No. Identitas</label>
+                                                        <input class="form-control" name="txtID" readonly="true" type="text" value="<%= cuss.getNoIdentitas()%>">
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Nama</label>
+                                                        <input class="form-control" name="txtNama" type="text" value="<%= cuss.getNama()%>">
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <% if (cuss.getJenisKelamin().equals("Laki-Laki")) { %>
+                                                        <input type="radio" name="txtJK" value="Laki-Laki" checked="true" > Laki-Laki
+                                                        <input type="radio" name="txtJK" value="Perempuan" > Perempuan <br>
+                                                        <%} else {%>
+                                                        <input type="radio" name="txtJK" value="Laki-Laki" > Laki-Laki
+                                                        <input type="radio" name="txtJK" value="Perempuan" checked="true"> Perempuan <br>
+                                                        <%}%>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>No. Telp</label>
+                                                        <input class="form-control" name="txtNoTelp" type="text" value="<%= cuss.getNoTelp()%>">
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Pekerjaan</label>
+                                                        <input class="form-control" name="txtPekerjaan" type="text" value="<%= cuss.getPekerjaan()%>">
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Alamat</label>
+                                                        <input class="form-control" name="txtAlamat" type="text" value="<%= cuss.getAlamat()%>">
+
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <input type="submit" value="Update" class="btn btn-primary" name="submit">
+                                                        <a href="customerservlet" class="btn btn-danger">Cancel</a>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+
                                         </div>
                                         <!-- /.modal-content -->
                                     </div>

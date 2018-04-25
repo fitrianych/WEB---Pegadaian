@@ -4,6 +4,7 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="dao.Jenis_BarangDAO"%>
 <%@page import="entities.JenisBarang"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -107,6 +108,56 @@
                             <li>
                                 <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -128,7 +179,34 @@
                     <div class="panel panel-default">
 
                         <div class="panel-heading">
-                            <a href="jenistoinsert" class="btn btn-primary">Add Jenis</a>
+                            <!--                            <a href="jenistoinsert" class="btn btn-primary">Add Jenis</a>-->
+                            <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-circle"><i class="fa fa-plus"></i></button>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Form Jenis</h4>
+                                        </div>
+                                        <% int autoid = new Jenis_BarangDAO().getAutoID();%>
+                                        <form role="form" action="jenisinsert" method="post">
+                                            <input class="form-control hidden"  name="txtID" type="text" value="<%= autoid%>"> 
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label>Jenis</label>
+                                                    <input class="form-control" name="txtJenis" type="text">
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <input type="submit" class="btn btn-primary" value="Insert" name="submit">
+                                                    <a href="jenisservlet" class="btn btn-danger">Cancel</a>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         <!-- /.panel-heading -->
@@ -138,10 +216,10 @@
                                 <%if (session.getAttribute("Pesan") != null) { %>
                                 <div class="alert alert-success alert-dismissable">  
                                     <%out.print(session.getAttribute("Pesan") + "<br>");
-                                    session.removeAttribute("Pesan"); %> 
+                                        session.removeAttribute("Pesan"); %> 
                                 </div>
 
-                                   <% }%>     
+                                <% }%>     
 
                                 <thead>
                                     <tr>
@@ -150,7 +228,7 @@
                                         <th>Aksi</th>                        
                                     </tr>
                                 </thead>
-                                <%                                   
+                                <%
                                     List<Object> datas = (List<Object>) session.getAttribute("dataJenis");
 
                                     for (Object data : datas) {
@@ -159,29 +237,70 @@
                                     <tr>
                                         <td><%= jb.getIdJenis()%></td>
                                         <td><%= jb.getNamaJenis()%></td>
-                                        <td><a href="jenisupdate?id=<%=jb.getIdJenis()%>" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>
-                                            <button data-toggle="modal" data-target="#myModal<%=jb.getIdJenis()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
+                                        <td>
+                                            
+                                            <button data-toggle="modal" data-target="#myModaledit<%=jb.getIdJenis()%>" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button>
+                                            <button data-toggle="modal" data-target="#myModal<%=jb.getIdJenis()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>
+                                        </td>
 
                                     </tr>
-                            <div class="modal fade" id="myModal<%=jb.getIdJenis()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                <div class="modal fade" id="myModal<%=jb.getIdJenis()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are You Sure to Delete?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                                                <a href="jenisdelete?id=<%=jb.getIdJenis()%>" type="button" class="btn btn-danger">Delete</a>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                           Are You Sure to Delete?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
-                                            <a href="jenisdelete?id=<%=jb.getIdJenis()%>" type="button" class="btn btn-danger">Delete</a>
-                                        </div>
+                                        <!-- /.modal-content -->
                                     </div>
-                                    <!-- /.modal-content -->
+                                    <!-- /.modal-dialog -->
                                 </div>
-                                <!-- /.modal-dialog -->
-                            </div>
+
+                                <div class="modal fade" id="myModaledit<%=jb.getIdJenis()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <% JenisBarang jnss = (JenisBarang) session.getAttribute("jns");%>
+                                                <form role="form" action="prosesupdatejenis" method="post">
+                                                    <div class="form-group">
+                                                        <label>ID Jenis</label>
+                                                        <input class="form-control" name="txtID" readonly="true" type="text" value="<%= jnss.getIdJenis()%>">
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Jenis</label>
+                                                        <input class="form-control" name="txtJenis" type="text" value="<%= jnss.getNamaJenis()%>">
+
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <input type="submit" value="Update" class="btn btn-primary" name="submit">
+                                                        <a href="jenisservlet" class="btn btn-primary">Cancel</a>
+                                                    </div>
+
+
+                                                </form>
+                                            </div>
+                                            
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
                                 </tbody>
                                 <% }
                                 %>

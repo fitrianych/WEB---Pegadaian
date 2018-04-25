@@ -110,6 +110,56 @@
                             <li>
                                 <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -126,7 +176,7 @@
                     <%if (session.getAttribute("Pesan") != null) { %>
                     <div class="alert alert-success alert-dismissable">  
                         <%out.print(session.getAttribute("Pesan") + "<br>");
-                                        session.removeAttribute("Pesan"); %> 
+                            session.removeAttribute("Pesan"); %> 
                     </div>
 
                     <% }%> 
@@ -155,7 +205,7 @@
                             Barang b = (Barang) data;%>
                     <input type="checkbox" name ="txtBarang" value="<%=b.getIdBarang()%>"><%=b.getNamaBarang()%></option><%
 
-                                }%>
+                        }%>
 
                 </div>
 
@@ -167,7 +217,7 @@
 
                 <div class="form-group">
                     <label>Keterangan</label>
-                    <input class="form-control" name="txtKeterangan" type="text">
+                    <input class="form-control" name="txtKeterangan" type="text" placeholder="Plat Nomor, Tipe, Deskripsi">
                 </div>
 
 

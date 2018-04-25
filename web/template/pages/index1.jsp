@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Apr 24, 2018, 11:03:20 AM
+    Document   : index1
+    Created on : Apr 24, 2018, 8:15:40 PM
     Author     : Fitriany Chairunnisa
 --%>
 
@@ -14,7 +14,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Pegadaian v1.0</title>
+        <title>Manager</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -328,3 +328,4 @@
                         </body>
 
                         </html>
+

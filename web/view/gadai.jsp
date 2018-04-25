@@ -4,6 +4,8 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entities.Gadai"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -107,6 +109,56 @@
                             <li>
                                 <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./customerservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./gadaiservlet">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="./angsuranservlet">Angsuran</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./jenisservlet">Jenis Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./barangservlet">List Barang</a>
+                                    </li>
+                                    <li>
+                                        <a href="./detailgadaiservlet">Detail Barang</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="./reportservlet">Customer</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportangsuran">Angsuran</a>
+                                    </li>
+                                    <li>
+                                        <a href="./reportgadai">Gadai</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Filter</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -128,12 +180,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="gadaitoinsert" class="btn btn-primary">Add Gadai</a>
+
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <%if (session.getAttribute("Pesan") != null) { %>
+                                <%if (session.getAttribute("Pesan") != null) { %>
                                 <div class="alert alert-success alert-dismissable">  
                                     <%out.print(session.getAttribute("Pesan") + "<br>");
                                         session.removeAttribute("Pesan"); %> 
@@ -149,7 +202,7 @@
                                         <th>Jumlah Pinjaman</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
-                                        
+
 
                                     </tr>
                                 </thead>
@@ -157,21 +210,36 @@
                                     List<Object> datas = (List<Object>) session.getAttribute("dataGadai");
 
                                     for (Object data : datas) {
-                                        Gadai b = (Gadai) data;%>
+                                        Gadai b = (Gadai) data;
+                                        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+                                        String tgl = dateformat.format(b.getTanggalPengajuan());
+                                        String tgl1 = dateformat.format(b.getJatuhTempo());
+
+
+                                %>
+
+
 
                                 <tr>
                                     <td><%= b.getIdGadai()%></td>
                                     <td><%= b.getNoIdentitas()%></td>
-                                    <td><%= b.getTanggalPengajuan()%></td>
-                                    <td><%= b.getJatuhTempo()%></td>
+                                    <td><%= tgl%></td>
+                                    <td><%= tgl1%></td>
                                     <td><%= b.getJumlahPinjaman()%></td>
                                     <td><%= b.getIdStatus().getStatus()%></td>
                                     <td>
                                         <!--                                    <a href="gadaidelete?id=
                                         <%--<%=b.getIdGadai()%>--%>
                                         ">delete</a>-->
-                                    <a href="angsurantoinsert?id=<%=b.getIdGadai()%>" class="btn btn-warning">angsur</a>
-                                    <a href="gadaiupdate?id=<%=b.getIdGadai()%>" class="btn btn-success">perpanjang</a>
+                                        <% if (b.getIdStatus().getIdStatus().equals("c ") || (b.getIdStatus().getIdStatus().equals("a "))) {%>
+                                        <a href="angsurantoinsert?id=<%=b.getIdGadai()%>" class="btn btn-danger" style="pointer-events: none; display: inline-block">angsur</a>
+                                        <a href="gadaiupdate?id=<%=b.getIdGadai()%>" class="btn btn-danger" style="pointer-events: none; display: inline-block">perpanjang</a>
+                                        <% } else {%>
+                                        <a href="angsurantoinsert?id=<%=b.getIdGadai()%>" class="btn btn-warning">angsur</a>
+                                        <a href="gadaiupdate?id=<%=b.getIdGadai()%>" class="btn btn-success">perpanjang</a>
+                                        <%}%>
+
+
                                     </td>
                                 </tr>
                                 <% }

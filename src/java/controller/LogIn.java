@@ -42,6 +42,7 @@ public class LogIn extends HttpServlet {
         HttpSession session = request.getSession();
         String category = "id";
         String er = "";
+        Usermanagement u = (Usermanagement) new UserManagementDAO().getById(ID);
 
         UserManagementDAO udao = new UserManagementDAO();
         try (PrintWriter out = response.getWriter()) {
@@ -51,16 +52,23 @@ public class LogIn extends HttpServlet {
             } else if (udao.search(category, ID).isEmpty()) {
                 er = "Login Gagal";
                 dispatcher = request.getRequestDispatcher("login.html");
-            } else if (udao.login(ID, password)) {
-                er = "Berhasil";
-                dispatcher = request.getRequestDispatcher("index.html");
             } else if (!udao.login(ID, password)) {
                 er = "Login Gagal";
                 dispatcher = request.getRequestDispatcher("login.html");
+            } else if (udao.login(ID, password)) {
+                if (u.getAkses().equals("manajer")) {
+                    er = "Berhasil";
+                    dispatcher = request.getRequestDispatcher("view/index1.jsp");
+                } else {
+                    dispatcher = request.getRequestDispatcher("view/index.jsp");
+                }
+
             }
-            session.setAttribute("er", er);
-            //out.println(er);
+           // session.setAttribute("er", er);
+            //out.println(ID);
             session.setAttribute("login", ID);
+            //session.setAttribute("login1", password);
+            session.setAttribute("u", u);
             dispatcher.include(request, response);
         }
 
