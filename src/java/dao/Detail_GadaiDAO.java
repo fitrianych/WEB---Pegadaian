@@ -62,6 +62,11 @@ public class Detail_GadaiDAO implements InterfaceDAO {
         return (Integer) fdao.getById("SELECT MAX(idDetailGadai)+1 FROM DetailGadai");
     }
 
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 }

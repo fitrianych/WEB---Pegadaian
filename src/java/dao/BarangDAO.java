@@ -70,4 +70,9 @@ public class BarangDAO implements InterfaceDAO {
         return (Long) fdao.getById("SELECT COUNT(idBarang) from Barang");
     }
 
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

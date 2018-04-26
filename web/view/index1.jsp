@@ -6,7 +6,6 @@
 
 <%@page import="entities.Usermanagement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -88,19 +87,29 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">Manager</a>
+                    <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
+                    <%if (session.getAttribute("Pesan") != null) { %>
+                    <div class="alert alert-success alert-dismissable">  
+                        <%out.print(session.getAttribute("Pesan") + "<br>");
+                            session.removeAttribute("Pesan"); %> 
+                    </div>
+
+                    <% }%> 
 
                 </div>
                 <!-- /.navbar-header -->
+                <% Usermanagement us = (Usermanagement) session.getAttribute("u");%>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i>Hi, <%=us.getUsername()%></i>
                         </a>
 
 
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="./logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
 
                             </li>
                         </ul>
@@ -126,26 +135,29 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./customerservlet">Customer</a>
+                                        <a href="./adminservlet">Admin</a>
                                     </li>
                                     <li>
-                                        <a href="./gadaiservlet">Gadai</a>
+                                        <a href="./customermjrservlet">Customer</a>
                                     </li>
                                     <li>
+                                        <a href="./gadaimjrservlet">Gadai</a>
+                                    </li>
+<!--                                    <li>
                                         <a href="./angsuranservlet">Angsuran</a>
-                                    </li>
+                                    </li>-->
                                 </ul>
-                                <!-- /.nav-second-level -->
+                                
                             </li>
 
-                            <li>
+<!--                            <li>
                                 <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -158,8 +170,8 @@
                                         <a href="./detailgadaiservlet">Detail Barang</a>
                                     </li>
                                 </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
+                                
+                            </li>-->
 
                             <li>
                                 <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
@@ -173,9 +185,9 @@
                                     <li>
                                         <a href="./reportgadai">Gadai</a>
                                     </li>
-                                    <li>
-                                        <a href="morris.html">Filter</a>
-                                    </li>
+<!--                                    <li>
+                                        <a href="idgadaireport">By Id Gadai</a>
+                                    </li>-->
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -190,145 +202,143 @@
             <div id="page-wrapper">                            
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Dashboard</h1>
-                        <% Usermanagement u = (Usermanagement) session.getAttribute("ID");%>
-                        <%if (session.getAttribute("ID") != null) { %>
-                        <div class="alert alert-success alert-dismissable">  
-                            <%out.print(u.getUsername()); %> 
-                        </div>
 
-                        <% }%> 
+                        <h1>
+                            <marquee behavior="alternate" class="page-header">Welcome, <%=us.getUsername()%>
+                            </marquee>
+                        </h1>
                     </div>
-
                 </div>
                 <!-- /.col-lg-12 -->
 
                 <!-- /.row -->
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-comments fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>New Comments!</div>
-                                    </div>
+                    <!-- Bootstrap CSS -->
+                    <!DOCTYPE html>
+                    <title>My Example</title>
+
+                    <!-- Bootstrap CSS -->
+                    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+                    <div class="container-fluid">
+
+                        <!-- Carousel container -->
+                        <div id="my-pics" class="carousel slide" data-ride="carousel" style="width:800px;margin:auto;">
+
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#my-pics" data-slide-to="0" class="active"></li>
+                                <li data-target="#my-pics" data-slide-to="1"></li>
+                                <li data-target="#my-pics" data-slide-to="2"></li>
+                            </ol>
+
+                            <!-- Content -->
+                            <div class="carousel-inner" role="listbox">
+
+                                <!-- Slide 1 -->
+                                <div class="item active">
+                                    <img src="./template/img/pict6.png" alt="Sunset over beach">
                                 </div>
+
+                                <!-- Slide 2 -->
+                                <div class="item">
+                                    <img src="./template/img/pict7.jpg" alt="Rob Roy Glacier">
+                                </div>
+
+                                <!-- Slide 3 -->
+                                <div class="item">
+                                    <img src="./template/img/pict8.jpg" alt="Longtail boats at Phi Phi">
+                                </div>
+
                             </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
+
+                            <!-- Previous/Next controls -->
+                            <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+                                <span class="icon-prev" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
                             </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-tasks fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>New Tasks!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
+                            <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+                                <span class="icon-next" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
                             </a>
+
                         </div>
+
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-shopping-cart fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
-                                        <div>New Orders!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-red">
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <i class="fa fa-support fa-5x"></i>
-                                    </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
-                                        <div>Support Tickets!</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">
-                                <div class="panel-footer">
-                                    <span class="pull-left">View Details</span>
-                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    
+
+                    <!-- jQuery library -->
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                    <!-- Bootstrap JS -->
+                    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+                    <!-- Initialize Bootstrap functionality -->
+                    <script>
+                        // Initialize tooltip component
+                        $(function () {
+                            $('[data-toggle="tooltip"]').tooltip()
+                        })
+
+                        // Initialize popover component
+                        $(function () {
+                            $('[data-toggle="popover"]').popover()
+                        })
+                    </script>
+
                 </div>
-                <!-- /.row -->
 
-                <!-- /.row -->
+                <!-- jQuery library -->
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                <!-- Bootstrap JS -->
+                <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+                <!-- Initialize Bootstrap functionality -->
+                <script>
+                        // Initialize tooltip component
+                        $(function () {
+                            $('[data-toggle="tooltip"]').tooltip()
+                        })
+
+                        // Initialize popover component
+                        $(function () {
+                            $('[data-toggle="popover"]').popover()
+                        })
+                </script>
             </div>
-            <!-- /#page-wrapper -->
+            <!-- /.row -->
 
+            <!-- /.row -->
         </div>
-        <!-- /#wrapper -->
+        <!-- /#page-wrapper -->
 
-        <!-- jQuery -->
-        <script src="./template/vendor/jquery/jquery.min.js"></script>
+    </div>
+    <!-- /#wrapper -->
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="./template/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="./template/vendor/jquery/jquery.min.js"></script>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="./template/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="./template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-        <!-- DataTables JavaScript -->
-        <script src="./template/vendor/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="./template/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-        <script src="./template/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="./template/vendor/metisMenu/metisMenu.min.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="./template/dist/js/sb-admin-2.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="./template/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="./template/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="./template/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
-        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').DataTable({
-                    responsive: true
-                });
-            });
-        </script>
+    <!-- Custom Theme JavaScript -->
+    <script src="./template/dist/js/sb-admin-2.js"></script>
 
-    </body>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+                        $(document).ready(function () {
+                            $('#dataTables-example').DataTable({
+                                responsive: true
+                            });
+                        });
+    </script>
+
+</body>
 
 </html>

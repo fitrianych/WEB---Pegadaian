@@ -114,7 +114,8 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="barangservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                               <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                 
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>

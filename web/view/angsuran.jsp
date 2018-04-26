@@ -107,7 +107,8 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="view/index.jsp"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
@@ -175,9 +176,13 @@
             </div>    
 
             <div class="row">
+
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            Angsuran
+                            </div>
+                         <div class="panel-heading">
                             <%if (session.getAttribute("Pesan") != null) { %>
                             <div class="alert alert-success alert-dismissable">  
                                 <%out.print(session.getAttribute("Pesan") + "<br>");
@@ -185,6 +190,8 @@
                             </div>
 
                             <% }%>
+
+
                         </div>
 
                         <!-- /.panel-heading -->

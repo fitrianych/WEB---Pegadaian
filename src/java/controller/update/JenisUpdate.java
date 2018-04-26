@@ -44,7 +44,7 @@ public class JenisUpdate extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             JenisBarang jns = (JenisBarang) new Jenis_BarangDAO().getById(id);
             session.setAttribute("jns", jns);
-            out.println("<font color = \"red\">update" +jns.getIdJenis()+"</font>");
+            //out.println("<font color = \"red\">update" +jns.getIdJenis()+"</font>");
         //out.println("<b>"+id);
         dis = request.getRequestDispatcher("view/update/updatejenis.jsp");
         dis.include(request, response);

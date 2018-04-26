@@ -16,17 +16,18 @@ import tools.HibernateUtil;
  *
  * @author Fitriany Chairunnisa
  */
-public class UserManagementDAO implements InterfaceDAO{
+public class UserManagementDAO implements InterfaceDAO {
 
     private FunctionsDAO fdao;
+
     public UserManagementDAO() {
-        
+
         this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
     }
 
     @Override
     public boolean insert(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.insert(object);
     }
 
     @Override
@@ -36,32 +37,34 @@ public class UserManagementDAO implements InterfaceDAO{
 
     @Override
     public boolean delete(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.delete(Usermanagement.class,BigDecimal.valueOf(new Long(object.toString())));
     }
 
     @Override
     public List<Object> getAll() {
         return fdao.getAll("FROM Usermanagement ORDER by id");
-    
+
     }
 
     @Override
     public List<Object> search(String category, String search) {
-      return fdao.getAll("FROM Usermanagement where "+category+" LIKE '%"+search+"%' ORDER by id");
-   
+        return fdao.getAll("FROM Usermanagement where " + category + " LIKE '%" + search + "%' ORDER by id");
+
     }
 
     @Override
     public Object getById(String id) {
-       return fdao.getById("FROM Usermanagement where id = "+id+"");
+        return fdao.getById("FROM Usermanagement where id = " + id + "");
     }
-    
-        public boolean login(String id, String password) {
+
+    public boolean login(String id, String password) {
         Usermanagement um = (Usermanagement) getById(id);
         return BCrypt.checkpw(password, um.getPassword());
     }
-    
-}
 
-    
-   
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+}

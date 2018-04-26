@@ -59,6 +59,13 @@ public class Usermanagement implements Serializable {
         this.password = password;
     }
 
+    public Usermanagement(BigDecimal idBaru, String username, String password, String akses) {
+     this.id = idBaru;
+     this.username = username;
+     this.password = password;
+     this.akses = akses;
+    }
+
     public BigDecimal getId() {
         return id;
     }

@@ -148,13 +148,13 @@ public class AngsuranInsert extends HttpServlet {
                 dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
                 dis.include(request, response);
             } else if (days >= masa_tenggang && days <= hangus) {
-                double total_denda = days * denda/pembagi * pinjam;
+                double total_denda = days + denda/pembagi * pinjam;
                 a.setDenda(new Double(total_denda).longValue());
             } else {
                 a.setDenda(Long.valueOf(0));
                 System.out.println("tidak ada denda");
             }
-
+            System.out.println(days);
             double x = Double.parseDouble(a.getDenda() + "");
             double y = Double.parseDouble(a.getJumlahAngsuran() + "");
             double hasil = x + y;

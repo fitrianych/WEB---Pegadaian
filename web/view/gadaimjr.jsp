@@ -1,26 +1,17 @@
 <%-- 
-    Document   : updategadai
-    Created on : Apr 18, 2018, 1:49:30 PM
+    Document   : gadaimjr
+    Created on : Apr 26, 2018, 10:21:07 AM
     Author     : Fitriany Chairunnisa
 --%>
 
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entities.Gadai"%>
-<%@page import="entities.Barang"%>
-<%@page import="entities.JenisBarang"%>
-<%@page import="entities.Customer"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <head>
-        <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <title>Lihat Customer<table border="1">
-                       
-                </title>-->
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,25 +107,29 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="gadaiservlet"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./customerservlet">Customer</a>
+                                        <a href="./adminservlet">Admin</a>
                                     </li>
                                     <li>
-                                        <a href="./gadaiservlet">Gadai</a>
+                                        <a href="./customermjrservlet">Customer</a>
                                     </li>
                                     <li>
+                                        <a href="./gadaimjrservlet">Gadai</a>
+                                    </li>
+<!--                                    <li>
                                         <a href="./angsuranservlet">Angsuran</a>
-                                    </li>
+                                    </li>-->
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
 
-                            <li>
+<!--                            <li>
                                 <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -147,8 +142,8 @@
                                         <a href="./detailgadaiservlet">Detail Barang</a>
                                     </li>
                                 </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
+                                 /.nav-second-level 
+                            </li>-->
 
                             <li>
                                 <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
@@ -162,9 +157,9 @@
                                     <li>
                                         <a href="./reportgadai">Gadai</a>
                                     </li>
-                                    <li>
+<!--                                    <li>
                                         <a href="morris.html">Filter</a>
-                                    </li>
+                                    </li>-->
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -174,53 +169,97 @@
 
                 <!-- /.navbar-static-side -->
             </nav>
-        </div>
+        </div>   
 
         <div id="page-wrapper">
+
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Perpanjang Masa Gadai </h1>
+                    <h1 class="page-header">Tabel Gadai</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>    
+            </div> 
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <form role="form" action="view/idgadaireport.jsp" method="post">
+                            <div class="form-group">
+                                <label>Print</label>
+                                <input class="form-control" name="idGadai" type="text">
+                            </div>
+                            <!--                            <a  class="btn btn-primary">Print</a>-->
+                            <button class="btn btn-primary" type="submit">Print</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                          
+                                <thead>
+                                    <tr>
+                                        <th>ID Gadai</th>
+                                        <th>No.Identitas</th>
+                                        <th>Tanggal Pengajuan</th>
+                                        <th>Jatuh Tempo</th>
+                                        <th>Jumlah Pinjaman</th>
+                                        <th>Status</th>
+                                        
 
 
-            <% Gadai brgg = (Gadai) session.getAttribute("g");
-                DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-                String tgl = dateformat.format(brgg.getTanggalPengajuan());
-                String tgl1 = dateformat.format(brgg.getJatuhTempo());
+                                    </tr>
+                                </thead>
+                                <%
+                                    List<Object> datas = (List<Object>) session.getAttribute("dataGadai");
 
-            %>
-            <form role="form" action="prosesupdategadai" method="post">
-                <div class="form-group">
-                    <label>No. Identitas</label>
-                    <input class="form-control" name="txtIdentitas" readonly="true" type="text" value="<%= brgg.getNoIdentitas().getNoIdentitas()%>">
-                </div>
-                <div class="form-group">
-                    <label>ID Gadai</label>
-                    <input class="form-control" name="txtID" readonly="true" type="text" value="<%= brgg.getIdGadai()%>">
+                                    for (Object data : datas) {
+                                        Gadai b = (Gadai) data;
+                                        DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+                                        String tgl = dateformat.format(b.getTanggalPengajuan());
+                                        String tgl1 = dateformat.format(b.getJatuhTempo());
 
+
+                                %>
+
+
+
+                                <tr>
+                                    <td><%= b.getIdGadai()%></td>
+                                    <td><%= b.getNoIdentitas()%></td>
+                                    <td><%= tgl%></td>
+                                    <td><%= tgl1%></td>
+                                    <td><%= b.getJumlahPinjaman()%></td>
+                                    <td><%= b.getIdStatus().getStatus()%></td>
+                                    
+                                </tr>
+                                <% }
+                                %>
+
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Tanggal Pengajuan</label>
-                    <input class="form-control" name="txtPengajuan"  type="date" value="<%=tgl%>">
-                </div>
-                <div class="form-group">
-                    <label>Jumlah Pinjaman</label>
-                    <input class="form-control" name="txtPinjaman" readonly="true" type="text" value="<%= brgg.getJumlahPinjaman()%>">
-                </div>
-                <div class="form-group">
-<!--                    <label>Status</label>-->
-                    <input class="form-control hidden" name="txtStatus" readonly="true"  type="text" value="<%= brgg.getIdStatus().getIdStatus()%>">
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                    <a href="gadaiservlet" class="btn btn-danger">Cancel</a>
-                </div>
-            </form>
+
+
+
+            </div>
+
+            <!--                                <a href="angsurantoinsert" class="btn btn-primary">Add Angsuran</a>-->
         </div>
 
+        <!--        <div class="row">-->
 
+        <!--        </div>-->
         <!-- /#wrapper -->
 
         <!-- jQuery -->
@@ -235,6 +274,7 @@
         <!-- DataTables JavaScript -->
         <script src="template/vendor/datatables/js/jquery.dataTables.min.js"></script>
         <script src="template/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+        <script src="template/vendor/datatables-plugins/dataTables.bootstrap.js"></script>
         <script src="template/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
         <!-- Custom Theme JavaScript -->

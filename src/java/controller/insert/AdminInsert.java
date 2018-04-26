@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.insert;
 
 import dao.UserManagementDAO;
 import entities.Usermanagement;
@@ -12,16 +12,19 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import tools.BCrypt;
 
 /**
  *
  * @author Fitriany Chairunnisa
  */
-public class LogIn extends HttpServlet {
+@WebServlet(name = "AdminInsert", urlPatterns = {"/admininsert"})
+public class AdminInsert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,42 +39,32 @@ public class LogIn extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String ID = request.getParameter("ID");
-        String password = request.getParameter("password");
-        RequestDispatcher dispatcher = null;
-        HttpSession session = request.getSession();
-        String category = "id";
-        String er = "";
-        Usermanagement u = (Usermanagement) new UserManagementDAO().getById(ID);
+        String id = request.getParameter("txtID");
+        String username = request.getParameter("txtusername");
+        String password = request.getParameter("txtpassword");
 
+        HttpSession session = request.getSession();
+        RequestDispatcher dis = null;
+        String Pesan = "Gagal Insert Data";
         UserManagementDAO udao = new UserManagementDAO();
         try (PrintWriter out = response.getWriter()) {
-            if (ID.equals("") || password.equals("")) {
-                er = "Login Gagal";
-                dispatcher = request.getRequestDispatcher("login.html");
-            } else if (udao.search(category, ID).isEmpty()) {
-                er = "Login Gagal";
-                dispatcher = request.getRequestDispatcher("login.html");
-            } else if (!udao.login(ID, password)) {
-                er = "Login Gagal";
-                dispatcher = request.getRequestDispatcher("login.html");
-            } else if (udao.login(ID, password)) {
-                if (u.getAkses().equals("manajer")) {
-                    er = "Berhasil";
-                    dispatcher = request.getRequestDispatcher("view/index1.jsp");
-                } else {
-                    dispatcher = request.getRequestDispatcher("view/index.jsp");
-                }
+//            Usermanagement u = new Usermanagement();
+//            u.setId(BigDecimal.valueOf(new Long(id)));
+//            u.setUsername(usermane);
+//            u.setPassword(pasword);
+//            u.setAkses("admin");
+            Usermanagement um = new Usermanagement(BigDecimal.valueOf(new Long(id)),
+                    username, BCrypt.hashpw(password, BCrypt.gensalt()), "admin"); //salt = seperti key nya
 
+            if (udao.insert(um)) {
+                Pesan = "Berhasil Insert dengan id = " + um.getId();
+//                session.setAttribute("gdao", udao.getById(id));
+//                session.setAttribute("Pesan", Pesan);
             }
-           // session.setAttribute("er", er);
-            //out.println(ID);
-            session.setAttribute("login", ID);
-            session.setAttribute("login1", password);
-            session.setAttribute("u", u);
-            dispatcher.include(request, response);
+            session.setAttribute("Pesan", Pesan);
+            dis = request.getRequestDispatcher("adminservlet");
+            dis.include(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

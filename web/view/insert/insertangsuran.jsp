@@ -234,7 +234,7 @@
                 <div class="form-group">
 
                     <input type="submit" class="btn btn-primary" value="Insert" name="submit">
-                    <a href="gadaiservlet" class="btn btn-primary">Cancel</a>
+                    <a href="gadaiservlet" class="btn btn-danger">Cancel</a>
                 </div>
             </form>
         </div>

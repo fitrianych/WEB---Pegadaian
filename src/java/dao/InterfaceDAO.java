@@ -18,4 +18,5 @@ public interface InterfaceDAO {
     public List<Object> getAll();
     public List<Object> search(String category, String search);
     public Object getById(String id);
+    public boolean save(Object object);
 }

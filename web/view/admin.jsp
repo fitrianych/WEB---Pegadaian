@@ -1,14 +1,12 @@
 <%-- 
-    Document   : barang
-    Created on : Apr 16, 2018, 4:58:17 PM
+    Document   : admin
+    Created on : Apr 26, 2018, 2:29:24 AM
     Author     : Fitriany Chairunnisa
 --%>
 
-<%@page import="entities.JenisBarang"%>
-<%@page import="dao.Jenis_BarangDAO"%>
-<%@page import="dao.BarangDAO"%>
-<%@page import="entities.Barang"%>
+<%@page import="entities.Usermanagement"%>
 <%@page import="java.util.List"%>
+<%@page import="dao.UserManagementDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,33 +113,39 @@
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./customerservlet">Customer</a>
+                                        <a href="./adminservlet">Admin</a>
                                     </li>
                                     <li>
-                                        <a href="./gadaiservlet">Gadai</a>
+                                        <a href="./customermjrservlet">Customer</a>
                                     </li>
                                     <li>
-                                        <a href="./angsuranservlet">Angsuran</a>
+                                        <a href="./gadaimjrservlet">Gadai</a>
                                     </li>
+
+
+                                    <!--
+<li>
+                                                                            <a href="./angsuranservlet">Angsuran</a>
+                                                                        </li>-->
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
 
-                            <li>
-                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="./jenisservlet">Jenis Barang</a>
-                                    </li>
-                                    <li>
-                                        <a href="./barangservlet">List Barang</a>
-                                    </li>
-                                    <li>
-                                        <a href="./detailgadaiservlet">Detail Barang</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
+                            <!--                            <li>
+                                                            <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                                            <ul class="nav nav-second-level">
+                                                                <li>
+                                                                    <a href="./jenisservlet">Jenis Barang</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="./barangservlet">List Barang</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="./detailgadaiservlet">Detail Barang</a>
+                                                                </li>
+                                                            </ul>
+                                                             /.nav-second-level 
+                                                        </li>-->
 
                             <li>
                                 <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
@@ -155,9 +159,7 @@
                                     <li>
                                         <a href="./reportgadai">Gadai</a>
                                     </li>
-                                    <li>
-                                        <a href="morris.html">Filter</a>
-                                    </li>
+                                   
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -171,7 +173,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tabel Barang</h1>
+                    <h1 class="page-header">Tabel Admin</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>    
@@ -187,37 +189,35 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                            <h4 class="modal-title" id="myModalLabel">Form Add Admin</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <% int autoid = new BarangDAO().getAutoID();%>
-                                            <form role="form" action="baranginsert" method="post">
 
-                                                <input class="form-control hidden"  name="txtID" type="text" value="<%= autoid%>"> 
-
+                                            <form role="form" action="admininsert" method="post">
                                                 <div class="form-group">
-                                                    <label>Jenis Barang</label>
-                                                    <select name ="txtJenis" class="form-control">
-                                                        <%
-                                                            List<Object> datas2 = new Jenis_BarangDAO().getAll();
-                                                            for (Object data : datas2) {
-                                                                JenisBarang jb = (JenisBarang) data;%>
-
-                                                        <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
-
-                                                            }%>
-                                                    </select>
+                                                    <label>NIK</label>
+                                                    <input class="form-control"  name="txtID" type="text" > 
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Nama Barang</label>
-                                                    <input class="form-control" name="txtBarang" type="text">
+                                                    <label>Username</label>
+                                                    <input class="form-control"  name="txtusername" type="text" > 
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input class="form-control" name="txtpassword" type="password">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <!--                                                    <label>Akses</label>-->
+                                                    <input class="form-control hidden" name="txtakses" type="text">
                                                 </div>
 
                                                 <div class="form-group">
 
                                                     <input type="submit" class="btn btn-primary" value="Insert" name="submit">
-                                                    <a href="barangservlet" class="btn btn-primary">Cancel</a>
+                                                    <a href="adminservlet" class="btn btn-danger">Cancel</a>
                                                 </div>
                                             </form>
                                         </div>                                       
@@ -241,88 +241,35 @@
                                 <% }%> 
                                 <thead>
                                     <tr>
-                                        <th>ID Barang</th>
-                                        <th>Jenis Barang</th>
-                                        <th>Nama Barang</th>
+                                        <th>NIK</th>
+                                        <th>Username</th>
+                                        <th>Passwords</th>
                                         <th>Aksi</th>
 
 
                                     </tr>
                                 </thead>
                                 <%
-                                    List<Object> datas = (List<Object>) session.getAttribute("dataBarang");
+                                    List<Object> datas = (List<Object>) session.getAttribute("dataAdmin");
 
                                     for (Object data : datas) {
-                                        Barang b = (Barang) data;%>
+                                        Usermanagement b = (Usermanagement) data;%>
 
                                 <tr>
-                                    <td><%= b.getIdBarang()%></td>
-                                    <td><%= b.getIdJenis().getNamaJenis()%></td>
-                                    <td><%= b.getNamaBarang()%></td>
+                                    <td><%= b.getId()%></td>
+                                    <td><%= b.getUsername()%></td>
+                                    <td><%= b.getPassword()%></td>
+                                    <td><%= b.getAkses()%></td>
                                     <td>
 <!--                                        <a href="barangupdate?id=<%--b.getIdBarang()--%>"class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>-->
-                                        <button data-toggle="modal" data-target="#myModal<%=b.getIdBarang()%>" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button>
-
-                                        <button data-toggle="modal" data-target="#myModaledit<%=b.getIdBarang()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
+<!--                                        <button data-toggle="modal" data-target="#myModal<%--b.getId()--%>" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button>-->
+                                        <% if (b.getAkses().equals("manajer")) {%>
+                                        <button data-toggle="modal" data-target="#myModaledit<%=b.getId()%>" class="btn btn-danger btn-circle" style="pointer-events: none; display: inline-block"><i class="fa fa-times"></i></button></td>
+                                            <% } else {%>
+                                <button data-toggle="modal" data-target="#myModaledit<%=b.getId()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
+                                    <%}%>
                                 </tr>
-
-                                <div class="modal fade" id="myModal<%=b.getIdBarang()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="myModalLabel">Update Jenis</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <% Barang brgg = (Barang) new BarangDAO().getById(b.getIdBarang().toString());%>
-                                                <form role="form" action="prosesupdatebarang" method="post">
-                                                    <div class="form-group">
-                                                        <label>ID Barang</label>
-                                                        <input class="form-control" name="txtID" readonly="true" type="text" value="<%= brgg.getIdBarang()%>">
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Jenis Barang</label>
-
-                                                        <select name ="txtJenis" class="form-control">
-                                                            <%
-                                                                List<Object> datass = new Jenis_BarangDAO().getAll();
-                                                                for (Object dataa : datass) {
-                                                                    JenisBarang jb = (JenisBarang) dataa;
-                                                                    if (brgg.getIdJenis().getIdJenis().equals(jb.getIdJenis())) {%>
-
-
-                                                            <option value="<%=jb.getIdJenis()%>"selected><%=jb.getNamaJenis()%></option><%
-                                                            } else {%>
-                                                            <option value="<%=jb.getIdJenis()%>"><%=jb.getNamaJenis()%></option><%
-                                                                    }
-                                                                }%>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Nama Barang</label>
-                                                        <input class="form-control" name="txtBarang"  type="text" value="<%= brgg.getNamaBarang()%>">
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                                                        <a href="barangservlet" class="btn btn-primary">Cancel</a>
-                                                    </div>
-
-
-                                                </form>
-                                            </div>
-
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-
-                                <div class="modal fade" id="myModaledit<%=b.getIdBarang()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="myModaledit<%=b.getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -334,13 +281,16 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
-                                                <a href="barangdelete?id=<%=b.getIdBarang()%>" type="button" class="btn btn-danger">Delete</a>
+                                                <a href="admindelete?id=<%=b.getId()%>" type="button" class="btn btn-danger">Delete</a>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
                                     </div>
                                     <!-- /.modal-dialog -->
                                 </div>
+
+
+
 
                                 <% }
                                 %>

@@ -62,4 +62,9 @@ public class SettingDAO implements InterfaceDAO {
         return fdao.getById("SELECT keterangan from setting where id='"+id+"'");
     }
 
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

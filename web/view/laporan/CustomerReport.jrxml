@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61db77f2-7383-403f-bff4-a855f9c4a84e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="no_identitas" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     CUSTOMER."NO_IDENTITAS" AS CUSTOMER_NO_IDENTITAS,
+     CUSTOMER."NAMA" AS CUSTOMER_NAMA,
+     CUSTOMER."JENIS_KELAMIN" AS CUSTOMER_JENIS_KELAMIN,
+     CUSTOMER."NO_TELP" AS CUSTOMER_NO_TELP,
+     CUSTOMER."PEKERJAAN" AS CUSTOMER_PEKERJAAN,
+     CUSTOMER."ALAMAT" AS CUSTOMER_ALAMAT,
+     GADAI."ID_GADAI" AS GADAI_ID_GADAI,
+     GADAI."TANGGAL_PENGAJUAN" AS GADAI_TANGGAL_PENGAJUAN,
+     GADAI."JATUH_TEMPO" AS GADAI_JATUH_TEMPO,
+     GADAI."JUMLAH_PINJAMAN" AS GADAI_JUMLAH_PINJAMAN,
+     GADAI."NO_IDENTITAS" AS GADAI_NO_IDENTITAS,
+     STATUS."STATUS" AS STATUS_STATUS
+FROM
+     "HR"."CUSTOMER" CUSTOMER INNER JOIN "HR"."GADAI" GADAI ON CUSTOMER."NO_IDENTITAS" = GADAI."NO_IDENTITAS"
+     INNER JOIN "HR"."STATUS" STATUS ON GADAI."ID_STATUS" = STATUS."ID_STATUS"
+
+WHERE
+     CUSTOMER."NO_IDENTITAS" = $P{no_identitas}
+
+ORDER BY GADAI."ID_GADAI" asc]]>
+	</queryString>
+	<field name="CUSTOMER_NO_IDENTITAS" class="java.math.BigDecimal"/>
+	<field name="CUSTOMER_NAMA" class="java.lang.String"/>
+	<field name="CUSTOMER_JENIS_KELAMIN" class="java.lang.String"/>
+	<field name="CUSTOMER_NO_TELP" class="java.lang.String"/>
+	<field name="CUSTOMER_PEKERJAAN" class="java.lang.String"/>
+	<field name="CUSTOMER_ALAMAT" class="java.lang.String"/>
+	<field name="GADAI_ID_GADAI" class="java.math.BigDecimal"/>
+	<field name="GADAI_TANGGAL_PENGAJUAN" class="java.sql.Timestamp"/>
+	<field name="GADAI_JATUH_TEMPO" class="java.sql.Timestamp"/>
+	<field name="GADAI_JUMLAH_PINJAMAN" class="java.math.BigDecimal"/>
+	<field name="GADAI_NO_IDENTITAS" class="java.math.BigDecimal"/>
+	<field name="STATUS_STATUS" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="2" width="210" height="44" uuid="129f51c1-34c4-4064-8bf3-0740c5bdafa6"/>
+				<imageExpression><![CDATA["E:\\Icon Pegadaian\\logo-pegadaian.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="227" y="46" width="193" height="58" uuid="f6df5cf6-ebb9-4d6e-8e00-36e366a4818b"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Gabriola" size="24"/>
+				</textElement>
+				<text><![CDATA[Data Customer]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="181" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement x="455" y="10" width="100" height="20" uuid="96b62da1-985a-48e0-9f58-8494598cc83e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="44" width="100" height="20" uuid="74a4621f-5790-463b-9856-b1a27c134d3a"/>
+				<text><![CDATA[No. Identitas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="44" width="417" height="20" uuid="ecabb4f9-b40e-45ea-b475-d7a74eb7186f"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_NO_IDENTITAS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="64" width="100" height="20" uuid="3f22e9e9-1fd0-443d-93eb-10f29552511a"/>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="64" width="417" height="20" uuid="14b942e8-d4b0-4826-875e-f1483a2618f9"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_NAMA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="84" width="100" height="20" uuid="69a78b86-1bb3-4272-ba7f-fa6722db1a4a"/>
+				<text><![CDATA[No.Telepon]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="84" width="417" height="20" uuid="f293c9c1-8d57-4578-bc5f-1798d6fd5215"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_NO_TELP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="104" width="100" height="20" uuid="b5b3cb33-c415-495f-9689-895b8adbd78d"/>
+				<text><![CDATA[Pekerjaan]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="104" width="417" height="20" uuid="28a07ba1-7779-46fa-9159-b1a3b75f5f39"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_PEKERJAAN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="124" width="100" height="20" uuid="39c674fb-4250-4a2b-b51a-ea5b6722a099"/>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="124" width="417" height="20" uuid="8177c3bb-e2da-40f7-9c67-f1f2f59342c7"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_ALAMAT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="164" width="555" height="1" uuid="bfef92e5-8fc3-4ee4-a14c-fc446b4cae65"/>
+			</line>
+			<staticText>
+				<reportElement x="100" y="44" width="20" height="20" uuid="d1d290ae-1706-4796-8ad8-e57a446aca3e"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="64" width="20" height="20" uuid="dd352d45-c3a1-4269-af28-71cc65ff030b"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="84" width="20" height="20" uuid="e9f4ef13-e0a2-43b9-8fc6-f8c2fd6088c8"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="104" width="20" height="20" uuid="67a2cf05-80a7-41f0-af3d-a030bba8f07d"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="124" width="20" height="20" uuid="1ba00d4e-8cfa-45ea-9ee8-cb2593ef4b47"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="5" width="78" height="20" uuid="df63da24-226e-46ea-9c56-81a1930609ae"/>
+				<text><![CDATA[ID Gadai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="5" width="100" height="20" uuid="5a1ad14b-1a12-468d-b636-ee86fe038689"/>
+				<text><![CDATA[Tanggal Pengajuan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="5" width="100" height="20" uuid="35e0a17d-dfaf-4e6c-8b26-83dd174295bf"/>
+				<text><![CDATA[Jatuh Tempo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="5" width="100" height="20" uuid="26e1bb16-97a3-4d7a-a0c2-edc1714f7ca4"/>
+				<text><![CDATA[Pinjaman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="5" width="79" height="20" uuid="1372d1b2-a2be-403f-9377-19b6447f3630"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="9" width="78" height="20" uuid="a818c652-f6ac-4fd3-a1fd-649ec6c24c0b"/>
+				<textFieldExpression><![CDATA[$F{GADAI_ID_GADAI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="109" y="9" width="100" height="20" uuid="2d212b87-92b5-46a8-99f0-44e76ef80d22"/>
+				<textFieldExpression><![CDATA[$F{GADAI_TANGGAL_PENGAJUAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="9" width="100" height="20" uuid="8dbdb209-abc3-43ee-a537-45a9c1008fb2"/>
+				<textFieldExpression><![CDATA[$F{GADAI_JATUH_TEMPO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="9" width="100" height="20" uuid="9756124c-95cd-4bde-96bb-bde781eefc87"/>
+				<textFieldExpression><![CDATA[$F{GADAI_JUMLAH_PINJAMAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="9" width="79" height="20" uuid="b602d698-3e2d-481b-a6b5-432ee82053b9"/>
+				<textFieldExpression><![CDATA[$F{STATUS_STATUS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="32" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="437" y="22" width="80" height="20" uuid="6a277cb8-349e-49b6-88aa-a17bb6d127cb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="517" y="22" width="40" height="20" uuid="e0458450-86e2-4ba4-a0e5-742bc8a65d43"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -60,4 +60,9 @@ public class Jenis_BarangDAO implements InterfaceDAO{
         public Integer getAutoID(){
         return (Integer) fdao.getById("SELECT MAX(idJenis)+1 FROM JenisBarang");
     }
+
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -1,15 +1,21 @@
 <%-- 
-    Document   : detailgadai
-    Created on : Apr 17, 2018, 12:13:27 AM
+    Document   : customermjr
+    Created on : Apr 26, 2018, 10:39:38 AM
     Author     : Fitriany Chairunnisa
 --%>
 
-<%@page import="entities.DetailGadai"%>
 <%@page import="java.util.List"%>
+<%@page import="dao.CustomerDAO"%>
+<%@page import="entities.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Lihat Customer<table border="1">
+                       
+                </title>-->
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,6 +79,7 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
     </head>
     <body>
         <div id="wrapper">
@@ -105,26 +112,26 @@
                                 </div>
                             </li>
                             <li>
-                               <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                                 
+                                <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./customerservlet">Customer</a>
+                                        <a href="./adminservlet">Admin</a>
                                     </li>
                                     <li>
-                                        <a href="./gadaiservlet">Gadai</a>
+                                        <a href="./customermjrservlet">Customer</a>
                                     </li>
                                     <li>
-                                        <a href="./angsuranservlet">Angsuran</a>
+                                        <a href="./gadaimjrservlet">Gadai</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
 
-                            <li>
+<!--                            <li>
                                 <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
@@ -137,8 +144,8 @@
                                         <a href="./detailgadaiservlet">Detail Barang</a>
                                     </li>
                                 </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
+                                 /.nav-second-level 
+                            </li>-->
 
                             <li>
                                 <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
@@ -152,9 +159,8 @@
                                     <li>
                                         <a href="./reportgadai">Gadai</a>
                                     </li>
-                                    <li>
-                                        <a href="morris.html">Filter</a>
-                                    </li>
+                                    
+                                    
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -163,98 +169,173 @@
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
-        </div>   
+        </div>
+        <!--        </div>   -->
 
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tabel Detail Gadai</h1>
-                </div>
+                    <h1 class="page-header">Tabel Customer</h1>
+                </div> 
                 <!-- /.col-lg-12 -->
-            </div>    
+            </div>     
 
             <div class="row">
+
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Detail Gadai
+                            <form role="form" action="view/idcustomerreport.jsp" method="post">
+                                <div class="form-group">
+                                    <label>Print</label>
+                                    <input class="form-control" name="no_identitas" type="text">
+                                </div>
+                                <!--                            <a  class="btn btn-primary">Print</a>-->
+                                <button class="btn btn-primary" type="submit">Print</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <!--                                <a href="customertoinsert" class="btn btn-primary">Add Customer</a>-->
+
+                            
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-
-
-
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <%if (session.getAttribute("Pesan") != null) { %>
+                                <div class="alert alert-success alert-dismissable">  
+                                    <%out.print(session.getAttribute("Pesan") + "<br>");
+                                        session.removeAttribute("Pesan"); %> 
+                                </div>
+
+                                <% }%> 
                                 <thead>
                                     <tr>
-                                        <th>ID Detail Barang</th>
-                                        <th>ID Gadai</th>
-                                        <th>Nama Barang</th>
-                                        <th>Keterangan</th>
-                                        <!--                                        <th>Update</th>
-                                                                                <th>Delete</th>-->
+                                        <th>No. Identitas</th>
+                                        <th>Nama</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>No Telp</th>
+                                        <th>Pekerjaan</th>
+                                        <th>Alamat</th>
+                                       
 
                                     </tr>
                                 </thead>
                                 <%
                                     //List<Object> datas = new CustomerDAO().getAll();
 
-                                    List<Object> datas = (List<Object>) session.getAttribute("dataDetail");
+                                    List<Object> datas = (List<Object>) session.getAttribute("dataCustomer");
 
                                     for (Object data : datas) {
-                                        DetailGadai dg = (DetailGadai) data;%>
-                                <tbody>
-                                    <tr>
-                                        <td><%= dg.getIdDetailGadai()%></td>
-                                        <td><%= dg.getIdGadai()%></td>
-                                        <td><%= dg.getIdBarang().getNamaBarang()%></td>
-                                        <td><%= dg.getKeterangan()%></td>
-                                        <!--                                        <td><a href="detailgadaiupdate?id=
-                                        <%--<%=dg.getIdDetailGadai()%>--%>
-                                        ">update</a></td>
-                                                                                <td><a href="detailgadaidelete?id=
-                                        <%--<%=dg.getIdDetailGadai()%>--%>
-                                        ">delete</a></td>
-                                        -->
-                                    </tr>
+                                        Customer c = (Customer) data;%>
 
-                                </tbody>
+                                <tr class="odd gradeX">
+                                    <td><%= c.getNoIdentitas()%></td>
+                                    <td><%= c.getNama()%></td>
+                                    <td><%= c.getJenisKelamin()%></td>
+                                    <td><%= c.getNoTelp()%></td>
+                                    <td><%= c.getPekerjaan()%></td>
+                                    <td><%= c.getAlamat()%></td>
+                                    
+                                </tr>
+                                
                                 <% }
                                 %>
-
                             </table>
                         </div>
                     </div>
-                </div>
+                    <!--                    <form name="report" action="reportservlet">
+                                            <input type="submit" value="Print Data Customer" name="btnver" class="btn btn-primary">
+                                        </form>  -->
+                </div>           
+
             </div>
+            <!--            <div class="row">
+                            <div class="col-lg-12">
+                                <h1 class="page-header">Form Customer</h1>
+                            </div>
+                        </div> -->
+            <!--            <form role="form" action="customerinsert" method="post">
+                            <div class="form-group">
+                                <label>No. Identitas</label>
+                                <input class="form-control"  name="txtID" type="text" >
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input class="form-control" name="txtNama" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <input class="form-control" name="txtJK" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>No. Telp</label>
+                                <input class="form-control" name="txtNoTelp" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Pekerjaan</label>
+                                <input class="form-control" name="txtPekerjaan" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <input class="form-control" name="txtAlamat" type="text">
+                                                                            <p class="help-block">Example block-level help text here.</p>
+                            </div>
+            
+            
+            
+                            <div class="form-group">
+                                                    <button type="button" name="submit" class="btn btn-primary">Tambah</button>
+                                <input type="submit" class="btn btn-primary" value="Insert" name="submit">
+                            </div>
+                        </form>-->
         </div>
+    </div>
 
-        <!-- /#wrapper -->
 
-        <!-- jQuery -->
-        <script src="template/vendor/jquery/jquery.min.js"></script>
+    <!-- /#wrapper -->
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="template/vendor/jquery/jquery.min.js"></script>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="template/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="template/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-        <!-- DataTables JavaScript -->
-        <script src="template/vendor/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="template/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-        <script src="template/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="template/vendor/metisMenu/metisMenu.min.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="template/dist/js/sb-admin-2.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="template/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="template/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="template/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
-        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').DataTable({
-                    responsive: true
-                });
+    <!-- Custom Theme JavaScript -->
+    <script src="template/dist/js/sb-admin-2.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
             });
-        </script>
-    </body>
+        });
+    </script>
+
+
+</body>
 </html>

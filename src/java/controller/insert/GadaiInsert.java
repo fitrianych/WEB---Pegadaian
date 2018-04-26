@@ -69,7 +69,7 @@ public class GadaiInsert extends HttpServlet {
         int c = sett.getKeterangan();
 
         LocalDateTime localDateTime = currentDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        localDateTime = localDateTime.plusYears(b).plusMonths(a).plusDays(c);
+        localDateTime = localDateTime.plusYears(b).plusMonths(a).plusDays(0);
         Date date_jt = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
         //Date date1 = null;

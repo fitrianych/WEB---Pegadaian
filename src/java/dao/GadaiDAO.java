@@ -86,4 +86,9 @@ public class GadaiDAO implements InterfaceDAO {
         return fdao.insert(gadd);
     }
 
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

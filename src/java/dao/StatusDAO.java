@@ -58,4 +58,9 @@ public class StatusDAO implements InterfaceDAO {
         return fdao.getById("from Status where idStatus='" + id + "'");
     }
 
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -44,7 +44,7 @@ public class CustomerUpdate extends HttpServlet {
         
             Customer cus = (Customer) new CustomerDAO().getById(id);
             session.setAttribute("cus", cus);
-            out.println("<font color = \"red\">update" +cus.getNama()+"</font>");
+            //out.println("<font color = \"red\">update" +cus.getNama()+"</font>");
         //out.println("<b>"+id);
         dis = request.getRequestDispatcher("view/update/updatecustomer.jsp");
         dis.include(request, response);

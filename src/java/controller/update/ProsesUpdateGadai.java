@@ -87,7 +87,8 @@ public class ProsesUpdateGadai extends HttpServlet {
         int pembagi = pem.getKeterangan();
 
         double tambahan = Double.parseDouble(jumlah_pinjaman);
-        double result = tambahan + (tambahan * (bunga / pembagi));
+        double result = tambahan + tambahan * bunga/pembagi;
+        System.out.println(result);
         Long result1 = new Double(result).longValue();
 
         try (PrintWriter out = response.getWriter()) {

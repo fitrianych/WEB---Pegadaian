@@ -45,7 +45,7 @@ public class AngsuranDAO implements InterfaceDAO{
 
     @Override
     public List<Object> getAll() {
-       return fdao.getAll("FROM Angsuran order by idAngsuran asc");
+       return fdao.getAll("FROM Angsuran order by idAngsuran desc");
     }
 
     @Override
@@ -60,6 +60,11 @@ public class AngsuranDAO implements InterfaceDAO{
     
            public String getAutoID() {
         return (String) fdao.getById("SELECT CONCAT('TR',LPAD((TO_NUMBER(SUBSTR(MAX(idAngsuran),3,3))+1),3,'0')) FROM Angsuran");
+    }
+
+    @Override
+    public boolean save(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 

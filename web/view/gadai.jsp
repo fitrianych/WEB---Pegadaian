@@ -107,7 +107,8 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="template/pages/index.html"><i class="fa fa-backward fa-fw"></i> Dashboard</a>
+                                <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>
@@ -168,18 +169,34 @@
         </div>   
 
         <div id="page-wrapper">
+
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Tabel Gadai</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-            </div>    
+            </div> 
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <form role="form" action="view/idgadaireport.jsp" method="post">
+                            <div class="form-group">
+                                <label>Print</label>
+                                <input class="form-control" name="idGadai" type="text">
+                            </div>
+                            <!--                            <a  class="btn btn-primary">Print</a>-->
+                            <button class="btn btn-primary" type="submit">Print</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="gadaitoinsert" class="btn btn-primary">Add Gadai</a>
+                            <a href="gadaitoinsert" class="btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
 
                         </div>
                         <!-- /.panel-heading -->
@@ -237,6 +254,7 @@
                                         <% } else {%>
                                         <a href="angsurantoinsert?id=<%=b.getIdGadai()%>" class="btn btn-warning">angsur</a>
                                         <a href="gadaiupdate?id=<%=b.getIdGadai()%>" class="btn btn-success">perpanjang</a>
+
                                         <%}%>
 
 
@@ -249,9 +267,17 @@
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
+
             <!--                                <a href="angsurantoinsert" class="btn btn-primary">Add Angsuran</a>-->
         </div>
+
+        <!--        <div class="row">-->
+
+        <!--        </div>-->
         <!-- /#wrapper -->
 
         <!-- jQuery -->
