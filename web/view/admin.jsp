@@ -284,7 +284,7 @@
 <!--                                        <a href="barangupdate?id=<%--b.getIdBarang()--%>"class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>-->
 <!--                                        <button data-toggle="modal" data-target="#myModal<%--b.getId()--%>" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></button>-->
                                         <% if (b.getAkses().equals("manajer")) {%>
-                                        <button data-toggle="modal" data-target="#myModaledit<%=b.getId()%>" class="btn btn-danger btn-circle" style="pointer-events: none; display: inline-block"><i class="fa fa-times"></i></button></td>
+                                        <button data-toggle="modal" data-target="#myModaledit<%=b.getId()%>" class="btn btn-warning btn-circle" style="pointer-events: none; display: inline-block"><i class="fa fa-times"></i></button></td>
                                             <% } else {%>
                                 <button data-toggle="modal" data-target="#myModaledit<%=b.getId()%>" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button></td>
                                     <%}%>
