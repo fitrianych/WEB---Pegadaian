@@ -126,8 +126,9 @@ public class AngsuranInsert extends HttpServlet {
             Setting tenggang = (Setting) new SettingDAO().search("nama", "Masa Tenggang").get(0);
             int masa_tenggang = tenggang.getKeterangan();
             
-            Setting den = (Setting) new SettingDAO().search("nama", "Denda").get(0);
-            int denda = den.getKeterangan();
+            Setting den = (Setting) new SettingDAO().search("nama", "den").get(0);
+            double denda = den.getKeterangan();
+            System.out.println(denda);
             
             Setting pem = (Setting) new SettingDAO().search("nama", "Pembagi Denda").get(0);
             int pembagi = pem.getKeterangan();
@@ -148,13 +149,14 @@ public class AngsuranInsert extends HttpServlet {
                 dis = request.getRequestDispatcher("view/insert/insertangsuran.jsp");
                 dis.include(request, response);
             } else if (days >= masa_tenggang && days <= hangus) {
-                double total_denda = days + denda/pembagi * pinjam;
+                double total_denda = days * denda/pembagi * pinjam;
+                System.out.println(days +","+ denda +","+ pembagi +","+ pinjam+","+ total_denda);
                 a.setDenda(new Double(total_denda).longValue());
             } else {
                 a.setDenda(Long.valueOf(0));
                 System.out.println("tidak ada denda");
             }
-            System.out.println(days);
+            
             double x = Double.parseDouble(a.getDenda() + "");
             double y = Double.parseDouble(a.getJumlahAngsuran() + "");
             double hasil = x + y;

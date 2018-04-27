@@ -48,13 +48,13 @@ public class LogIn extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             if (ID.equals("") || password.equals("")) {
                 er = "Login Gagal";
-                dispatcher = request.getRequestDispatcher("login.html");
+                dispatcher = request.getRequestDispatcher("log.jsp");
             } else if (udao.search(category, ID).isEmpty()) {
                 er = "Login Gagal";
-                dispatcher = request.getRequestDispatcher("login.html");
+                dispatcher = request.getRequestDispatcher("log.jsp");
             } else if (!udao.login(ID, password)) {
                 er = "Login Gagal";
-                dispatcher = request.getRequestDispatcher("login.html");
+                dispatcher = request.getRequestDispatcher("log.jsp");
             } else if (udao.login(ID, password)) {
                 if (u.getAkses().equals("manajer")) {
                     er = "Berhasil";

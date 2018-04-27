@@ -4,6 +4,7 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Usermanagement"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entities.Angsuran"%>
@@ -90,7 +91,25 @@
                     <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
                 </div>
                 <!-- /.navbar-header -->
+                <% Usermanagement us = (Usermanagement) session.getAttribute("u");%>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i>Hi, <%=us.getUsername()%></i>
+                        </a>
 
+
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="./logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
 
                 <!-- /.navbar-top-links -->
                 <div class="navbar-default sidebar" role="navigation">
@@ -181,8 +200,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Angsuran
-                            </div>
-                         <div class="panel-heading">
+                        </div>
+                        <div class="panel-heading">
                             <%if (session.getAttribute("Pesan") != null) { %>
                             <div class="alert alert-success alert-dismissable">  
                                 <%out.print(session.getAttribute("Pesan") + "<br>");

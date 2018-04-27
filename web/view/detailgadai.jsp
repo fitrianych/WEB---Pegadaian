@@ -4,6 +4,7 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Usermanagement"%>
 <%@page import="entities.DetailGadai"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -88,7 +89,25 @@
                     <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
                 </div>
                 <!-- /.navbar-header -->
+                <% Usermanagement us = (Usermanagement) session.getAttribute("u");%>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i>Hi, <%=us.getUsername()%></i>
+                        </a>
 
+
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="./logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
 
                 <!-- /.navbar-top-links -->
                 <div class="navbar-default sidebar" role="navigation">
@@ -105,8 +124,8 @@
                                 </div>
                             </li>
                             <li>
-                               <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                                 
+                                <a href="./login?ID=<%= session.getAttribute("login")%>&password=<%=session.getAttribute("login1")%>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Master<span class="fa arrow"></span></a>

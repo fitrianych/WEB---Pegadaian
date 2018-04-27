@@ -36,13 +36,16 @@ public class BarangServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+ 
         RequestDispatcher dispatcher = null;
         HttpSession session = request.getSession();
         BarangDAO bdao = new BarangDAO();
         try (PrintWriter out = response.getWriter()) {
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             if (session.getAttribute("login")== null) {
-                response.sendRedirect("login.html");
+                //response.sendRedirect("log.html");
+                dispatcher = request.getRequestDispatcher("log.jsp");
+                dispatcher.forward(request, response);
             }
 
             List<Object> datas = new BarangDAO().getAll();
@@ -53,7 +56,7 @@ public class BarangServlet extends HttpServlet {
 //            }
             session.setAttribute("dataBarang", datas);
             dispatcher = request.getRequestDispatcher("view/barang.jsp");
-            dispatcher.include(request, response);
+            dispatcher.forward(request, response);
         }
     }
 

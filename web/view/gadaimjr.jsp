@@ -4,6 +4,7 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Usermanagement"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entities.Gadai"%>
@@ -90,7 +91,25 @@
                     <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
                 </div>
                 <!-- /.navbar-header -->
+                <% Usermanagement us = (Usermanagement) session.getAttribute("u");%>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i>Hi, <%=us.getUsername()%></i>
+                        </a>
 
+
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="./logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
 
                 <!-- /.navbar-top-links -->
                 <div class="navbar-default sidebar" role="navigation">
@@ -122,28 +141,28 @@
                                     <li>
                                         <a href="./gadaimjrservlet">Gadai</a>
                                     </li>
-<!--                                    <li>
-                                        <a href="./angsuranservlet">Angsuran</a>
-                                    </li>-->
+                                    <!--                                    <li>
+                                                                            <a href="./angsuranservlet">Angsuran</a>
+                                                                        </li>-->
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
 
-<!--                            <li>
-                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="./jenisservlet">Jenis Barang</a>
-                                    </li>
-                                    <li>
-                                        <a href="./barangservlet">List Barang</a>
-                                    </li>
-                                    <li>
-                                        <a href="./detailgadaiservlet">Detail Barang</a>
-                                    </li>
-                                </ul>
-                                 /.nav-second-level 
-                            </li>-->
+                            <!--                            <li>
+                                                            <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                                            <ul class="nav nav-second-level">
+                                                                <li>
+                                                                    <a href="./jenisservlet">Jenis Barang</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="./barangservlet">List Barang</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="./detailgadaiservlet">Detail Barang</a>
+                                                                </li>
+                                                            </ul>
+                                                             /.nav-second-level 
+                                                        </li>-->
 
                             <li>
                                 <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
@@ -157,9 +176,9 @@
                                     <li>
                                         <a href="./reportgadai">Gadai</a>
                                     </li>
-<!--                                    <li>
-                                        <a href="morris.html">Filter</a>
-                                    </li>-->
+                                    <!--                                    <li>
+                                                                            <a href="morris.html">Filter</a>
+                                                                        </li>-->
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -199,13 +218,13 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            
+
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                          
+
                                 <thead>
                                     <tr>
                                         <th>ID Gadai</th>
@@ -214,7 +233,7 @@
                                         <th>Jatuh Tempo</th>
                                         <th>Jumlah Pinjaman</th>
                                         <th>Status</th>
-                                        
+
 
 
                                     </tr>
@@ -240,7 +259,7 @@
                                     <td><%= tgl1%></td>
                                     <td><%= b.getJumlahPinjaman()%></td>
                                     <td><%= b.getIdStatus().getStatus()%></td>
-                                    
+
                                 </tr>
                                 <% }
                                 %>

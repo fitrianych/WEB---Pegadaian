@@ -1,0 +1,118 @@
+﻿create table jenis_barang (
+id_jenis number(3),
+nama_jenis varchar(20),
+constraint jenis_pk primary key (id_jenis)
+);
+
+create table barang_(
+id_barang number(4),
+nama_barang varchar(20),
+id_jenis number(3),
+constraint barang1_pk primary key (id_barang),
+constraint jenis1_fk foreign key (id_jenis) references jenis_barang(id_jenis)
+);
+drop table barang_;
+
+create table gadai(
+id_gadai number (5),
+tanggal_pengajuan date,
+jatuh_tempo date,
+jumlah_pinjaman number (10),
+status varchar (10),
+no_identitas,
+constraint gadai_pk primary key (id_gadai),
+CONSTRAINT gadai_fk1 FOREIGN KEY (no_identitas) REFERENCES 
+customer(no_identitas)
+);
+
+create table detail_gadai(
+id_detail_gadai number (5),
+id_gadai number (5),
+id_barang number (4),
+keterangan varchar (100),
+constraint detail_gadai_pk primary key (id_detail_gadai,id_barang,id_gadai),
+constraint id_gadai_fk foreign key (id_gadai) references gadai(id_gadai),
+constraint id_barang_fk foreign key (id_barang) references barang_(id_barang)
+);
+
+
+create table customer(
+no_identitas number(25),
+nama varchar (30),
+jenis_kelamin varchar (10),
+no_telp varchar (12),
+pekerjaan varchar (30),
+alamat varchar (35),
+constraint no_identitas_pk primary key (no_identitas)
+);
+drop table customer;
+
+create table angsuran(
+id_angsuran varchar (30),
+tanggal_angsuran date,
+jumlah_angsuran number(10),
+denda number (10),
+id_gadai number (5),
+no_identitas number(25),
+constraint id_angsuran_pk primary key (id_angsuran),
+constraint id_gadai11_fk foreign key (id_gadai) references gadai (id_gadai),
+constraint no_identitas1_fk foreign key (no_identitas ) references customer(no_identitas)
+);
+
+CREATE TABLE  "SETTING" 
+   (	"ID" NUMBER(2,0), 
+	"NAMA" VARCHAR2(20), 
+	"KETERANGAN" NUMBER(5,0), 
+	 CONSTRAINT "ID_SETTING_PK" PRIMARY KEY ("ID") ENABLE
+   ) ;
+
+CREATE TABLE  "STATUS" 
+   (	"ID_STATUS" CHAR(2) NOT NULL ENABLE, 
+	"STATUS" CHAR(13), 
+	 PRIMARY KEY ("ID_STATUS") ENABLE
+   ) ;
+
+
+insert all
+into jenis_barang values ('1','Kendaraan')
+into jenis_barang values ('2','Elektronik')
+into jenis_barang values ('3','Emas')
+into jenis_barang values ('4','Kendaraan')
+select * from dual;
+
+insert all
+into barang_ values ('1','Motor','1')
+into barang_ values ('2','Mobil','1')
+into barang_ values ('3','TV','2')
+into barang_ values ('4','Laptop','2')
+into barang_ values ('5','Logam Mulia','3')
+select * from dual;
+
+insert all
+into customer values ('1311521018','Fitriany Chairunnisa','Perempuan','081261944301','Pegawai','Jl. Kemanggisan Ilir')
+select * from dual;
+
+insert all
+into gadai values ('1','04/05/2018','07/05/2018','2000000','T','1311521018')
+select * from dual;
+
+insert all
+into detail_gadai values ('1','1','1','contoh keterangan detail')
+select * from dual;
+
+insert all
+into angsuran values ('1','05/05/2018','200000','0','1','1311521018')
+select * from dual;
+
+select * from jenis_barang;
+select * from barang_;
+select * from customer;
+select * from gadai;
+select * from detail_gadai;
+select * from angsuran;
+
+desc gadai;
+desc jenis_barang;
+desc barang_;
+desc detail_gadai;
+

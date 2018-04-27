@@ -54,10 +54,10 @@
                             <form role="form" method="post" action="login">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="ID" name="ID" type="text" autofocus>
+                                        <input class="form-control" placeholder="ID" name="ID" type="text" required="true" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password" required="true" type="password" value="">
                                     </div>
                                     <div class="checkbox">
                                         <label>

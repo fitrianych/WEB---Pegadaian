@@ -4,6 +4,7 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Usermanagement"%>
 <%@page import="entities.JenisBarang"%>
 <%@page import="dao.Jenis_BarangDAO"%>
 <%@page import="dao.BarangDAO"%>
@@ -91,7 +92,25 @@
                     <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
                 </div>
                 <!-- /.navbar-header -->
+                <% Usermanagement us = (Usermanagement) session.getAttribute("u");%>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i>Hi, <%=us.getUsername()%></i>
+                        </a>
 
+
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="./logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
 
                 <!-- /.navbar-top-links -->
                 <div class="navbar-default sidebar" role="navigation">
@@ -217,7 +236,7 @@
                                                 <div class="form-group">
 
                                                     <input type="submit" class="btn btn-primary" value="Insert" name="submit">
-                                                    <a href="barangservlet" class="btn btn-primary">Cancel</a>
+                                                    <a href="barangservlet" class="btn btn-danger">Cancel</a>
                                                 </div>
                                             </form>
                                         </div>                                       
@@ -309,7 +328,7 @@
 
                                                     <div class="form-group">
                                                         <input type="submit" value="Update" class="btn btn-primary" name="submit">
-                                                        <a href="barangservlet" class="btn btn-primary">Cancel</a>
+                                                        <a href="barangservlet" class="btn btn-danger">Cancel</a>
                                                     </div>
 
 

@@ -4,6 +4,7 @@
     Author     : Fitriany Chairunnisa
 --%>
 
+<%@page import="entities.Usermanagement"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.CustomerDAO"%>
 <%@page import="entities.Customer"%>
@@ -95,7 +96,25 @@
                     <a class="navbar-brand" href="index.html">Pegadaian v1.0</a>
                 </div>
                 <!-- /.navbar-header -->
+                <% Usermanagement us = (Usermanagement) session.getAttribute("u");%>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            <i>Hi, <%=us.getUsername()%></i>
+                        </a>
 
+
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="./logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
 
                 <!-- /.navbar-top-links -->
                 <div class="navbar-default sidebar" role="navigation">
@@ -131,21 +150,21 @@
                                 <!-- /.nav-second-level -->
                             </li>
 
-<!--                            <li>
-                                <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="./jenisservlet">Jenis Barang</a>
-                                    </li>
-                                    <li>
-                                        <a href="./barangservlet">List Barang</a>
-                                    </li>
-                                    <li>
-                                        <a href="./detailgadaiservlet">Detail Barang</a>
-                                    </li>
-                                </ul>
-                                 /.nav-second-level 
-                            </li>-->
+                            <!--                            <li>
+                                                            <a href="#"><i class="fa fa-database"></i> Barang<span class="fa arrow"></span></a>
+                                                            <ul class="nav nav-second-level">
+                                                                <li>
+                                                                    <a href="./jenisservlet">Jenis Barang</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="./barangservlet">List Barang</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="./detailgadaiservlet">Detail Barang</a>
+                                                                </li>
+                                                            </ul>
+                                                             /.nav-second-level 
+                                                        </li>-->
 
                             <li>
                                 <a href="#"><i class="fa fa-file-pdf-o"></i> Report<span class="fa arrow"></span></a>
@@ -159,8 +178,8 @@
                                     <li>
                                         <a href="./reportgadai">Gadai</a>
                                     </li>
-                                    
-                                    
+
+
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -202,7 +221,7 @@
                         <div class="panel-heading">
                             <!--                                <a href="customertoinsert" class="btn btn-primary">Add Customer</a>-->
 
-                            
+
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -222,7 +241,7 @@
                                         <th>No Telp</th>
                                         <th>Pekerjaan</th>
                                         <th>Alamat</th>
-                                       
+
 
                                     </tr>
                                 </thead>
@@ -241,9 +260,9 @@
                                     <td><%= c.getNoTelp()%></td>
                                     <td><%= c.getPekerjaan()%></td>
                                     <td><%= c.getAlamat()%></td>
-                                    
+
                                 </tr>
-                                
+
                                 <% }
                                 %>
                             </table>
