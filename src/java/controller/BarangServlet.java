@@ -47,7 +47,7 @@ public class BarangServlet extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("log.jsp");
                 dispatcher.forward(request, response);
             }
-
+ 
             List<Object> datas = new BarangDAO().getAll();
 
 //            if (session.getAttribute("Pesan") != null) {
